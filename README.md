@@ -6,3 +6,4 @@ Full stack webapp project for the course DAT076
 
 ## Start
 `npm run dev` and server will start on localhost:3000
+
