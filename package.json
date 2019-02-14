@@ -1,0 +1,27 @@
+{
+  "name": "dat076",
+  "version": "1.0.0",
+  "description": "Full stack webapp project for the course DAT076",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "next",
+    "build": "next build",
+    "start": "next start"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Baloo1/DAT076.git"
+  },
+  "author": "",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Baloo1/DAT076/issues"
+  },
+  "homepage": "https://github.com/Baloo1/DAT076#readme",
+  "dependencies": {
+    "next": "^8.0.1",
+    "react": "^16.8.1",
+    "react-dom": "^16.8.1"
+  }
+}
