@@ -7,3 +7,6 @@ Full stack webapp project for the course DAT076
 ## Start
 `npm run dev` and server will start on localhost:3000
 
+## Techstach documentation
+* [Next.js](https://nextjs.org/)
+* [React.js](https://reactjs.org/)
