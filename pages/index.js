@@ -1,7 +1,9 @@
-import React from 'react';
+import React from "react";
 import Head from 'next/head';
-
-import TempNavBar from './Navbar';
+import {Container, Row, Col} from "react-bootstrap/";
+import MainCarousel from "./mainCarousel";
+import MainNavBar from './mainNavbar';
+import MainJumbotron from "./mainJumbotron";
 
 function Home() {
 
@@ -16,8 +18,15 @@ function Home() {
           crossOrigin="anonymous"
         />
       </Head>
-      <TempNavBar/>
-    </div>
+        <MainNavBar/>
+        <MainJumbotron/>
+          <Container>
+              <Row>
+                  <Col><MainCarousel/></Col>
+                  <Col><MainJumbotron/></Col>
+              </Row>
+          </Container>
+      </div>
   );
 }
 export default Home;
