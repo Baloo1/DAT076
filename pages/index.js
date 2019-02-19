@@ -1,29 +1,32 @@
 import React from "react";
-import {Navbar} from "react-bootstrap"
 import Head from 'next/head';
-
-import Nav from "react-bootstrap/Nav";
-import NavDropdown from "react-bootstrap/NavDropdown";
-import Form from "react-bootstrap/Form";
-import FormControl from "react-bootstrap/FormControl";
-import Button from "react-bootstrap/Button";
-import TempNavBar from "./navbar";
+import {Container, Row, Col} from "react-bootstrap/";
+import MainCarousel from "./mainCarousel";
+import MainNavBar from './mainNavbar';
+import MainJumbotron from "./mainJumbotron";
 
 function Home() {
 
   return (
-      <div>
-          <Head>
-            <title>DAT076</title>
-          <link
-            rel="stylesheet"
-            href="https://maxcdn.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css"
-            integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS"
-            crossOrigin="anonymous"
-          />
-        </Head>
-        <TempNavBar/>
+    <div>
+      <Head>
+        <title>DAT076</title>
+        <link
+          rel="stylesheet"
+          href="https://maxcdn.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css"
+          integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS"
+          crossOrigin="anonymous"
+        />
+      </Head>
+        <MainNavBar/>
+        <MainJumbotron/>
+          <Container>
+              <Row>
+                  <Col><MainCarousel/></Col>
+                  <Col><MainJumbotron/></Col>
+              </Row>
+          </Container>
       </div>
-  )
+  );
 }
-export default Home
+export default Home;
