@@ -1,3 +1,10 @@
+CREATE TABLE "logins" (
+    "login_id" INT PRIMARY KEY,
+    "email" varchar NOT NULL,
+    "password" varchar NOT NULL,
+    "user_id" INT
+);
+
 CREATE TABLE "users" (
   "user_id" INT PRIMARY KEY,
   "name" varchar NOT NULL,
@@ -46,18 +53,20 @@ CREATE TABLE "projects" (
   "end_date" date
 );
 
-ALTER TABLE "images" ADD FOREIGN KEY ("img_id") REFERENCES "users" ("img_id");
+ALTER TABLE "logins" ADD FOREIGN KEY ("user_id") REFERENCES "users" ("user_id");
 
-ALTER TABLE "descriptions" ADD FOREIGN KEY ("descr_id") REFERENCES "about_items" ("descr_id");
+ALTER TABLE "users" ADD FOREIGN KEY ("img_id") REFERENCES "images" ("img_id");
+
+ALTER TABLE "about_items" ADD FOREIGN KEY ("descr_id") REFERENCES "descriptions" ("descr_id");
 
 ALTER TABLE "about_items" ADD FOREIGN KEY ("user_id") REFERENCES "users" ("user_id");
 
-ALTER TABLE "descriptions" ADD FOREIGN KEY ("descr_id") REFERENCES "experience_items" ("descr_id");
+ALTER TABLE "experience_items" ADD FOREIGN KEY ("descr_id") REFERENCES "descriptions" ("descr_id");
 
 ALTER TABLE "experience_items" ADD FOREIGN KEY ("user_id") REFERENCES "users" ("user_id");
 
 ALTER TABLE "projects" ADD FOREIGN KEY ("user_id") REFERENCES "users" ("user_id");
 
-ALTER TABLE "descriptions" ADD FOREIGN KEY ("descr_id") REFERENCES "projects" ("descr_id");
+ALTER TABLE "projects" ADD FOREIGN KEY ("descr_id") REFERENCES "descriptions" ("descr_id");
 
-ALTER TABLE "images" ADD FOREIGN KEY ("img_id") REFERENCES "projects" ("img_id");
+ALTER TABLE "projects" ADD FOREIGN KEY ("img_id") REFERENCES "images" ("img_id");

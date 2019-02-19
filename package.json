@@ -26,9 +26,10 @@
     "eslint-plugin-react": "^7.12.4",
     "express": "^4.16.4",
     "next": "^8.0.1",
+    "pg": "^7.8.0",
     "react": "^16.8.1",
     "react-bootstrap": "^1.0.0-beta.5",
-    "react-dom": "^16.8.1"
+    "react-dom": "^16.8.1",
   },
   "devDependencies": {
     "eslint": "^5.13.0"
