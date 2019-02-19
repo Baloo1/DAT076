@@ -1,4 +1,5 @@
 const Pool = require('pg').Pool;
+
 const pool = new Pool({
     // TODO - put this info into another file
     user: 'api',
@@ -16,7 +17,7 @@ const getUserIDByEmail = (req, response) => {
             throw error
         }
 
-        response.status(200).json(results.rows)
+        response.status(200).json(results.rows).send()
     })
 };
 
@@ -34,9 +35,9 @@ const validatePassword = (req, response) => {
 
         // TODO handle this properly
         if (passSent === passHere) {
-            response.status(200);
+            response.status(200).send();
         } else {
-            response.status(401);
+            response.status(401).send();
         }
     })
 };
@@ -49,7 +50,7 @@ const getUserByID = (req, response) => {
             throw error
         }
 
-        response.status(200).json(results.rows)
+        response.status(200).json(results.rows).send();
     })
 };
 
@@ -57,7 +58,7 @@ const createUser = (req, response) => {
     const {email, password, name} = req.body;
     pool.query('SELECT MAX(id) FROM users', (error, results) => {
         if (error) {
-            response.status(400)
+            response.status(400).send();
         }
 
         const id = results.rows[0] + 1;
@@ -65,12 +66,19 @@ const createUser = (req, response) => {
         pool.query('INSERT INTO users (id, email, password, name) VALUES ($1, $2, $3, $4)', [id, email, password, name], (error, results) => {
             // TODO more specific checks here might be good
             if (error) {
-                response.status(400)
+                response.status(400).send();
             } else {
-                response.status(200)
+                response.status(200).send();
             }
         })
     })
+};
+
+module.exports = {
+    getUserByID,
+    getUserIDByEmail,
+    validatePassword,
+    createUser,
 };
 
 
