@@ -1,12 +1,7 @@
-CREATE TABLE "logins" (
-    "login_id" INT PRIMARY KEY,
-    "email" varchar NOT NULL,
-    "password" varchar NOT NULL,
-    "user_id" INT
-);
-
 CREATE TABLE "users" (
   "user_id" INT PRIMARY KEY,
+  "email" varchar NOT NULL UNIQUE,
+  "password" varchar NOT NULL,
   "name" varchar NOT NULL,
   "img_id" INT,
   "permissions" INT,
@@ -52,8 +47,6 @@ CREATE TABLE "projects" (
   "start_date" date,
   "end_date" date
 );
-
-ALTER TABLE "logins" ADD FOREIGN KEY ("user_id") REFERENCES "users" ("user_id");
 
 ALTER TABLE "users" ADD FOREIGN KEY ("img_id") REFERENCES "images" ("img_id");
 
