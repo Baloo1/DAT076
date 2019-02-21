@@ -1,9 +1,10 @@
-import React from 'react';
+import React from "react";
 import Head from 'next/head';
-import {Container, Row, Col} from 'react-bootstrap/';
-import MainCarousel from './mainCarousel';
+import {Container, Row, Col} from "react-bootstrap";
+import MainCarousel from "./mainCarousel";
 import MainNavBar from './mainNavbar';
-import MainJumbotron from './mainJumbotron';
+import MainJumbotron from "./mainJumbotron";
+import ExperienceTable from "./experienceTable";
 
 function Home() {
 
@@ -18,15 +19,16 @@ function Home() {
           crossOrigin="anonymous"
         />
       </Head>
-      <MainNavBar/>
-      <MainJumbotron/>
-      <Container>
-        <Row>
-          <Col><MainCarousel/></Col>
-          <Col><MainJumbotron/></Col>
-        </Row>
-      </Container>
-    </div>
+        <MainNavBar/>
+        <MainJumbotron/>
+          <Container>
+              <Row>
+                  <Col><MainCarousel/></Col>
+                  <Col><MainJumbotron/></Col>
+              </Row>
+          </Container>
+        <ExperienceTable/>
+      </div>
   );
 }
 export default Home;
