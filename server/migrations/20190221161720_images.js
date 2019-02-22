@@ -2,7 +2,7 @@
 exports.up = function(knex, Promise) {
     return Promise.all([
         knex.schema.createTable('images', table => {
-            table.increments('image_id').primary();
+            table.increments('id').primary();
             table.string('image_path');
             table.boolean('thumbnail_done').defaultTo(false);
         })

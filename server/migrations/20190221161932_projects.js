@@ -2,11 +2,11 @@
 exports.up = function(knex, Promise) {
     return Promise.all([
         knex.schema.createTable('projects', table => {
-            table.increments('project_id').primary();
-            table.integer('user_id').references('user_id').inTable('users');
+            table.increments('id').primary();
+            table.integer('user_id').references('id').inTable('users');
             table.string('title');
             table.string('description');
-            table.integer('image_id').references('image_id').inTable('images');
+            table.integer('image_id').references('id').inTable('images');
             table.date('start_date');
             table.date('end_date');
         })

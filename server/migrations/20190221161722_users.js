@@ -2,12 +2,12 @@
 exports.up = function(knex, Promise) {
     return Promise.all([
         knex.schema.createTable('users', table => {
-            table.increments('user_id').primary();
+            table.increments('id').primary();
             table.string('email').notNullable();
             table.string('password').notNullable();
             table.enum('role', ['user', 'admin']).defaultTo('user');
             table.string('name');
-            table.integer('image_id').references('images.image_id');
+            table.integer('image_id').references('images.id');
             table.string('phone');
             table.string('website');
             table.string('twitter');
