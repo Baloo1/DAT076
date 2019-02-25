@@ -1,6 +1,14 @@
 const express = require('express');
 const router = express.Router();
-const {User, Experience, About, Project} = require('../models/schema')
+require('dotenv').config();
+const {User, Experience, About, Project, Image} = require('../models/schema');
+const multer = require('multer');
+const fs = require('fs');
+const path = require('path');
+const uuidv4 = require('uuid/v4');
+const upload = multer({
+  dest: process.env.TMP_IMAGE_PATH
+});
 
 // API Routes
 router.get('/', (req, res) => {
@@ -56,5 +64,30 @@ router.post('/:id/project', async (req, res) => {
   res.send(project)
 });
 
+// Upload and download an image. Only png and jpg so far
+router.post('/uploadimg', upload.single('image'), (req, res) => {
+  const uploadPath = req.file.path;
+  const savePath = process.env.SAVE_IMAGE_PATH + uuidv4() + path.extname(req.file.originalname).toLowerCase();
+
+  if (path.extname(req.file.originalname).toLowerCase() === '.png'
+      || path.extname(req.file.originalname).toLowerCase() === '.jpg') {
+    fs.rename(uploadPath, savePath, async err => {
+      if (err) return res.status(500).contentType('text/plain').end('Error!');
+      await Image.query().insert({image_path: savePath});
+      res.status(200).contentType('text/plain').end('Upload success! ');
+    });
+  } else {
+    fs.unlink(uploadPath, err => {
+      if (err) return res.status(500).contentType('text/plain').end('Error!');
+
+      res.status(200).contentType('text/plain').end('Only image files are allowed');
+    });
+  }
+});
+
+router.get('/display/:id', async (req, res) => {
+  const imgPath = await Image.query().where('id', '=', req.params.id);
+  res.sendFile(imgPath[0].image_path);
+});
 
 module.exports = router;
