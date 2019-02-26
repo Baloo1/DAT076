@@ -1,12 +1,8 @@
 import React from 'react';
 import Head from 'next/head';
-import {Container, Row, Col} from 'react-bootstrap';
-import MainCarousel from './mainCarousel';
-import MainNavBar from './mainNavbar';
-import MainJumbotron from './mainJumbotron';
+import {Container, Row, Col} from 'react-bootstrap/';
 
-function Home() {
-
+function Login() {
   return (
     <div>
       <Head>
@@ -18,15 +14,16 @@ function Home() {
           crossOrigin="anonymous"
         />
       </Head>
-      <MainNavBar/>
-      <MainJumbotron/>
       <Container>
         <Row>
-          <Col><MainCarousel/></Col>
-          <Col><MainJumbotron/></Col>
+          <Col>
+            <h3>
+              You must login before you can edit your profile
+            </h3>
+          </Col>
         </Row>
       </Container>
     </div>
   );
 }
-export default Home;
+export default Login;

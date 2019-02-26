@@ -1,91 +1,91 @@
-const Pool = require('pg').Pool;
+// const Pool = require('pg').Pool;
 
-const pool = new Pool({
-    // TODO - put this info into another file
-    user: 'api',
-    host: 'localhost',
-    database: 'api',
-    password: 'password',
-    port: '5432',
-});
+// const pool = new Pool({
+//   // TODO - put this info into another file
+//   user: 'api',
+//   host: 'localhost',
+//   database: 'api',
+//   password: 'password',
+//   port: '5432',
+// });
 
-const getUserIDByEmail = (req, response) => {
-    const {email} = req.body;
+// const getUserIDByEmail = (req, response) => {
+//   const {email} = req.body;
 
-    pool.query('SELECT user_id FROM users WHERE email = $1', [email], (error, results) => {
-        if (error) {
-            throw error
-        }
+//   pool.query('SELECT user_id FROM users WHERE email = $1', [email], (error, results) => {
+//     if (error) {
+//       throw error;
+//     }
 
-        response.status(200).json(results.rows).send()
-    })
-};
+//     response.status(200).json(results.rows).send();
+//   });
+// };
 
-// Takes a request with email and hashed password, compares and returns a 200 or 401 depending on success or failure
-const validatePassword = (req, response) => {
-    // TODO make this actually do a proper password check instead of plaintext
-    const {email, passSent} = req.body;
+// // Takes a request with email and hashed password, compares and returns a 200 or 401 depending on success or failure
+// const validatePassword = (req, response) => {
+//   // TODO make this actually do a proper password check instead of plaintext
+//   const {email, passSent} = req.body;
 
-    pool.query('SELECT password FROM users WHERE email = $1', [email], (error, results) => {
-        if (error) {
-            throw error
-        }
+//   pool.query('SELECT password FROM users WHERE email = $1', [email], (error, results) => {
+//     if (error) {
+//       throw error;
+//     }
 
-        const passHere = results.rows[0].password;
+//     const passHere = results.rows[0].password;
 
-        // TODO handle this properly
-        if (passSent === passHere) {
-            response.status(200).send();
-        } else {
-            response.status(401).send();
-        }
-    })
-};
+//     // TODO handle this properly
+//     if (passSent === passHere) {
+//       response.status(200).send();
+//     } else {
+//       response.status(401).send();
+//     }
+//   });
+// };
 
-const getUserByID = (req, response) => {
-    const id = req.params.id;
+// const getUserByID = (req, response) => {
+//   const id = req.params.id;
 
-    pool.query('SELECT (email, name, img_id, phone, website, twitter) FROM users WHERE user_id = $1', [id], (error, results) => {
-        if (error) {
-            throw error
-        }
+//   pool.query('SELECT (email, name, img_id, phone, website, twitter) FROM users WHERE user_id = $1', [id], (error, results) => {
+//     if (error) {
+//       throw error;
+//     }
 
-        response.status(200).json(results.rows).send();
-    })
-};
+//     response.status(200).json(results.rows).send();
+//   });
+// };
 
-const createUser = (req, response) => {
-    const {email, password, name} = req.body;
-    pool.query('SELECT MAX(id) FROM users', (error, results) => {
-        if (error) {
-            response.status(400).send();
-        }
+// const createUser = (req, response) => {
+//   const {email, password, name} = req.body;
+//   pool.query('SELECT MAX(id) FROM users', (error, results) => {
+//     if (error) {
+//       response.status(400).send();
+//     }
 
-        const id = results.rows[0] + 1;
+//     const id = results.rows[0] + 1;
 
-        pool.query('INSERT INTO users (id, email, password, name) VALUES ($1, $2, $3, $4)', [id, email, password, name], (error, results) => {
-            // TODO more specific checks here might be good
-            if (error) {
-                response.status(400).send();
-            } else {
-                response.status(200).send();
-            }
-        })
-    })
-};
+//     pool.query('INSERT INTO users (id, email, password, name) VALUES ($1, $2, $3, $4)', [id, email, password, name], (error, results) => {
+//       // TODO more specific checks here might be good
+//       if (error) {
+//         response.status(400).send();
+//       } else {
+//         response.status(200).send();
+//       }
+//     });
+//   });
+// };
 
-module.exports = {
-    getUserByID,
-    getUserIDByEmail,
-    validatePassword,
-    createUser,
-};
+// module.exports = {
+//   getUserByID,
+//   getUserIDByEmail,
+//   validatePassword,
+//   createUser,
+// };
 
 
-// TESTING
-pool.query('SELECT password FROM users WHERE user_id = 0', (error, results) => {
-    if (error) {
-        throw error
-    }
-    console.log(results.rows[0].password)
-})
+// // TESTING
+// pool.query('SELECT password FROM users WHERE user_id = 0', (error, results) => {
+//   if (error) {
+//     throw error;
+//   }
+//   console.log(results.rows[0].password);
+// });
