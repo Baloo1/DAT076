@@ -1,11 +1,11 @@
 import React from 'react';
 import {Col, Container, Row} from 'react-bootstrap';
-import UserHeader from './userHeader';
-import UserContact from './userContact';
-import ExperienceTable from './experienceTable';
-import UserInformation from './userInformation';
+import UserHeader from '../components/userHeader';
+import UserContact from '../components/userContact';
+import ExperienceTable from '../components/experienceTable';
+import UserInformation from '../components/userInformation';
 import Head from 'next/head';
-import Projects from './projects';
+import Projects from '../components/projects';
 
 export default class User extends React.Component {
   render() {

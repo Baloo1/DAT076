@@ -1,9 +1,9 @@
 import React from 'react';
 import Head from 'next/head';
 import {Container, Row, Col} from 'react-bootstrap';
-import MainCarousel from './mainCarousel';
-import MainNavBar from './mainNavbar';
-import MainJumbotron from './mainJumbotron';
+import MainCarousel from '../components/mainCarousel';
+import MainNavBar from '../components/mainNavbar';
+import MainJumbotron from '../components/mainJumbotron';
 
 function Home() {
 
