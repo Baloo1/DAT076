@@ -8,7 +8,9 @@
     "dev": "node server/server.js",
     "build": "next build",
     "start": "next start",
-    "lint": "eslint . --fix"
+    "lint": "eslint . --fix",
+    "migrate": "cd server && knex migrate:latest",
+    "seed": "cd server && knex seed:run"
   },
   "repository": {
     "type": "git",

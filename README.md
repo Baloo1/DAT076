@@ -3,6 +3,7 @@ Full stack webapp project for the course DAT076
 
 ## Installation
 `npm install`
+Create a postgresql db name `api` with user `api` and password as `password`. Then run `npm run migrate` and `npm run seed`
 
 ## Start
 `npm run dev` and server will start on localhost:3000
