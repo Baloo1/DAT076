@@ -1,6 +1,7 @@
 import React from 'react';
 import Head from 'next/head';
-import {Container, Row, Col} from 'react-bootstrap/';
+import Router from 'next/router';
+import {Container, Row, Col, Button} from 'react-bootstrap/';
 
 function Login() {
   return (
@@ -20,6 +21,15 @@ function Login() {
             <h3>
               You must login before you can edit your profile
             </h3>
+          </Col>
+          <Col>
+            <Button
+              onClick={() => {
+                Router.push('/user');
+              }}
+            >
+              Login
+            </Button>
           </Col>
         </Row>
       </Container>
