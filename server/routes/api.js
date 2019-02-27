@@ -80,7 +80,7 @@ router.post('/uploadimg', upload.single('image'), (req, res) => {
     fs.unlink(uploadPath, err => {
       if (err) return res.status(500).contentType('text/plain').end('Error!');
 
-      res.status(200).contentType('text/plain').end('Only image files are allowed');
+      res.status(500).contentType('text/plain').end('Only image files are allowed');
     });
   }
 });

@@ -6,6 +6,7 @@ import ExperienceTable from '../components/experienceTable';
 import UserInformation from '../components/userInformation';
 import Head from 'next/head';
 import Projects from '../components/projects';
+import Upload from '../components/upload'
 
 export default class User extends React.Component {
   render() {
@@ -25,6 +26,7 @@ export default class User extends React.Component {
           <Row>
             <Col>
               <UserContact/>
+              <Upload/>
             </Col>
             <Col>
               <Col>

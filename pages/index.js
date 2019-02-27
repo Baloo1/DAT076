@@ -6,6 +6,7 @@ import {Container, Row, Col} from 'react-bootstrap';
 import MainCarousel from '../components/mainCarousel';
 import MainNavBar from '../components/mainNavbar';
 import MainJumbotron from '../components/mainJumbotron';
+import Upload from '../components/upload';
 
 export default class Home extends React.Component {
   static async getInitialProps({ res }) {

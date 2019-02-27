@@ -1,20 +1,46 @@
 import React from 'react';
-import Head from 'next/head';
+const axios =require('axios');
 
-function Upload() {
+export default class Upload extends React.Component {
 
-  // Use a <form> like this to upload
-  return (
-    <div>
-      <Head>
-        <title>Upload an image</title>
-      </Head>
-      <form method="post" encType="multipart/form-data" action="/api/uploadimg">
-        <input type="file" name="image"/>
-        <input type="submit" value="Submit"/>
-      </form>
-    </div>
-  );
+    constructor(props) {
+        super(props);
+        this.state = { image: null };
+        this.onFormSubmit = this.onFormSubmit.bind(this);
+        this.onChange = this.onChange.bind(this);
+    }
+
+    onFormSubmit(e) {
+        e.preventDefault();
+        const formData = new FormData();
+        formData.append('image', this.state.image);
+        const config = {
+            headers: {
+                'content-type': 'multipart/form-data'
+            }
+        };
+        axios.post("/api/uploadimg", formData, config)
+            .then((response) => {
+                if(response.status == 200) {
+                    alert("The file is successfully uploaded");
+                } else {
+                    alert("Something went wrong, " + response.status + ": " + response.statusText)
+                }
+            }).catch((error) => {
+            alert("Something went wrong, " + error)
+        });
+    }
+
+    onChange(e) {
+        this.setState({image: e.target.files[0]});
+    }
+
+    render() {
+        return (
+            <form onSubmit={this.onFormSubmit}>
+                <input type="file" name="image" onChange={this.onChange} />
+                <button type="submit">Upload</button>
+            </form>
+        )
+    }
 }
-
-export default Upload;
