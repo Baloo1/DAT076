@@ -7,6 +7,9 @@ const fs = require('fs');
 const path = require('path');
 const uuidv4 = require('uuid/v4');
 const bcrypt = require('bcrypt');
+const jwt = require('jsonwebtoken');
+const withAuth = require('./authmiddleware');
+const cookieParser = require('cookie-parser');
 const upload = multer({
     dest: process.env.TMP_IMAGE_PATH
 });
@@ -25,7 +28,7 @@ router.get('/users', async (req, res) => {
 router.get('/user/:id', async (req, res) => {
     const user = await User.query().findById(req.params.id).first()
     res.json(user)
-}
+});
 
 // Get all experiences, abouts, projects of a user by id
 router.get('/:id/experiences', async (req, res) => {
@@ -54,10 +57,10 @@ router.post('/:id/experience', async (req, res) => {
     res.send(experience)
 });
 
-router.post('/:id/about', async (req, res) => {
+router.post('/:id/about', withAuth, async (req, res) => {
     const newAbout = req.body
-
-    const ebout = await Experience.query().insert(newAbout)
+    console.log(req.id)
+    const about = await Experience.query().insert(newAbout)
 
     res.send(newAbout)
 });
@@ -131,13 +134,12 @@ router.post('/login', async (req, res) => {
             } else if (!same) {
                 res.status(401).contentType('text/plain').end('No such user/password exists');
             } else {
-                // TODO implement auth here
-                //const payload = { email };
-                //const token = jwt.sign(payload, secret, {
-                //    expiresIn: '1h'
-                //});
-                //res.cookie('token', token, { httpOnly: true })
-                //    .sendStatus(200);
+                // Token authentication
+                const payload = { id: user.id };
+                const token = jwt.sign(payload, process.env.SECRET, {
+                    expiresIn: '1h'
+                });
+                res.cookie('token', token, { httpOnly: true }).sendStatus(200);
             }
         });
     } else {
