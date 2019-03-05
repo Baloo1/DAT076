@@ -22,6 +22,11 @@ router.get('/users', async (req, res) => {
     res.json(users)
 });
 
+router.get('/user/:id', async (req, res) => {
+    const user = await User.query().findById(req.params.id).first()
+    res.json(user)
+}
+
 // Get all experiences, abouts, projects of a user by id
 router.get('/:id/experiences', async (req, res) => {
     const experiences = await Experience.query().where('user_id', '=', req.params.id)
