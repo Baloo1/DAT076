@@ -31,46 +31,75 @@ router.get('/user/:id', async (req, res) => {
 });
 
 // Get all experiences, abouts, projects of a user by id
-router.get('/:id/experiences', async (req, res) => {
+router.get('/user/:id/experiences', async (req, res) => {
     const experiences = await Experience.query().where('user_id', '=', req.params.id)
     res.json(experiences)
 });
 
-router.get('/:id/abouts', async (req, res) => {
+router.get('/user/:id/abouts', async (req, res) => {
     const abouts = await About.query().where('user_id', '=', req.params.id)
     res.json(abouts)
 });
 
-router.get('/:id/projects', async (req, res) => {
+router.get('/user/:id/projects', async (req, res) => {
     const projects = await Project.query().where('user_id', '=', req.params.id)
     res.json(projects)
 });
 
-//TODO add a middleware function to check if user logged in is same as trying to add
-
 // Add a new experience, about or project of a user by id
-router.post('/:id/experience', async (req, res) => {
+router.post('/user/:id/experience/new', withAuth, async (req, res) => {
     const newExperience = req.body
 
-    const experience = await Experience.query().insert(newExperience)
-
-    res.send(experience)
+    if(req.id != req.params.id) {
+        res.status(401).contentType('text/plain').end('Unauthorized');
+    } else {
+        newExperience.user_id = req.params.id; // Force the insert to use the authorized user_id!
+        Experience.query().insert(newExperience).then(experience => {
+            res.status(200).contentType('text/plain').end('New experience added');
+        }).catch(err => {
+            console.log(err);
+            res.status(500).contentType('text/plain').end('Error inserting');
+        })
+    }
 });
 
-router.post('/:id/about', withAuth, async (req, res) => {
+router.post('/user/:id/about/new', withAuth, async (req, res) => {
     const newAbout = req.body
-    console.log(req.id)
-    const about = await Experience.query().insert(newAbout)
 
-    res.send(newAbout)
+    if(req.id != req.params.id) {
+        res.status(401).contentType('text/plain').end('Unauthorized');
+    } else {
+        newAbout.user_id = req.params.id; // Force the insert to use the authorized user_id!
+        About.query().insert(newAbout).then(about => {
+            res.status(200).contentType('text/plain').end('New about added');
+        }).catch(err => {
+            console.log(err);
+            res.status(500).contentType('text/plain').end('Error inserting');
+        })
+    }
 });
 
-router.post('/:id/project', async (req, res) => {
+router.post('/user/:id/project/new', async (req, res) => {
     const newProject = req.body
 
-    const project = await Experience.query().insert(newProject)
+    if(req.id != req.params.id) {
+        res.status(401).contentType('text/plain').end('Unauthorized');
+    } else {
+        newProject.user_id = req.params.id; // Force the insert to use the authorized user_id!
+        Project.query().insert(newProject).then(project => {
+            res.status(200).contentType('text/plain').end('New project added');
+        }).catch(err => {
+            console.log(err);
+            res.status(500).contentType('text/plain').end('Error inserting');
+        })
+    }
+});
 
-    res.send(project)
+// Updates an experience, about or project with new data
+// TODO DO THIS
+
+router.post('/user/:id/about/:item/edit', async (req, res) => {
+
 });
 
 // Upload and download an image. Only png and jpg so far
@@ -132,6 +161,7 @@ router.post('/login', async (req, res) => {
             if (err) {
                 res.status(500).contentType('text/plain').end('Server error!');
             } else if (!same) {
+                console.log('Password mismatch');
                 res.status(401).contentType('text/plain').end('No such user/password exists');
             } else {
                 // Token authentication
@@ -143,6 +173,7 @@ router.post('/login', async (req, res) => {
             }
         });
     } else {
+        console.log('No such user found');
         res.status(401).contentType('text/plain').end('No such user/password exists');
     }
 });
