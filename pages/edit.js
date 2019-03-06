@@ -8,6 +8,7 @@ import Head from 'next/head';
 import Projects from '../components/projects';
 import Upload from '../components/upload'
 import Router from "next/dist/client/router";
+import EditProject from "../components/editProject";
 const axios =require('axios');
 
 
@@ -17,9 +18,9 @@ export default class User extends React.Component {
         const res = await axios.get('http://127.0.0.1:3000/api/user/0');
         const user = await res.data;
         const id = user.id;
-        const res1 = await axios.get('http://127.0.0.1:3000/api/user'+id+'/experiences');
+        const res1 = await axios.get('http://127.0.0.1:3000/api/user/'+id+'/experiences');
         const experiences = await res1.data;
-        const res2 = await axios.get('http://127.0.0.1:3000/api/user'+id+'/projects');
+        const res2 = await axios.get('http://127.0.0.1:3000/api/user/'+id+'/projects');
         const projects = await res1.data;
         console.log(user);
         return {user: user, experiences: experiences, projects: projects};
@@ -87,20 +88,25 @@ export default class User extends React.Component {
           <Row>
             <Col>
               <UserContact user={this.props.user}/>
-              <Upload/>
+              <EditProject component={"userContect"}/>
             </Col>
             <Col>
               <Col>
                 <UserInformation user={this.props.user}/>
+                  <EditProject component={"userInformation"}/>
               </Col>
               <Col>
                 <ExperienceTable experiences={this.props.experiences}/>
+                  <EditProject component={"experiences"}/>
               </Col>
             </Col>
           </Row>
           <Row>
             <Projects projects={this.props.projects}/>
           </Row>
+            <Row>
+                <EditProject id={this.props.user.id}/>
+            </Row>
         </Container>
       </div>
     );

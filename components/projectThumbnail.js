@@ -21,12 +21,10 @@ export default class ProjectThumbnail extends React.Component {
         <Card.Img variant="top" src={this.state.img} alt="Picture"/>
         <Card.Body>
           <Card.ImgOverlay>
-            <Card.Title>Card title</Card.Title>
+            <Card.Title>{this.props.project.title}</Card.Title>
             <Card.Text>
-              This is a wider card with supporting text below as a natural lead-in to
-              additional content. This content is a little bit longer.
+              {this.props.project.description}
             </Card.Text>
-            <Card.Text>Last updated 3 mins ago</Card.Text>
           </Card.ImgOverlay>
         </Card.Body>
       </Card>
