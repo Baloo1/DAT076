@@ -79,7 +79,7 @@ router.post('/user/:id/about/new', withAuth, async (req, res) => {
     }
 });
 
-router.post('/user/:id/project/new', async (req, res) => {
+router.post('/user/:id/project/new', withAuth, async (req, res) => {
     const newProject = req.body
 
     if(req.id != req.params.id) {
@@ -96,11 +96,58 @@ router.post('/user/:id/project/new', async (req, res) => {
 });
 
 // Updates an experience, about or project with new data
-// TODO DO THIS
+router.post('/user/:id/about/:item/edit', withAuth, async (req, res) => {
+    const updateAbout = req.body
 
-router.post('/user/:id/about/:item/edit', async (req, res) => {
-
+    if(req.id != req.params.id) {
+        res.status(401).contentType('text/plain').end('Unauthorized');
+    } else {
+        updateAbout.user_id = req.params.id; // Force the update to only update the correct item!
+        updateAbout.id = req.params.item;
+        About.query().patch(updateAbout).where('user_id', '=', req.params.id).andWhere('id', '=', req.params.item).then(about => {
+            res.json(about);
+        }).catch(err => {
+            console.log(err);
+            res.status(500).contentType('text/plain').end('Error updating');
+        })
+    }
 });
+
+router.post('/user/:id/experience/:item/edit', withAuth, async (req, res) => {
+    const updateExperience = req.body
+
+    if(req.id != req.params.id) {
+        res.status(401).contentType('text/plain').end('Unauthorized');
+    } else {
+        updateExperience.user_id = req.params.id; // Force the update to only update the correct item!
+        updateExperience.id = req.params.item;
+        Experience.query().patch(updateExperience).where('user_id', '=', req.params.id).andWhere('id', '=', req.params.item).then(experience => {
+            res.json(experience);
+        }).catch(err => {
+            console.log(err);
+            res.status(500).contentType('text/plain').end('Error updating');
+        })
+    }
+});
+
+router.post('/user/:id/project/:item/edit', withAuth, async (req, res) => {
+    const updateProject = req.body
+
+    if(req.id != req.params.id) {
+        res.status(401).contentType('text/plain').end('Unauthorized');
+    } else {
+        updateProject.user_id = req.params.id; // Force the update to only update the correct item!
+        updateProject.id = req.params.item;
+        Project.query().patch(updateProject).where('user_id', '=', req.params.id).andWhere('id', '=', req.params.item).then(project => {
+            res.json(project);
+        }).catch(err => {
+            console.log(err);
+            res.status(500).contentType('text/plain').end('Error updating');
+        })
+    }
+});
+
+
 
 // Upload and download an image. Only png and jpg so far
 router.post('/uploadimg', upload.single('image'), (req, res) => {
