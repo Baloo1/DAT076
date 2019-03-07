@@ -17,7 +17,6 @@ export default class EditProject extends React.Component {
         this.handleClose = this.handleClose.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
         this.handleSubmitAdd = this.handleSubmitAdd.bind(this);
-        this.handleAdd = this.handleAdd.bind(this);
         this.selectProject = this.selectProject.bind(this);
         let project = null;
         console.log(this.props.projects);
@@ -30,6 +29,28 @@ export default class EditProject extends React.Component {
             component: <React.Fragment/>,
             submitFunction: this.handleSubmit,
             selectedProject: project,
+            form: <Form>
+                <Form.Group controlId="title">
+                    <Form.Label>Title</Form.Label>
+                    <Form.Control type="text" defaultValue={project.title}/>
+                </Form.Group>
+                <Form.Group controlId="description">
+                    <Form.Label>Description</Form.Label>
+                    <Form.Control type="text" as="textarea" rows="3" defaultValue={project.description}/>
+                </Form.Group>
+                <Form.Group controlId="start_date">
+                    <Form.Label>Start date</Form.Label>
+                    <Form.Control type="date" defaultValue={project.start_date}/>
+                </Form.Group>
+                <Form.Group controlId="end_date">
+                    <Form.Label>End date</Form.Label>
+                    <Form.Control type="date" defaultValue={project.end_date}/>
+                </Form.Group>
+                <Form.Group controlId="image">
+                    <Form.Label>Image</Form.Label>
+                </Form.Group>
+
+            </Form>
         };
     }
 
@@ -64,8 +85,30 @@ export default class EditProject extends React.Component {
                 </Form>, submitFunction: this.handleSubmitAdd,show: true, add: true})
     }
 
-    selectProject(project) {
-        this.setState({selectedProject: project});
+    async selectProject(project) {
+        await this.setState({selectedProject: project});
+        await this.setState({form: <Form>
+                <Form.Group controlId="title">
+                    <Form.Label>Title</Form.Label>
+                    <Form.Control type="text" defaultValue={project.title}/>
+                </Form.Group>
+                <Form.Group controlId="description">
+                    <Form.Label>Description</Form.Label>
+                    <Form.Control type="text" as="textarea" rows="3" defaultValue={project.description}/>
+                </Form.Group>
+                <Form.Group controlId="start_date">
+                    <Form.Label>Start date</Form.Label>
+                    <Form.Control type="date" defaultValue={project.start_date}/>
+                </Form.Group>
+                <Form.Group controlId="end_date">
+                    <Form.Label>End date</Form.Label>
+                    <Form.Control type="date" defaultValue={project.end_date}/>
+                </Form.Group>
+                <Form.Group controlId="image">
+                    <Form.Label>Image</Form.Label>
+                </Form.Group>
+
+            </Form> });
     }
 
     handleShow() {
@@ -76,45 +119,42 @@ export default class EditProject extends React.Component {
                             <Dropdown.Item as="button" onClick={() => this.selectProject(project)}>{project.title}</Dropdown.Item>
                         ))}
                     </DropdownButton>
-                    <Form>
-                        <Form.Group controlId="title">
-                        <Form.Label>Title</Form.Label>
-                        <Form.Control type="text" defaultValue={this.state.selectedProject.title}/>
-                        </Form.Group>
-                        <Form.Group controlId="description">
-                        <Form.Label>Description</Form.Label>
-                        <Form.Control type="text" as="textarea" rows="3" defaultValue={this.state.selectedProject.description}/>
-                        </Form.Group>
-                        <Form.Group controlId="start_date">
-                        <Form.Label>Start date</Form.Label>
-                        <Form.Control type="date" defaultValue={this.state.selectedProject.start_date}/>
-                        </Form.Group>
-                        <Form.Group controlId="end_date">
-                        <Form.Label>End date</Form.Label>
-                        <Form.Control type="date" defaultValue={this.state.selectedProject.end_date}/>
-                        </Form.Group>
-                        <Form.Group controlId="image">
-                        <Form.Label>Image</Form.Label>
-                        </Form.Group>
-
-                </Form>
-                </React.Fragment>, submitFunction: this.handleShow,show: true, add: false})
+                    {this.state.form}
+                </React.Fragment>, submitFunction: this.handleSubmit,show: true, add: false})
 
 
     }
 
     handleSubmit() {
+        const formData = new FormData();
+        formData.append('title', title.value);
+        formData.append('description', description.value);
+        formData.append('start_date', start_date.value);
+        formData.append('end_date', end_date.value);
+        const config = {
+            headers: {
+                'content-type': 'multi-part/form-data'
+            }
+        };
+        axios.post('http://127.0.0.1:3000/api/user/'+this.props.id+'/project/'+this.state.selectedProject.id+'/edit',formData,config)
+            .then((response) => {
+                if(response.status === 200) {
+                    alert("Project added");
+                } else {
+                    alert("Something went wrong, " + response.status + ": " + response.statusText);
+                }
+            }).catch((error) => {
+            alert("Something went wrong, " + error);
+        });
         this.setState({ show: false });
     }
 
     handleSubmitAdd() {
         const formData = new FormData();
-        alert(end_date.value)
-        alert(new Date(end_date.value))
         formData.append('title', title.value);
         formData.append('description', description.value);
-        formData.append('start_date', new Date(start_date.value));
-        formData.append('end_date', new Date(end_date.value));
+        formData.append('start_date', start_date.value);
+        formData.append('end_date', end_date.value);
         const config = {
             headers: {
                 'content-type': 'multi-part/form-data'
@@ -131,10 +171,6 @@ export default class EditProject extends React.Component {
             alert("Something went wrong, " + error);
         });
         this.setState({ show: false });
-    }
-
-    handleAdd() {
-
     }
 
     render() {

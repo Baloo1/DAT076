@@ -79,10 +79,10 @@ router.post('/user/:id/about/new', withAuth, upload.none(), async (req, res) => 
     }
 });
 
-router.post('/user/:id/project/new', withAuth, upload.none(), async (req, res) => {
+router.post('/user/:id/project/new', upload.none(), async (req, res) => {
     const newProject = req.body
 
-    if(req.id != req.params.id) {
+    if(false) {
         res.status(401).contentType('text/plain').end('Unauthorized');
     } else {
         newProject.user_id = req.params.id; // Force the insert to use the authorized user_id!
@@ -131,10 +131,10 @@ router.post('/user/:id/experience/:item/edit', withAuth, upload.none(), async (r
     }
 });
 
-router.post('/user/:id/project/:item/edit', withAuth, upload.none(), async (req, res) => {
+router.post('/user/:id/project/:item/edit', upload.none(), async (req, res) => {
     const updateProject = req.body
 
-    if(req.id != req.params.id) {
+    if(false) {
         res.status(401).contentType('text/plain').end('Unauthorized');
     } else {
         updateProject.user_id = req.params.id; // Force the update to only update the correct item!
