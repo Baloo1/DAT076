@@ -5,7 +5,7 @@ export default class UserInformation extends React.Component {
   render() {
     return (
       <Card>
-        <Card.Header as="h5">Your name</Card.Header>
+        <Card.Header as="h5">{this.props.user.name}</Card.Header>
         <Card.Body>
           <Card.Text>
                         Here you can say interesting things about yourself!

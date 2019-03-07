@@ -19,8 +19,8 @@ export default class Projects extends React.Component {
   render() {
 
     const projectCards = [];
-    for (var i = 0; i < this.state.projectLength; i += 1) {
-      projectCards.push(<ProjectThumbnail/>);
+    for (var i = 0; i < this.props.projects.length; i += 1) {
+      projectCards.push(<ProjectThumbnail project={this.props.projects[i]}/>);
     }
     return (
       <CardColumns>
