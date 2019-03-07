@@ -6,7 +6,7 @@ exports.seed = function(knex, Promise) {
       // Inserts seed entries
       return knex('users').insert([
           // password is admin
-        {id: 0, email: 'admin@admin.com', password: '$2b$10$O9zz1ENsnYC3f9W/FE3SaOBnE7RGBFXoIA/vSXBgxD1wfPJ067qlO', role: 'admin'},
+        {id: 0, email: 'admin@admin.com', image_id: 0, password: '$2b$10$O9zz1ENsnYC3f9W/FE3SaOBnE7RGBFXoIA/vSXBgxD1wfPJ067qlO', role: 'admin'},
       ]);
     });
 };
