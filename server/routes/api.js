@@ -172,7 +172,7 @@ router.post('/uploadimg', upload.single('image'), (req, res) => {
 
 router.get('/display/:id', async (req, res) => {
     const imgPath = await Image.query().where('id', '=', req.params.id);
-    res.sendFile(imgPath[0].image_path);
+    res.sendFile(path.resolve('.') + '/' + imgPath[0].image_path);
 });
 
 // Handle login, registering and password changes
