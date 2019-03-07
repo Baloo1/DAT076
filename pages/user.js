@@ -24,7 +24,7 @@ export default class User extends React.Component {
         const res3 = await axios.get('http://127.0.0.1:3000/api/user/'+id+'/abouts');
         const abouts = await res3.data;
         console.log(user);
-        return {user: user, experiences: experiences, projects: projects, abouts: abouts};
+        return {user: user, experiences: experiences, projects: projects, about: abouts[0]};
     }
 
 
