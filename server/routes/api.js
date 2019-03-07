@@ -79,10 +79,10 @@ router.post('/user/:id/about/new', withAuth, async (req, res) => {
     }
 });
 
-router.post('/user/:id/project/new', withAuth, async (req, res) => {
+router.post('/user/:id/project/new', async (req, res) => {
     const newProject = req.body
 
-    if(req.id != req.params.id) {
+    if(false) {
         res.status(401).contentType('text/plain').end('Unauthorized');
     } else {
         newProject.user_id = req.params.id; // Force the insert to use the authorized user_id!

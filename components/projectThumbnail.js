@@ -9,7 +9,7 @@ export default class ProjectThumbnail extends React.Component {
 
     this.state = {
       projectLength: 0,
-      img: '/api/images/' + this.props.img,
+      img: '/api/display/' //this.props.project.image_id,
 
     };
 

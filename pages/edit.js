@@ -21,9 +21,10 @@ export default class User extends React.Component {
         const res1 = await axios.get('http://127.0.0.1:3000/api/user/'+id+'/experiences');
         const experiences = await res1.data;
         const res2 = await axios.get('http://127.0.0.1:3000/api/user/'+id+'/projects');
-        const projects = await res1.data;
-        console.log(user);
-        return {user: user, experiences: experiences, projects: projects};
+        const projects = await res2.data;
+        const res3 = await axios.get('http://127.0.0.1:3000/api/user/'+id+'/abouts');
+        const abouts = await res3.data;
+        return {user: user, experiences: experiences, projects: projects, about: abouts[0]};
     }
 
 
@@ -38,8 +39,6 @@ export default class User extends React.Component {
       };
       this.getUser();
 
-      console.log("State:");
-      console.log(this.state.user)
   }
 
 
@@ -88,16 +87,13 @@ export default class User extends React.Component {
           <Row>
             <Col>
               <UserContact user={this.props.user}/>
-              <EditProject component={"userContect"}/>
             </Col>
             <Col>
               <Col>
-                <UserInformation user={this.props.user}/>
-                  <EditProject component={"userInformation"}/>
+                <UserInformation user={this.props.user} about={this.props.about}/>
               </Col>
               <Col>
                 <ExperienceTable experiences={this.props.experiences}/>
-                  <EditProject component={"experiences"}/>
               </Col>
             </Col>
           </Row>
@@ -105,7 +101,7 @@ export default class User extends React.Component {
             <Projects projects={this.props.projects}/>
           </Row>
             <Row>
-                <EditProject id={this.props.user.id}/>
+                <EditProject id={this.props.user.id} projects={this.props.projects}/>
             </Row>
         </Container>
       </div>

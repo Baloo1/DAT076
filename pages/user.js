@@ -17,12 +17,14 @@ export default class User extends React.Component {
         const res = await axios.get('http://127.0.0.1:3000/api/user/0');
         const user = await res.data;
         const id = user.id;
-        const res1 = await axios.get('http://127.0.0.1:3000/api/user'+id+'/experiences');
+        const res1 = await axios.get('http://127.0.0.1:3000/api/user/'+id+'/experiences');
         const experiences = await res1.data;
-        const res2 = await axios.get('http://127.0.0.1:3000/api/user'+id+'/projects');
-        const projects = await res1.data;
+        const res2 = await axios.get('http://127.0.0.1:3000/api/user/'+id+'/projects');
+        const projects = await res2.data;
+        const res3 = await axios.get('http://127.0.0.1:3000/api/user/'+id+'/abouts');
+        const abouts = await res3.data;
         console.log(user);
-        return {user: user, experiences: experiences, projects: projects};
+        return {user: user, experiences: experiences, projects: projects, abouts: abouts};
     }
 
 
@@ -37,8 +39,6 @@ export default class User extends React.Component {
       };
       this.getUser();
 
-      console.log("State:");
-      console.log(this.state.user)
   }
 
 
@@ -91,7 +91,7 @@ export default class User extends React.Component {
             </Col>
             <Col>
               <Col>
-                <UserInformation user={this.props.user}/>
+                <UserInformation user={this.props.user} about={this.props.abouts}/>
               </Col>
               <Col>
                 <ExperienceTable experiences={this.props.experiences}/>

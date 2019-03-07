@@ -8,7 +8,7 @@ export default class UserInformation extends React.Component {
         <Card.Header as="h5">{this.props.user.name}</Card.Header>
         <Card.Body>
           <Card.Text>
-                        Here you can say interesting things about yourself!
+              {this.props.about.description}
           </Card.Text>
           <Button variant="primary">Go to timeline</Button>
         </Card.Body>
