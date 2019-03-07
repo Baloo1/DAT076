@@ -47,7 +47,7 @@ router.get('/user/:id/projects', async (req, res) => {
 });
 
 // Add a new experience, about or project of a user by id
-router.post('/user/:id/experience/new', withAuth, async (req, res) => {
+router.post('/user/:id/experience/new', withAuth, upload.none(), async (req, res) => {
     const newExperience = req.body
 
     if(req.id != req.params.id) {
@@ -63,7 +63,7 @@ router.post('/user/:id/experience/new', withAuth, async (req, res) => {
     }
 });
 
-router.post('/user/:id/about/new', withAuth, async (req, res) => {
+router.post('/user/:id/about/new', withAuth, upload.none(), async (req, res) => {
     const newAbout = req.body
 
     if(req.id != req.params.id) {
@@ -79,13 +79,14 @@ router.post('/user/:id/about/new', withAuth, async (req, res) => {
     }
 });
 
-router.post('/user/:id/project/new', async (req, res) => {
+router.post('/user/:id/project/new', withAuth, upload.none(), async (req, res) => {
     const newProject = req.body
 
-    if(false) {
+    if(req.id != req.params.id) {
         res.status(401).contentType('text/plain').end('Unauthorized');
     } else {
         newProject.user_id = req.params.id; // Force the insert to use the authorized user_id!
+        console.log(newProject)
         Project.query().insert(newProject).then(project => {
             res.status(200).contentType('text/plain').end('New project added');
         }).catch(err => {
@@ -96,7 +97,7 @@ router.post('/user/:id/project/new', async (req, res) => {
 });
 
 // Updates an experience, about or project with new data
-router.post('/user/:id/about/:item/edit', withAuth, async (req, res) => {
+router.post('/user/:id/about/:item/edit', withAuth, upload.none(), async (req, res) => {
     const updateAbout = req.body
 
     if(req.id != req.params.id) {
@@ -113,7 +114,7 @@ router.post('/user/:id/about/:item/edit', withAuth, async (req, res) => {
     }
 });
 
-router.post('/user/:id/experience/:item/edit', withAuth, async (req, res) => {
+router.post('/user/:id/experience/:item/edit', withAuth, upload.none(), async (req, res) => {
     const updateExperience = req.body
 
     if(req.id != req.params.id) {
@@ -130,7 +131,7 @@ router.post('/user/:id/experience/:item/edit', withAuth, async (req, res) => {
     }
 });
 
-router.post('/user/:id/project/:item/edit', withAuth, async (req, res) => {
+router.post('/user/:id/project/:item/edit', withAuth, upload.none(), async (req, res) => {
     const updateProject = req.body
 
     if(req.id != req.params.id) {
