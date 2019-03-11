@@ -91,7 +91,7 @@ export default class User extends React.Component {
             </Col>
             <Col>
               <Col>
-                <UserInformation user={this.props.user} about={this.props.abouts}/>
+                <UserInformation user={this.props.user} about={this.props.about}/>
               </Col>
               <Col>
                 <ExperienceTable experiences={this.props.experiences}/>
