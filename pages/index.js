@@ -6,22 +6,22 @@ import {Container, Row, Col} from 'react-bootstrap';
 import MainCarousel from '../components/mainCarousel';
 import MainNavBar from '../components/mainNavbar';
 import MainJumbotron from '../components/mainJumbotron';
-import Upload from '../components/upload';
 
 export default class Home extends React.Component {
-  static async getInitialProps({ res }) {
-    if (res) {
-      res.writeHead(302, {
-        Location: '/login'
-      });
-      res.end();
-    } else {
-      Router.push('/');
-    }
-    return {};
-  }
+    /*static async getInitialProps({ res }) {
+        if (res) {
+            res.writeHead(302, {
+                Location: '/login'
+            });
+            res.end();
+        } else {
+            Router.push('/');
+        }
+        return {};
+    }*/
 
-  render() {
+
+    render() {
     return (
       <div>
         <Head>
@@ -33,14 +33,14 @@ export default class Home extends React.Component {
             crossOrigin="anonymous"
           />
         </Head>
-        <MainNavBar/>
-        <MainJumbotron/>
-        <Container>
-          <Row>
-            <Col><MainCarousel/></Col>
-            <Col><MainJumbotron/></Col>
-          </Row>
-        </Container>
+          <MainNavBar/>
+          <MainJumbotron/>
+          <Container>
+              <Row>
+                  <Col><MainCarousel/></Col>
+                  <Col><MainJumbotron/></Col>
+              </Row>
+          </Container>
       </div>
     );
   }

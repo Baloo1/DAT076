@@ -177,7 +177,7 @@ router.get('/display/:id', async (req, res) => {
 });
 
 // Handle login, registering and password changes
-router.post('/register', async (req, res) => {
+router.post('/register', upload.none(), async (req, res) => {
     const { email, password } = req.body;
     const userexists = await User.query().where('email', '=', email).first();
     console.log(userexists)
@@ -201,7 +201,7 @@ function isPasswordCorrect(user, password, callback) {
     });
 }
 
-router.post('/login', async (req, res) => {
+router.post('/login', upload.none(), async (req, res) => {
     const { email, password } = req.body;
     const user = await User.query().where('email', '=', email).first();
     if(user != null) {
@@ -213,11 +213,12 @@ router.post('/login', async (req, res) => {
                 res.status(401).contentType('text/plain').end('No such user/password exists');
             } else {
                 // Token authentication
-                const payload = { id: user.id };
+                const payload = { id: user.id, role: user.role };
                 const token = jwt.sign(payload, process.env.SECRET, {
-                    expiresIn: '1h'
+                    expiresIn: '12h'
                 });
-                res.cookie('token', token, { httpOnly: true }).sendStatus(200);
+                res.json({user: user.id, token: token});
+                //res.cookie('token', token, { httpOnly: true }).sendStatus(200);
             }
         });
     } else {
