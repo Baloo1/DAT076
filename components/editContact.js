@@ -91,49 +91,53 @@ export default class EditContact extends React.Component {
     }
 
     render() {
-        return (
-            <>
-                <Button variant="primary" onClick={this.handleShow}>
-                    Edit
-                </Button>
-                <Modal show={this.state.show} onHide={this.handleClose}>
-                    <Modal.Header closeButton>
-                        <Modal.Title>Edit contact details</Modal.Title>
-                    </Modal.Header>
-                    <Modal.Body>
-                        <Form>
-                            <Form.Group controlId="phone">
-                                <Form.Label>Phone</Form.Label>
-                                <Form.Control type="text" defaultValue={this.props.user.phone}/>
-                            </Form.Group>
-                            <Form.Group controlId="email">
-                                <Form.Label>Email</Form.Label>
-                                <Form.Control type="text" defaultValue={this.props.user.email}/>
-                            </Form.Group>
-                            <Form.Group controlId="website">
-                                <Form.Label>Website</Form.Label>
-                                <Form.Control type="text" defaultValue={this.props.user.website}/>
-                            </Form.Group>
-                            <Form.Group controlId="twitter">
-                                <Form.Label>Twitter</Form.Label>
-                                <Form.Control type="text" defaultValue={this.props.user.twitter}/>
-                            </Form.Group>
-                            <Form.Group controlId="image">
-                                <Form.Label>Image</Form.Label>
-                                <Form.Control type="file" onChange={this.fileChange}/>
-                            </Form.Group>
-                        </Form>
-                    </Modal.Body>
-                    <Modal.Footer>
-                        <Button variant="secondary" onClick={this.handleClose}>
-                            Close
-                        </Button>
-                        <Button variant="primary" onClick={this.handleSubmit}>
-                            Save Changes
-                        </Button>
-                    </Modal.Footer>
-                </Modal>
-            </>
-        );
+        if (this.props.user == null) {
+            return null
+        } else {
+            return (
+                <>
+                    <Button variant="primary" onClick={this.handleShow}>
+                        Edit
+                    </Button>
+                    <Modal show={this.state.show} onHide={this.handleClose}>
+                        <Modal.Header closeButton>
+                            <Modal.Title>Edit contact details</Modal.Title>
+                        </Modal.Header>
+                        <Modal.Body>
+                            <Form>
+                                <Form.Group controlId="phone">
+                                    <Form.Label>Phone</Form.Label>
+                                    <Form.Control type="text" defaultValue={this.props.user.phone}/>
+                                </Form.Group>
+                                <Form.Group controlId="email">
+                                    <Form.Label>Email</Form.Label>
+                                    <Form.Control type="text" defaultValue={this.props.user.email}/>
+                                </Form.Group>
+                                <Form.Group controlId="website">
+                                    <Form.Label>Website</Form.Label>
+                                    <Form.Control type="text" defaultValue={this.props.user.website}/>
+                                </Form.Group>
+                                <Form.Group controlId="twitter">
+                                    <Form.Label>Twitter</Form.Label>
+                                    <Form.Control type="text" defaultValue={this.props.user.twitter}/>
+                                </Form.Group>
+                                <Form.Group controlId="image">
+                                    <Form.Label>Image</Form.Label>
+                                    <Form.Control type="file" onChange={this.fileChange}/>
+                                </Form.Group>
+                            </Form>
+                        </Modal.Body>
+                        <Modal.Footer>
+                            <Button variant="secondary" onClick={this.handleClose}>
+                                Close
+                            </Button>
+                            <Button variant="primary" onClick={this.handleSubmit}>
+                                Save Changes
+                            </Button>
+                        </Modal.Footer>
+                    </Modal>
+                </>
+            );
+        }
     }
 }
