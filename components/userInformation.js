@@ -1,32 +1,45 @@
 import React from 'react';
-import {Button, Card} from 'react-bootstrap';
+import {Button, Card, Table} from 'react-bootstrap';
 import PropTypes from 'prop-types';
 
-
 export default class UserInformation extends React.Component {
+    constructor(props) {
+        super(props);
+
+        this.state = {
+            name: 'Loading...',
+        }
+    }
+
     render() {
-        if(this.props.about == null || this.props.user == null) {
+        if(this.props.abouts == null || this.props.user == null) {
             return (
                 <Card>
                     <Card.Header as="h5">Loading...</Card.Header>
                     <Card.Body>
                         <Card.Text>
-                        Loading...
+                            Loading...
                         </Card.Text>
                     </Card.Body>
                 </Card>
             );
         } else {
+            const abouts = this.props.abouts.map((about) =>
+                <tr>
+                    <td style={{background: 'lightgray', width: '20%'}}>{about.title}</td>
+                    <td>{about.description}</td>
+                </tr>
+            );
+
             return (
-                <Card>
-                    <Card.Header as="h5">{this.props.user.name}</Card.Header>
-                    <Card.Body>
-                        <Card.Text>
-                            {this.props.about.description}
-                        </Card.Text>
-                        <Button variant="primary">Go to timeline</Button>
-                    </Card.Body>
-                </Card>
+                <div>
+                    <h3>About me</h3>
+                    <Table striped bordered>
+                        <tbody>
+                            {abouts}
+                        </tbody>
+                    </Table>
+                </div>
             );
         }
     }

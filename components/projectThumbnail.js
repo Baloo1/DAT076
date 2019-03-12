@@ -52,7 +52,7 @@ export default class ProjectThumbnail extends React.Component {
             <Card onMouseOut={() => this.mouseOut()} onMouseOver={() => this.mouseOver()}>
                 <Card.Img variant="top" src={this.state.img} alt="Picture"/>
                 <Card.Body>
-                    <Card.ImgOverlay style={this.state.style}>
+                    <Card.ImgOverlay>
                         <Card.Title>{this.props.project.title}</Card.Title>
                         <Card.Text>
                             {this.props.project.description}

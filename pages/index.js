@@ -22,7 +22,12 @@ export default class Home extends React.Component {
                 <Container>
                     <Row>
                         <Col>
-
+                            <Jumbotron fluid>
+                                <h1>Make your own portfolio page!</h1>
+                                <p>On this site you can make your own, almost professional looking portfolio.
+                                It's not quite that cool though since it was made in haste for a school project
+                                and we're not quite that smart yet. It was made with react-bootstrap</p>
+                            </Jumbotron>
                         </Col>
                     </Row>
                 </Container>

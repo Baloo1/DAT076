@@ -34,11 +34,20 @@ export default class User extends React.Component {
         this.getUser = this.getUser.bind(this);
 
         this.state = {
-            user: null
-
+            user_id: null,
+            user: null,
+            experiences: null,
+            projects: null,
+            abouts: null
         };
-        this.getUser();
+    }
 
+    async componentDidMount() {
+        const resU = await axios.get('http://localhost:3000/api/user/' + sessionStorage.user);
+        const resE = await axios.get('http://localhost:3000/api/user/' + sessionStorage.user + '/experiences');
+        const resP = await axios.get('http://localhost:3000/api/user/' + sessionStorage.user + '/projects');
+        const resA = await axios.get('http://localhost:3000/api/user/' + sessionStorage.user + '/abouts');
+        await this.setState({user_id: sessionStorage.user, user: resU.data, experiences: resE.data, projects: resP.data, abouts: resA.data});
     }
 
     getUser() {
@@ -81,29 +90,29 @@ export default class User extends React.Component {
                         <Col>
                             <Row>
                                 <Col>
-                                    <UserContact user={this.props.user}/>
+                                    <UserContact user={this.state.user}/>
                                 </Col>
                             </Row>
                             <Row>
                                 <Col>
-                                    <EditContact user={this.props.user}/>
+                                    <EditContact user={this.state.user}/>
                                 </Col>
                             </Row>
                         </Col>
                         <Col>
                             <Col>
-                                <UserInformation user={this.props.user} about={this.props.about}/>
+                                <UserInformation user={this.state.user} about={this.state.abouts}/>
                             </Col>
                             <Col>
-                                <ExperienceTable experiences={this.props.experiences}/>
+                                <ExperienceTable experiences={this.state.experiences}/>
                             </Col>
                         </Col>
                     </Row>
                     <Row>
-                        <Projects projects={this.props.projects}/>
+                        <Projects projects={this.state.projects}/>
                     </Row>
                     <Row>
-                        <EditProject id={this.props.user.id} projects={this.props.projects}/>
+                        <EditProject id={this.state.user} projects={this.state.projects}/>
                     </Row>
                 </Container>
             </div>

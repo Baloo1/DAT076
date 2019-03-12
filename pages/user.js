@@ -38,7 +38,7 @@ export default class User extends React.Component {
             user: null,
             experiences: null,
             projects: null,
-            about: null
+            abouts: null
         };
         this.getUser();
     }
@@ -48,7 +48,7 @@ export default class User extends React.Component {
         const resE = await axios.get('http://localhost:3000/api/user/' + sessionStorage.user + '/experiences');
         const resP = await axios.get('http://localhost:3000/api/user/' + sessionStorage.user + '/projects');
         const resA = await axios.get('http://localhost:3000/api/user/' + sessionStorage.user + '/abouts');
-        await this.setState({user_id: sessionStorage.user, user: resU.data, experiences: resE.data, projects: resP.data, about: resA.data[0]});
+        await this.setState({user_id: sessionStorage.user, user: resU.data, experiences: resE.data, projects: resP.data, abouts: resA.data});
     }
 
     getUser() {
@@ -91,11 +91,10 @@ export default class User extends React.Component {
                     <Row>
                         <Col>
                             <UserContact user={this.state.user}/>
-                            <Upload/>
                         </Col>
                         <Col>
                             <Col>
-                                <UserInformation user={this.state.user} about={this.state.about}/>
+                                <UserInformation user={this.state.user} abouts={this.state.abouts}/>
                             </Col>
                             <Col>
                                 <ExperienceTable experiences={this.state.experiences}/>
