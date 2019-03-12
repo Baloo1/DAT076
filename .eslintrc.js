@@ -34,6 +34,7 @@ module.exports = {
             "always"
         ],
         "no-console": 0,
+        "react/no-unescaped-entities": "off"
     },
     "settings": {
         "react": {
