@@ -1,11 +1,10 @@
 import React from 'react';
 import Modal from 'react-bootstrap/Modal';
 import Button from 'react-bootstrap/Button';
-import Form from 'react-bootstrap/Form';
-import DropdownButton from 'react-bootstrap/DropdownButton';
-import Dropdown from 'react-bootstrap/Dropdown';
 import axios from 'axios';
 import PropTypes from 'prop-types';
+import EditProjectForm from './editProjectForm';
+import AddProjectForm from './addProjectForm';
 
 
 export default class EditProject extends React.Component {
@@ -41,69 +40,25 @@ export default class EditProject extends React.Component {
         this.setState({ show: false });
     }
 
-    handleShowAdd() {
-        this.setState({component: <Form>
-            <Form.Group controlId="title">
-                <Form.Label>Title</Form.Label>
-                <Form.Control type="text" />
-            </Form.Group>
-            <Form.Group controlId="description">
-                <Form.Label>Description</Form.Label>
-                <Form.Control type="text" as="textarea" rows="3" />
-            </Form.Group>
-            <Form.Group controlId="start_date">
-                <Form.Label>Start date</Form.Label>
-                <Form.Control type="date"/>
-            </Form.Group>
-            <Form.Group controlId="end_date">
-                <Form.Label>End date</Form.Label>
-                <Form.Control type="date"/>
-            </Form.Group>
-            <Form.Group controlId="image">
-                <Form.Label>Image</Form.Label>
-            </Form.Group>
-
-        </Form>, submitFunction: this.handleSubmitAdd,show: true, add: true});
-    }
-
     selectProject(project) {
-        console.log(project)
+        console.log(project);
         this.setState({selectedProject: project});
     }
 
     handleShow() {
-            this.setState({component:
-                <React.Fragment>
-                    <DropdownButton id="dropdown-item-button" title="Select project">
-                        {this.props.projects.map(project => (
-                            <Dropdown.Item as="button" onClick={() => this.selectProject(project)}>{project.title}</Dropdown.Item>
-                        ))}
-                    </DropdownButton>
-                    <Form>
-                        <Form.Group controlId="title">
-                            <Form.Label>Title</Form.Label>
-                            <Form.Control type="text" value={this.state.selectedProject.title}/>
-                        </Form.Group>
-                        <Form.Group controlId="description">
-                            <Form.Label>Description</Form.Label>
-                            <Form.Control type="text" as="textarea" rows="3" value={this.state.selectedProject.description}/>
-                        </Form.Group>
-                        <Form.Group controlId="start_date">
-                            <Form.Label>Start date</Form.Label>
-                            <Form.Control type="date" value={this.state.selectedProject.start_date}/>
-                        </Form.Group>
-                        <Form.Group controlId="end_date">
-                            <Form.Label>End date</Form.Label>
-                            <Form.Control type="date" value={this.state.selectedProject.end_date}/>
-                        </Form.Group>
-                        <Form.Group controlId="image">
-                            <Form.Label>Image</Form.Label>
-                        </Form.Group>
+        this.setState({
+            submitFunction: this.handleSubmit,
+            show: true,
+            add: false
+        });
+    }
 
-                    </Form>
-                </React.Fragment>, submitFunction: this.handleSubmit,show: true, add: false})
-
-
+    handleShowAdd() {
+        this.setState({
+            submitFunction: this.handleSubmitAdd,
+            show: true,
+            add: true
+        });
     }
 
     handleSubmit() {
@@ -156,26 +111,28 @@ export default class EditProject extends React.Component {
     }
 
     render() {
-        let edit = <Button variant="primary" onClick={this.handleShow} disabled>
-            Edit
-        </Button>;
-        if (this.props.projects!==null) {
-            edit = <Button variant="primary" onClick={this.handleShow}>
-                Edit
-            </Button>;
-        }
         return (
             <>
-                {edit}
+                <Button variant="primary" onClick={this.handleShow} disabled={this.props.projects===null}>
+                    Edit
+                </Button>
                 <Button variant="secondary" onClick={this.handleShowAdd}>
                     Add
                 </Button>
-
                 <Modal show={this.state.show} onHide={this.handleClose}>
                     <Modal.Header closeButton>
                         <Modal.Title>Modal heading</Modal.Title>
                     </Modal.Header>
-                    <Modal.Body>{this.state.component}</Modal.Body>
+                    <Modal.Body>
+                        {this.state.add ?
+                            <AddProjectForm /> :
+                            <EditProjectForm
+                                projects={this.props.projects}
+                                selectedProject={this.state.selectedProject}
+                                selectProject={this.selectProject}
+                            />
+                        }
+                    </Modal.Body>
                     <Modal.Footer>
                         <Button variant="secondary" onClick={this.handleClose}>
                             Close
@@ -191,5 +148,7 @@ export default class EditProject extends React.Component {
 }
 
 EditProject.propTypes = {
-    projects: PropTypes.array
+    projects: PropTypes.array,
+    id: PropTypes.object
 };
+

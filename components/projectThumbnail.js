@@ -26,7 +26,7 @@ export default class ProjectThumbnail extends React.Component {
         if (this.props.project.image_id===null) {
             img = 0;
         } else {
-            img = this.props.project.image_id
+            img = this.props.project.image_id;
         }
 
         this.state = {
@@ -40,11 +40,11 @@ export default class ProjectThumbnail extends React.Component {
     }
 
     async mouseOut() {
-        await this.setState({style: {display: 'none'}})
+        await this.setState({style: {display: 'none'}});
     }
 
     async mouseOver() {
-        await this.setState({style: {}})
+        await this.setState({style: {}});
     }
 
     render() {

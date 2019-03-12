@@ -2,7 +2,8 @@ import React from 'react';
 import Modal from 'react-bootstrap/Modal';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
-const axios =require('axios');
+import PropTypes from 'prop-types';
+import axios from 'axios';
 
 export default class EditContact extends React.Component {
 
@@ -47,16 +48,16 @@ export default class EditContact extends React.Component {
             axios.post('/api/uploadimg', formDataImg, config)
                 .then((response) => {
                     if(response.status == 200) {
-                        image_id = response.data.id
+                        image_id = response.data.id;
                         this.updateUser(image_id);
                     } else {
                         alert('Something went wrong with the image, ' + response.status + ': ' + response.statusText);
                     }
                 }).catch((error) => {
-                alert('Something went wrong with the image, ' + error);
-            });
+                    alert('Something went wrong with the image, ' + error);
+                });
         } else {
-            this.updateUser(image_id)
+            this.updateUser(image_id);
         }
     }
 
@@ -81,8 +82,8 @@ export default class EditContact extends React.Component {
                     alert('Something went wrong, ' + response.status + ': ' + response.statusText);
                 }
             }).catch((error) => {
-            alert('Something went wrong, ' + error);
-        });
+                alert('Something went wrong, ' + error);
+            });
         this.setState({ show: false });
     }
 
@@ -92,7 +93,7 @@ export default class EditContact extends React.Component {
 
     render() {
         if (this.props.user == null) {
-            return null
+            return null;
         } else {
             return (
                 <>
@@ -141,3 +142,7 @@ export default class EditContact extends React.Component {
         }
     }
 }
+
+EditContact.propTypes = {
+    user: PropTypes.object
+};
