@@ -19,7 +19,6 @@ export default class EditProject extends React.Component {
         this.handleSubmitAdd = this.handleSubmitAdd.bind(this);
         this.selectProject = this.selectProject.bind(this);
         let project = null;
-        console.log(this.props.projects);
         if (this.props.projects!==null) {
             project = this.props.projects[0];
         }
@@ -29,29 +28,9 @@ export default class EditProject extends React.Component {
             component: <React.Fragment/>,
             submitFunction: this.handleSubmit,
             selectedProject: project,
-            form: <Form>
-                <Form.Group controlId="title">
-                    <Form.Label>Title</Form.Label>
-                    <Form.Control type="text" defaultValue={project.title}/>
-                </Form.Group>
-                <Form.Group controlId="description">
-                    <Form.Label>Description</Form.Label>
-                    <Form.Control type="text" as="textarea" rows="3" defaultValue={project.description}/>
-                </Form.Group>
-                <Form.Group controlId="start_date">
-                    <Form.Label>Start date</Form.Label>
-                    <Form.Control type="date" defaultValue={project.start_date}/>
-                </Form.Group>
-                <Form.Group controlId="end_date">
-                    <Form.Label>End date</Form.Label>
-                    <Form.Control type="date" defaultValue={project.end_date}/>
-                </Form.Group>
-                <Form.Group controlId="image">
-                    <Form.Label>Image</Form.Label>
-                </Form.Group>
-
-            </Form>
         };
+
+        console.log(this.state)
     }
 
 
@@ -85,42 +64,42 @@ export default class EditProject extends React.Component {
         </Form>, submitFunction: this.handleSubmitAdd,show: true, add: true});
     }
 
-    async selectProject(project) {
-        await this.setState({selectedProject: project});
-        await this.setState({form: <Form>
-            <Form.Group controlId="title">
-                <Form.Label>Title</Form.Label>
-                <Form.Control type="text" defaultValue={project.title}/>
-            </Form.Group>
-            <Form.Group controlId="description">
-                <Form.Label>Description</Form.Label>
-                <Form.Control type="text" as="textarea" rows="3" defaultValue={project.description}/>
-            </Form.Group>
-            <Form.Group controlId="start_date">
-                <Form.Label>Start date</Form.Label>
-                <Form.Control type="date" defaultValue={project.start_date}/>
-            </Form.Group>
-            <Form.Group controlId="end_date">
-                <Form.Label>End date</Form.Label>
-                <Form.Control type="date" defaultValue={project.end_date}/>
-            </Form.Group>
-            <Form.Group controlId="image">
-                <Form.Label>Image</Form.Label>
-            </Form.Group>
-
-        </Form> });
+    selectProject(project) {
+        console.log(project)
+        this.setState({selectedProject: project});
     }
 
     handleShow() {
-        this.setState({component:
+            this.setState({component:
                 <React.Fragment>
                     <DropdownButton id="dropdown-item-button" title="Select project">
                         {this.props.projects.map(project => (
                             <Dropdown.Item as="button" onClick={() => this.selectProject(project)}>{project.title}</Dropdown.Item>
                         ))}
                     </DropdownButton>
-                    {this.state.form}
-                </React.Fragment>, submitFunction: this.handleSubmit,show: true, add: false});
+                    <Form>
+                        <Form.Group controlId="title">
+                            <Form.Label>Title</Form.Label>
+                            <Form.Control type="text" value={this.state.selectedProject.title}/>
+                        </Form.Group>
+                        <Form.Group controlId="description">
+                            <Form.Label>Description</Form.Label>
+                            <Form.Control type="text" as="textarea" rows="3" value={this.state.selectedProject.description}/>
+                        </Form.Group>
+                        <Form.Group controlId="start_date">
+                            <Form.Label>Start date</Form.Label>
+                            <Form.Control type="date" value={this.state.selectedProject.start_date}/>
+                        </Form.Group>
+                        <Form.Group controlId="end_date">
+                            <Form.Label>End date</Form.Label>
+                            <Form.Control type="date" value={this.state.selectedProject.end_date}/>
+                        </Form.Group>
+                        <Form.Group controlId="image">
+                            <Form.Label>Image</Form.Label>
+                        </Form.Group>
+
+                    </Form>
+                </React.Fragment>, submitFunction: this.handleSubmit,show: true, add: false})
 
 
     }
@@ -133,7 +112,8 @@ export default class EditProject extends React.Component {
         formData.append('end_date', end_date.value);
         const config = {
             headers: {
-                'content-type': 'multi-part/form-data'
+                'content-type': 'multi-part/form-data',
+                'x-access-token': sessionStorage.getItem('jwtToken')
             }
         };
         axios.post('http://127.0.0.1:3000/api/user/'+this.props.id+'/project/'+this.state.selectedProject.id+'/edit',formData,config)
