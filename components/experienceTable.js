@@ -2,7 +2,7 @@ import React from 'react';
 import {ListGroup} from 'react-bootstrap';
 import Card from 'react-bootstrap/Card';
 import Experience from './experience';
-import ProjectThumbnail from './projects';
+
 
 export default class ExperienceTable extends React.Component {
     render () {

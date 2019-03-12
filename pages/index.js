@@ -4,6 +4,7 @@ import {Container, Row, Col} from 'react-bootstrap';
 
 import MainNavBar from '../components/mainNavbar';
 
+
 export default class Home extends React.Component {
     render() {
         return (
@@ -29,3 +30,4 @@ export default class Home extends React.Component {
         );
     }
 }
+

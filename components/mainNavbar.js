@@ -3,7 +3,8 @@ import React from 'react';
 import Modal from 'react-bootstrap/Modal';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
-const axios =require('axios');
+import axios from 'axios';
+
 
 export default class MainNavBar extends React.Component {
     constructor(props, context) {

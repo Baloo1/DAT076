@@ -1,20 +1,17 @@
 import React from 'react';
 import {Col, Container, Row} from 'react-bootstrap';
-import UserHeader from '../components/userHeader';
+import Head from 'next/head';
+
 import MainNavBar from '../components/mainNavbar';
 import UserContact from '../components/userContact';
 import ExperienceTable from '../components/experienceTable';
 import UserInformation from '../components/userInformation';
-import Head from 'next/head';
 import Projects from '../components/projects';
-import Upload from '../components/upload';
-import Router from 'next/dist/client/router';
 import EditProject from '../components/editProject';
-const axios =require('axios');
+import axios from 'axios';
 
 
 export default class User extends React.Component {
-
     static async getInitialProps() {
         const res = await axios.get('http://127.0.0.1:3000/api/user/0');
         const user = await res.data;
@@ -42,10 +39,6 @@ export default class User extends React.Component {
 
     }
 
-
-
-
-
     getUser() {
         // We're using axios instead of Fetch
         axios
@@ -67,7 +60,6 @@ export default class User extends React.Component {
             // We can still use the `.catch()` method since axios is promise-based
             .catch(error => this.setState({ error}));
     }
-
 
     render() {
         return (

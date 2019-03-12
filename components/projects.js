@@ -3,7 +3,6 @@ import CardColumns from 'react-bootstrap/CardColumns';
 import ProjectThumbnail from './projectThumbnail';
 
 
-
 export default class Projects extends React.Component {
 
     constructor(props) {

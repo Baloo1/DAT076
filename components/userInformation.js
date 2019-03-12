@@ -1,6 +1,7 @@
 import React from 'react';
 import {Button, Card} from 'react-bootstrap';
 
+
 export default class UserInformation extends React.Component {
     render() {
         if(this.props.about == null || this.props.user == null) {

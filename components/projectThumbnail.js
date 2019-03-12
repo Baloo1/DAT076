@@ -2,7 +2,6 @@ import React from 'react';
 import {Card} from 'react-bootstrap';
 
 export default class ProjectThumbnail extends React.Component {
-
     constructor(props) {
         super(props);
 

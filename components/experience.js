@@ -1,8 +1,8 @@
 import React from 'react';
 import { Card } from 'react-bootstrap';
 
-export default class Experience extends React.Component {
 
+export default class Experience extends React.Component {
     constructor(props) {
         super(props);
         let end_date;
