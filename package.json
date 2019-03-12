@@ -4,11 +4,12 @@
   "description": "Full stack webapp project for the course DAT076",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
     "dev": "node server/server.js",
     "build": "next build",
     "start": "next start",
     "lint": "eslint . --fix",
+    "test": "jest",
+    "test:coverage": "jest --coverage",
     "migrate": "cd server && knex migrate:latest",
     "seed": "cd server && knex seed:run"
   },
@@ -22,6 +23,26 @@
     "url": "https://github.com/Baloo1/DAT076/issues"
   },
   "homepage": "https://github.com/Baloo1/DAT076#readme",
+  "jest": {
+    "testMatch": [
+      "<rootDir>/__tests__/**/*.js?(x)",
+      "**/?(*.)+(spec|test).js?(x)"
+    ],
+    "testPathIgnorePatterns": [
+      "<rootDir>/node_modules/"
+    ],
+    "collectCoverageFrom": [
+      "**/components/**",
+      "**/pages/**",
+      "**/server/models**",
+      "**/server/routes**"
+    ],
+    "coverageReporters": [
+      "json",
+      "html"
+    ],
+    "coverageDirectory": "<rootDir>/coverage"
+  },
   "dependencies": {
     "axios": "^0.18.0",
     "bcrypt": "^3.0.4",
@@ -47,6 +68,7 @@
   },
   "devDependencies": {
     "eslint": "^5.15.1",
-    "eslint-plugin-react": "^7.12.4"
+    "eslint-plugin-react": "^7.12.4",
+    "jest": "^24.5.0"
   }
 }
