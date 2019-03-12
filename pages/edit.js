@@ -47,7 +47,7 @@ export default class User extends React.Component {
         const resE = await axios.get('http://localhost:3000/api/user/' + sessionStorage.user + '/experiences');
         const resP = await axios.get('http://localhost:3000/api/user/' + sessionStorage.user + '/projects');
         const resA = await axios.get('http://localhost:3000/api/user/' + sessionStorage.user + '/abouts');
-        await this.setState({user_id: sessionStorage.user, user: resU.data, experiences: resE.data, projects: resP.data, abouts: resA.data});
+        return await this.setState({user_id: sessionStorage.user, user: resU.data, experiences: resE.data, projects: resP.data, abouts: resA.data});
     }
 
     getUser() {
