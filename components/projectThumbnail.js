@@ -14,14 +14,14 @@ export default class ProjectThumbnail extends React.Component {
             modded_end_date = modded_end_date.substring(0, 10);
         }
         if(modded_start_date == null) {
-            modded_start_date = 'unknows';
+            modded_start_date = 'unknown';
         } else {
             modded_start_date = modded_start_date.substring(0, 10);
         }
 
         this.state = {
             projectLength: 0,
-            img: '/api/display/', //this.props.project.image_id,
+            img: '/api/display/' + this.props.project.image_id,
             start_date: modded_start_date,
             end_date: modded_end_date
         };

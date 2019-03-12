@@ -172,8 +172,13 @@ router.post('/uploadimg', upload.single('image'), (req, res) => {
 });
 
 router.get('/display/:id', async (req, res) => {
-    const imgPath = await Image.query().where('id', '=', req.params.id);
-    res.sendFile(path.resolve('.') + '/' + imgPath[0].image_path);
+    const imgPath = await Image.query().where('id', '=', req.params.id).first();
+    if(imgPath == null) {
+        const backup = await Image.query().where('id', '=', 0).first();
+        res.sendFile(path.resolve('.') + '/' + backup.image_path);
+    } else {
+        res.sendFile(path.resolve('.') + '/' + imgPath.image_path);
+    }
 });
 
 // Handle login, registering and password changes
