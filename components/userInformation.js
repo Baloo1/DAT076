@@ -1,5 +1,5 @@
 import React from 'react';
-import {Button, Card, Table} from 'react-bootstrap';
+import {Card, Table} from 'react-bootstrap';
 import PropTypes from 'prop-types';
 
 export default class UserInformation extends React.Component {
@@ -8,7 +8,7 @@ export default class UserInformation extends React.Component {
 
         this.state = {
             name: 'Loading...',
-        }
+        };
     }
 
     render() {
@@ -24,8 +24,8 @@ export default class UserInformation extends React.Component {
                 </Card>
             );
         } else {
-            const abouts = this.props.abouts.map((about) =>
-                <tr>
+            const abouts = this.props.abouts.map((about, index) =>
+                <tr key={index}>
                     <td style={{background: 'lightgray', width: '20%'}}>{about.title}</td>
                     <td>{about.description}</td>
                 </tr>
@@ -46,6 +46,7 @@ export default class UserInformation extends React.Component {
 }
 
 UserInformation.propTypes = {
-    about: PropTypes.object,
-    user: PropTypes.object
+    about: PropTypes.array,
+    user: PropTypes.object,
+    abouts: PropTypes.array
 };

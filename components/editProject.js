@@ -29,7 +29,12 @@ export default class EditProject extends React.Component {
             submitFunction: this.handleSubmit,
             selectedProject: project,
         };
+    }
 
+    componentDidUpdate(prevProps) {
+        if(this.props.projects!==prevProps.projects) {
+            this.setState({selectedProject: this.props.projects[0]});
+        }
     }
 
     handleClose() {
