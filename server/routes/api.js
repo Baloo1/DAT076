@@ -96,7 +96,23 @@ router.post('/user/:id/project/new', upload.none(), async (req, res) => {
     }
 });
 
-// Updates an experience, about or project with new data
+// Updates a user, experience, about or project with new data
+router.post('/user/:id/edit', withAuth, upload.none(), async (req, res) => {
+    const updateUser = req.body;
+
+    if(req.id != req.params.id) {
+        res.status(401).contentType('text/plain').end('Unauthorized');
+    } else {
+        updateUser.id = req.params.id; // Force the update to only update the correct user
+        User.query().patch(updateUser).where('id', '=', req.params.id).then(user => {
+            res.json(user);
+        }).catch(err => {
+            console.log(err);
+            res.status(500).contentType('text/plain').end('Error updating');
+        });
+    }
+});
+
 router.post('/user/:id/about/:item/edit', withAuth, upload.none(), async (req, res) => {
     const updateAbout = req.body;
 
@@ -159,8 +175,8 @@ router.post('/uploadimg', upload.single('image'), (req, res) => {
         || path.extname(req.file.originalname).toLowerCase() === '.jpg') {
         fs.rename(uploadPath, savePath, async err => {
             if (err) return res.status(500).contentType('text/plain').end('Error!');
-            await Image.query().insert({image_path: savePath});
-            res.status(200).contentType('text/plain').end('Upload success! ');
+            const img = await Image.query().insert( {image_path: savePath} );
+            res.json({id: img.id});
         });
     } else {
         fs.unlink(uploadPath, err => {

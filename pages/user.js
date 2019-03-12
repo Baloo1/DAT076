@@ -90,7 +90,6 @@ export default class User extends React.Component {
                     <Row>
                         <Col>
                             <UserContact user={this.state.user}/>
-                            <Upload/>
                         </Col>
                         <Col>
                             <Col>

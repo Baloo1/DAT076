@@ -34,7 +34,9 @@ export default class UserInformation extends React.Component {
                 <div>
                     <h3>About me</h3>
                     <Table striped bordered>
-                        {abouts}
+                        <tbody>
+                            {abouts}
+                        </tbody>
                     </Table>
                 </div>
             );
