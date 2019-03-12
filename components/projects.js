@@ -1,11 +1,11 @@
 import React from 'react';
 import CardColumns from 'react-bootstrap/CardColumns';
+import PropTypes from 'prop-types';
+
 import ProjectThumbnail from './projectThumbnail';
 
 
-
 export default class Projects extends React.Component {
-
     constructor(props) {
         super(props);
     }
@@ -30,6 +30,6 @@ export default class Projects extends React.Component {
     }
 }
 
-
-
-
+Projects.propTypes = {
+    projects: PropTypes.array
+};

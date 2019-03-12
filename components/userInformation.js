@@ -1,5 +1,11 @@
 import React from 'react';
+<<<<<<< HEAD
 import {Button, Card, Table} from 'react-bootstrap';
+=======
+import {Button, Card} from 'react-bootstrap';
+import PropTypes from 'prop-types';
+
+>>>>>>> 10b5f66be1e48e6737b265f0fc621e9955672fbc
 
 export default class UserInformation extends React.Component {
     constructor(props) {
@@ -43,3 +49,8 @@ export default class UserInformation extends React.Component {
         }
     }
 }
+
+UserInformation.propTypes = {
+    about: PropTypes.object,
+    user: PropTypes.object
+};

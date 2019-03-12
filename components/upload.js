@@ -1,8 +1,8 @@
 import React from 'react';
-const axios =require('axios');
+import axios from 'axios';
+
 
 export default class Upload extends React.Component {
-
     constructor(props) {
         super(props);
         this.state = { image: null };

@@ -4,11 +4,11 @@ import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import DropdownButton from 'react-bootstrap/DropdownButton';
 import Dropdown from 'react-bootstrap/Dropdown';
-const axios =require('axios');
+import axios from 'axios';
+import PropTypes from 'prop-types';
+
 
 export default class EditProject extends React.Component {
-
-
     constructor(props, context) {
         super(props, context);
 
@@ -31,8 +31,6 @@ export default class EditProject extends React.Component {
         };
 
     }
-
-
 
     handleClose() {
         this.setState({ show: false });
@@ -186,3 +184,7 @@ export default class EditProject extends React.Component {
         );
     }
 }
+
+EditProject.propTypes = {
+    projects: PropTypes.array
+};

@@ -1,8 +1,9 @@
 import React from 'react';
-import {Card} from 'react-bootstrap';
+import { Card } from 'react-bootstrap';
+import PropTypes from 'prop-types';
+
 
 export default class UserContact extends React.Component {
-
     constructor(props) {
         super(props);
     }
@@ -26,7 +27,7 @@ export default class UserContact extends React.Component {
         } else {
             return (
                 <Card>
-                    <Card.Img variant="top" src={"/api/display/" + this.props.user.image_id} alt="Profile picture"/>
+                    <Card.Img variant="top" src={'/api/display/' + this.props.user.image_id} alt="Profile picture"/>
                     <Card.Body>
                         <Card.Title>Contact information</Card.Title>
                         <Card.Text>
@@ -41,3 +42,7 @@ export default class UserContact extends React.Component {
         }
     }
 }
+
+UserContact.propTypes = {
+    user: PropTypes.object
+};

@@ -1,8 +1,8 @@
 import React from 'react';
 import {Card} from 'react-bootstrap';
+import PropTypes from 'prop-types';
 
 export default class ProjectThumbnail extends React.Component {
-
     constructor(props) {
         super(props);
 
@@ -64,3 +64,7 @@ export default class ProjectThumbnail extends React.Component {
         );
     }
 }
+
+ProjectThumbnail.propTypes = {
+    project: PropTypes.object
+};
