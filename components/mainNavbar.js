@@ -109,20 +109,22 @@ export default class MainNavBar extends React.Component {
                     <Navbar.Toggle aria-controls="basic-navbar-nav"/>
                     <Navbar.Collapse id="basic-navbar-nav">
                         { !this.state.isLoggedIn ? (
-                            <div>
+                            <>
+                                <Nav className="mr-auto">
+                                    <Navbar.Text>Log in to see more!</Navbar.Text>
+                                </Nav>
+
                                 <Button onClick={this.handleShowRegister}>Register</Button>
                                 <Button onClick={this.handleShowLogin}>Login</Button>
-                            </div>
+                            </>
                         ) : (
-                            <div>
+                            <>
                                 <Nav className="mr-auto">
                                     <Nav.Link href={'user?id=' + this.state.user}>My Page</Nav.Link>
-                                </Nav>
-                                <Nav className="mr-auto">
                                     <Nav.Link href={'edit?id=' + this.state.user}>Edit My Page</Nav.Link>
                                 </Nav>
                                 <Button onClick={this.handleLogout}>Logout</Button>
-                            </div>
+                            </>
                         )
                         }
                     </Navbar.Collapse>

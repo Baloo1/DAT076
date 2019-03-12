@@ -1,5 +1,5 @@
 import React from 'react';
-import {Button, Card} from 'react-bootstrap';
+import {Card} from 'react-bootstrap';
 
 export default class UserContact extends React.Component {
 
@@ -17,7 +17,8 @@ export default class UserContact extends React.Component {
                         <Card.Text>
                             Phone nr: Loading... {'\n'}
                             Email: Loading... {'\n'}
-                            etc: {'\n'}
+                            Website: Loading... {'\n'}
+                            Twitter: Loading... {'\n'}
                         </Card.Text>
                     </Card.Body>
                 </Card>
@@ -31,7 +32,8 @@ export default class UserContact extends React.Component {
                         <Card.Text>
                             Phone nr: {this.props.user.phone}<br/>
                             Email: {this.props.user.email}<br/>
-                            etc:<br/>
+                            Website: {this.props.user.website}<br/>
+                            Twitter: {this.props.user.twitter}<br/>
                         </Card.Text>
                     </Card.Body>
                 </Card>

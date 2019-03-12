@@ -30,7 +30,6 @@ export default class EditProject extends React.Component {
             selectedProject: project,
         };
 
-        console.log(this.state)
     }
 
 

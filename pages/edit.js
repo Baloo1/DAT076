@@ -1,6 +1,5 @@
 import React from 'react';
 import {Col, Container, Row} from 'react-bootstrap';
-import UserHeader from '../components/userHeader';
 import MainNavBar from '../components/mainNavbar';
 import UserContact from '../components/userContact';
 import ExperienceTable from '../components/experienceTable';
@@ -10,6 +9,7 @@ import Projects from '../components/projects';
 import Upload from '../components/upload';
 import Router from 'next/dist/client/router';
 import EditProject from '../components/editProject';
+import EditContact from "../components/editContact";
 const axios =require('axios');
 
 
@@ -85,7 +85,16 @@ export default class User extends React.Component {
                 <Container>
                     <Row>
                         <Col>
-                            <UserContact user={this.props.user}/>
+                            <Row>
+                                <Col>
+                                <UserContact user={this.props.user}/>
+                                </Col>
+                            </Row>
+                            <Row>
+                                <Col>
+                                <EditContact user={this.props.user}/>
+                                </Col>
+                            </Row>
                         </Col>
                         <Col>
                             <Col>
