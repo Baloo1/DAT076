@@ -25,7 +25,7 @@ export default class UserContact extends React.Component {
         } else {
             return (
                 <Card>
-                    <Card.Img variant="top" src="/api/display/0" alt="Profile picture"/>
+                    <Card.Img variant="top" src={"/api/display/" + this.props.user.image_id} alt="Profile picture"/>
                     <Card.Body>
                         <Card.Title>Contact information</Card.Title>
                         <Card.Text>

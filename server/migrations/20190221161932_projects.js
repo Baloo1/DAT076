@@ -6,7 +6,7 @@ exports.up = function(knex, Promise) {
             table.integer('user_id').references('id').inTable('users');
             table.string('title');
             table.string('description');
-            table.integer('image_id').references('id').inTable('images');
+            table.integer('image_id').references('id').inTable('images').defaultTo(0);
             table.date('start_date');
             table.date('end_date');
         })
