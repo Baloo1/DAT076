@@ -15,13 +15,15 @@ export default class ExperienceTable extends React.Component {
         } else {
             const experiences = [];
             for (let i = 0; i < this.props.experiences.length; i += 1) {
-                experiences.push(<Experience experience={this.props.experiences[i]}/>);
+                experiences.push(
+                    <Experience key={i} experience={this.props.experiences[i]}/>
+                    );
             }
             return (
                 <Card>
                     <Card.Header as="h5">Experiences</Card.Header>
                     <ListGroup variant="flush">
-                        {experiences}
+                            {experiences}
                     </ListGroup>
                 </Card>
             );

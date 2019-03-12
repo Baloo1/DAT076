@@ -15,9 +15,9 @@ export default class UserContact extends React.Component {
                     <Card.Body>
                         <Card.Title>Contact information</Card.Title>
                         <Card.Text>
-                            <p>Phone nr: Loading...</p>
-                            <p>Email: Loading...</p>
-                            <p>etc:</p>
+                            Phone nr: Loading... {"\n"}
+                            Email: Loading... {"\n"}
+                            etc: {"\n"}
                         </Card.Text>
                     </Card.Body>
                 </Card>
@@ -29,9 +29,9 @@ export default class UserContact extends React.Component {
                     <Card.Body>
                         <Card.Title>Contact information</Card.Title>
                         <Card.Text>
-                            <p>Phone nr: {this.props.user.phone}</p>
-                            <p>Email: {this.props.user.email}</p>
-                            <p>etc:</p>
+                            Phone nr: {this.props.user.phone}<br/>
+                            Email: {this.props.user.email}<br/>
+                            etc:<br/>
                         </Card.Text>
                     </Card.Body>
                 </Card>
