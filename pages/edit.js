@@ -104,6 +104,6 @@ export default class User extends React.Component {
 User.propTypes = {
     user: PropTypes.object,
     projects: PropTypes.array,
-    experiences: PropTypes.object,
+    experiences: PropTypes.array,
     about: PropTypes.object
 };
