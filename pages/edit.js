@@ -1,6 +1,7 @@
 import React from 'react';
 import {Col, Container, Row} from 'react-bootstrap';
 import Head from 'next/head';
+import axios from 'axios';
 
 import MainNavBar from '../components/mainNavbar';
 import UserContact from '../components/userContact';
@@ -8,8 +9,8 @@ import ExperienceTable from '../components/experienceTable';
 import UserInformation from '../components/userInformation';
 import Projects from '../components/projects';
 import EditProject from '../components/editProject';
-import axios from 'axios';
 import PropTypes from 'prop-types';
+import EditContact from '../components/editContact';
 
 
 export default class User extends React.Component {
@@ -78,7 +79,16 @@ export default class User extends React.Component {
                 <Container>
                     <Row>
                         <Col>
-                            <UserContact user={this.props.user}/>
+                            <Row>
+                                <Col>
+                                    <UserContact user={this.props.user}/>
+                                </Col>
+                            </Row>
+                            <Row>
+                                <Col>
+                                    <EditContact user={this.props.user}/>
+                                </Col>
+                            </Row>
                         </Col>
                         <Col>
                             <Col>
