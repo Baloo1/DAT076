@@ -26,7 +26,7 @@ router.get('/users', async (req, res) => {
 });
 
 router.get('/user/:id', async (req, res) => {
-    const user = await User.query().findById(req.params.id).first();
+    const user = await User.query().findById(req.params.id).omit(['password']).first();
     res.json(user);
 });
 
