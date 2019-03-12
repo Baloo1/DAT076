@@ -8,6 +8,7 @@ import Head from 'next/head';
 import Projects from '../components/projects';
 import Upload from '../components/upload'
 import Router from "next/dist/client/router";
+import MainNavBar from "../components/mainNavbar";
 const axios =require('axios');
 
 
@@ -34,18 +35,22 @@ export default class User extends React.Component {
       this.getUser = this.getUser.bind(this);
 
       this.state = {
-          user: null
-
+          user_id: null,
+          user: null,
+          experiences: null,
+          projects: null,
+          about: null
       };
       this.getUser();
-
   }
 
-
-
-
-
-
+  async componentDidMount() {
+    const resU = await axios.get('http://localhost:3000/api/user/' + sessionStorage.user);
+    const resE = await axios.get('http://localhost:3000/api/user/' + sessionStorage.user + '/experiences');
+    const resP = await axios.get('http://localhost:3000/api/user/' + sessionStorage.user + '/projects');
+    const resA = await axios.get('http://localhost:3000/api/user/' + sessionStorage.user + '/abouts');
+    await this.setState({user_id: sessionStorage.user, user: resU.data, experiences: resE.data, projects: resP.data, about: resA.data[0]});
+  }
 
     getUser() {
         // We're using axios instead of Fetch
@@ -82,24 +87,24 @@ export default class User extends React.Component {
             crossOrigin="anonymous"
           />
         </Head>
-        <UserHeader/>
+        <MainNavBar/>
         <Container>
           <Row>
             <Col>
-              <UserContact user={this.props.user}/>
+              <UserContact user={this.state.user}/>
               <Upload/>
             </Col>
             <Col>
               <Col>
-                <UserInformation user={this.props.user} about={this.props.about}/>
+                <UserInformation user={this.state.user} about={this.state.about}/>
               </Col>
               <Col>
-                <ExperienceTable experiences={this.props.experiences}/>
+                <ExperienceTable experiences={this.state.experiences}/>
               </Col>
             </Col>
           </Row>
           <Row>
-            <Projects projects={this.props.projects}/>
+            <Projects projects={this.state.projects}/>
           </Row>
         </Container>
       </div>

@@ -8,19 +8,34 @@ export default class UserContact extends React.Component {
     }
 
     render() {
-    return (
-      <Card>
-        <Card.Img variant="top" src="holder.js/100px180" alt="Profile picture"/>
-        <Card.Body>
-          <Card.Title>Contact information</Card.Title>
-          <Card.Text>
-            <p>Phone nr: {this.props.user.phone}</p>
-            <p>Email: {this.props.user.email}</p>
-            <p>etc:</p>
-          </Card.Text>
-          <Button variant="primary">Go somewhere</Button>
-        </Card.Body>
-      </Card>
-    );
-  }
+        if (this.props.user == null) {
+            return (
+                <Card>
+                    <Card.Img variant="top" src="/api/display/0" alt="Profile picture"/>
+                    <Card.Body>
+                        <Card.Title>Contact information</Card.Title>
+                        <Card.Text>
+                            <p>Phone nr: Loading...</p>
+                            <p>Email: Loading...</p>
+                            <p>etc:</p>
+                        </Card.Text>
+                    </Card.Body>
+                </Card>
+            )
+        } else {
+            return (
+                <Card>
+                    <Card.Img variant="top" src="/api/display/0" alt="Profile picture"/>
+                    <Card.Body>
+                        <Card.Title>Contact information</Card.Title>
+                        <Card.Text>
+                            <p>Phone nr: {this.props.user.phone}</p>
+                            <p>Email: {this.props.user.email}</p>
+                            <p>etc:</p>
+                        </Card.Text>
+                    </Card.Body>
+                </Card>
+            );
+        }
+    }
 }

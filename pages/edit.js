@@ -1,6 +1,7 @@
 import React from 'react';
 import {Col, Container, Row} from 'react-bootstrap';
 import UserHeader from '../components/userHeader';
+import MainNavBar from '../components/mainNavbar';
 import UserContact from '../components/userContact';
 import ExperienceTable from '../components/experienceTable';
 import UserInformation from '../components/userInformation';
@@ -45,8 +46,6 @@ export default class User extends React.Component {
 
 
 
-
-
     getUser() {
         // We're using axios instead of Fetch
         axios
@@ -82,7 +81,7 @@ export default class User extends React.Component {
             crossOrigin="anonymous"
           />
         </Head>
-        <UserHeader/>
+        <MainNavBar/>
         <Container>
           <Row>
             <Col>

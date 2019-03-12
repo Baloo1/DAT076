@@ -21,12 +21,14 @@ export default class MainNavBar extends React.Component {
             showLogin: false,
             showRegister: false,
             isLoggedIn: false,
+            user: null
         };
     }
 
-    async componentWillMount() {
+    async componentDidMount() {
         if(window.sessionStorage.getItem('user') != null) {
             await this.setState({isLoggedIn: true})
+            this.setState({user: window.sessionStorage.getItem('user')})
         }
     }
 
@@ -42,6 +44,7 @@ export default class MainNavBar extends React.Component {
         this.setState({isLoggedIn: false});
         sessionStorage.removeItem('user');
         sessionStorage.removeItem('token');
+        window.location = '/'
     }
 
     handleRegister() {
@@ -88,8 +91,7 @@ export default class MainNavBar extends React.Component {
                 if(response.status === 200) {
                     sessionStorage.setItem('user', response.data.user);
                     sessionStorage.setItem('jwtToken', response.data.token);
-                    this.setState({isLoggedIn: true});
-                    this.setState({showLogin: false});
+                    this.setState({isLoggedIn: true, showLogin: false, user: response.data.user});
                 } else {
                     alert("Something went wrong, " + response.status + ": " + response.statusText);
                 }
@@ -106,16 +108,21 @@ export default class MainNavBar extends React.Component {
                     <Navbar.Brand>LinkedIn</Navbar.Brand>
                     <Navbar.Toggle aria-controls="basic-navbar-nav"/>
                     <Navbar.Collapse id="basic-navbar-nav">
-                        <Nav className="mr-auto">
-                            <Nav.Link href="user">Userpage</Nav.Link>
-                        </Nav>
                         { !this.state.isLoggedIn ? (
                             <div>
                                 <Button onClick={this.handleShowRegister}>Register</Button>
                                 <Button onClick={this.handleShowLogin}>Login</Button>
                             </div>
                             ) : (
-                            <Button onClick={this.handleLogout}>Logout</Button>
+                            <div>
+                                <Nav className="mr-auto">
+                                    <Nav.Link href={"user?id=" + this.state.user}>My Page</Nav.Link>
+                                </Nav>
+                                <Nav className="mr-auto">
+                                    <Nav.Link href={"edit?id=" + this.state.user}>Edit My Page</Nav.Link>
+                                </Nav>
+                                <Button onClick={this.handleLogout}>Logout</Button>
+                            </div>
                             )
                         }
                     </Navbar.Collapse>
