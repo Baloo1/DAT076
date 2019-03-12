@@ -11,11 +11,11 @@ exports.up = function(knex, Promise) {
             table.boolean('public').defaultTo(false);
             table.integer('company_id').references('id').inTable('companies');
         })
-    ])
+    ]);
 };
 
 exports.down = function(knex, Promise) {
     return Promise.all([
         knex.schema.dropTable('experiences')
-    ])
+    ]);
 };

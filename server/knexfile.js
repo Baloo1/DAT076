@@ -6,4 +6,4 @@ pg.defaults.ssl = false;
 module.exports = {
     client: 'pg',
     connection: 'postgres://api:password@localhost:5432/api'
-}
+};

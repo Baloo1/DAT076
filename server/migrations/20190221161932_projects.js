@@ -10,11 +10,11 @@ exports.up = function(knex, Promise) {
             table.date('start_date');
             table.date('end_date');
         })
-    ])
+    ]);
 };
 
 exports.down = function(knex, Promise) {
     return Promise.all([
         knex.schema.dropTable('projects')
-    ])
+    ]);
 };

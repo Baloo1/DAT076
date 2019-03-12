@@ -19,16 +19,16 @@ export default class Upload extends React.Component {
                 'content-type': 'multipart/form-data'
             }
         };
-        axios.post("/api/uploadimg", formData, config)
+        axios.post('/api/uploadimg', formData, config)
             .then((response) => {
                 if(response.status == 200) {
-                    alert("The file is successfully uploaded");
+                    alert('The file is successfully uploaded');
                 } else {
-                    alert("Something went wrong, " + response.status + ": " + response.statusText)
+                    alert('Something went wrong, ' + response.status + ': ' + response.statusText);
                 }
             }).catch((error) => {
-            alert("Something went wrong, " + error)
-        });
+                alert('Something went wrong, ' + error);
+            });
     }
 
     onChange(e) {
@@ -41,6 +41,6 @@ export default class Upload extends React.Component {
                 <input type="file" name="image" onChange={this.onChange} />
                 <button type="submit">Upload</button>
             </form>
-        )
+        );
     }
 }

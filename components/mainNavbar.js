@@ -1,8 +1,8 @@
 import {Navbar, Nav} from 'react-bootstrap';
 import React from 'react';
-import Modal from "react-bootstrap/Modal";
-import Button from "react-bootstrap/Button";
-import Form from "react-bootstrap/Form";
+import Modal from 'react-bootstrap/Modal';
+import Button from 'react-bootstrap/Button';
+import Form from 'react-bootstrap/Form';
 const axios =require('axios');
 
 export default class MainNavBar extends React.Component {
@@ -27,8 +27,8 @@ export default class MainNavBar extends React.Component {
 
     async componentDidMount() {
         if(window.sessionStorage.getItem('user') != null) {
-            await this.setState({isLoggedIn: true})
-            this.setState({user: window.sessionStorage.getItem('user')})
+            await this.setState({isLoggedIn: true});
+            this.setState({user: window.sessionStorage.getItem('user')});
         }
     }
 
@@ -44,7 +44,7 @@ export default class MainNavBar extends React.Component {
         this.setState({isLoggedIn: false});
         sessionStorage.removeItem('user');
         sessionStorage.removeItem('token');
-        window.location = '/'
+        window.location = '/';
     }
 
     handleRegister() {
@@ -59,14 +59,14 @@ export default class MainNavBar extends React.Component {
         axios.post('http://127.0.0.1:3000/api/register',formData,config)
             .then((response) => {
                 if(response.status === 200) {
-                    alert("Registration successful, please login")
-                    this.setState({showRegister: false})
+                    alert('Registration successful, please login');
+                    this.setState({showRegister: false});
                 } else {
-                    alert("Something went wrong, " + response.status + ": " + response.statusText);
+                    alert('Something went wrong, ' + response.status + ': ' + response.statusText);
                 }
             }).catch((error) => {
-            alert("Something went wrong, " + error.response.data);
-        });
+                alert('Something went wrong, ' + error.response.data);
+            });
     }
 
     handleCloseLogin() {
@@ -93,11 +93,11 @@ export default class MainNavBar extends React.Component {
                     sessionStorage.setItem('jwtToken', response.data.token);
                     this.setState({isLoggedIn: true, showLogin: false, user: response.data.user});
                 } else {
-                    alert("Something went wrong, " + response.status + ": " + response.statusText);
+                    alert('Something went wrong, ' + response.status + ': ' + response.statusText);
                 }
             }).catch((error) => {
-            alert("Something went wrong, " + error.response.data);
-        });
+                alert('Something went wrong, ' + error.response.data);
+            });
     }
 
     render() {
@@ -113,17 +113,17 @@ export default class MainNavBar extends React.Component {
                                 <Button onClick={this.handleShowRegister}>Register</Button>
                                 <Button onClick={this.handleShowLogin}>Login</Button>
                             </div>
-                            ) : (
+                        ) : (
                             <div>
                                 <Nav className="mr-auto">
-                                    <Nav.Link href={"user?id=" + this.state.user}>My Page</Nav.Link>
+                                    <Nav.Link href={'user?id=' + this.state.user}>My Page</Nav.Link>
                                 </Nav>
                                 <Nav className="mr-auto">
-                                    <Nav.Link href={"edit?id=" + this.state.user}>Edit My Page</Nav.Link>
+                                    <Nav.Link href={'edit?id=' + this.state.user}>Edit My Page</Nav.Link>
                                 </Nav>
                                 <Button onClick={this.handleLogout}>Logout</Button>
                             </div>
-                            )
+                        )
                         }
                     </Navbar.Collapse>
                 </Navbar>
@@ -182,6 +182,6 @@ export default class MainNavBar extends React.Component {
                 </Modal>
 
             </>
-                    );
-                    }
-                    }
+        );
+    }
+}

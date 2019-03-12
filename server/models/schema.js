@@ -8,7 +8,7 @@ Model.knex(knexConnection);
 
 class Image extends Model {
     static get tableName() {
-        return 'images'
+        return 'images';
     }
 
     static relationMappings() {
@@ -29,13 +29,13 @@ class Image extends Model {
                     to: 'images.id'
                 }
             }
-        }
+        };
     }
 }
 
 class User extends  Model {
     static get tableName() {
-        return 'users'
+        return 'users';
     }
 
     static relationMappings() {
@@ -72,13 +72,13 @@ class User extends  Model {
                     to: 'projects.user_id'
                 }
             }
-        }
+        };
     }
 }
 
 class Company extends Model {
     static get tableName() {
-        return 'companies'
+        return 'companies';
     }
 
     static relationMappings() {
@@ -91,13 +91,13 @@ class Company extends Model {
                     to: 'companies.id'
                 }
             }
-        }
+        };
     }
 }
 
 class About extends Model {
     static get tableName() {
-        return 'abouts'
+        return 'abouts';
     }
 
     static relationMappings() {
@@ -110,13 +110,13 @@ class About extends Model {
                     to: 'users.id'
                 }
             }
-        }
+        };
     }
 }
 
 class Project extends Model {
     static get tableName() {
-        return 'projects'
+        return 'projects';
     }
 
     static relationMappings() {
@@ -137,13 +137,13 @@ class Project extends Model {
                     to: 'images.id'
                 }
             }
-        }
+        };
     }
 }
 
 class Experience extends Model {
     static get tableName() {
-        return 'experiences'
+        return 'experiences';
     }
 
     static relationMappings() {
@@ -164,8 +164,8 @@ class Experience extends Model {
                     to: 'companies.id'
                 }
             }
-        }
+        };
     }
 }
 
-module.exports = {Image, Company, User, About, Experience, Project}
+module.exports = {Image, Company, User, About, Experience, Project};

@@ -7,11 +7,11 @@ exports.up = function(knex, Promise) {
             table.string('title');
             table.string('description');
         })
-    ])
+    ]);
 };
 
 exports.down = function(knex, Promise) {
     return Promise.all([
         knex.schema.dropTable('abouts')
-    ])
+    ]);
 };

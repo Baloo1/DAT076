@@ -1,9 +1,9 @@
 import React from 'react';
-import Modal from "react-bootstrap/Modal";
-import Button from "react-bootstrap/Button";
-import Form from "react-bootstrap/Form";
-import DropdownButton from "react-bootstrap/DropdownButton";
-import Dropdown from "react-bootstrap/Dropdown"
+import Modal from 'react-bootstrap/Modal';
+import Button from 'react-bootstrap/Button';
+import Form from 'react-bootstrap/Form';
+import DropdownButton from 'react-bootstrap/DropdownButton';
+import Dropdown from 'react-bootstrap/Dropdown';
 const axios =require('axios');
 
 export default class EditProject extends React.Component {
@@ -61,58 +61,58 @@ export default class EditProject extends React.Component {
     }
 
     handleShowAdd() {
-            this.setState({component: <Form>
-                    <Form.Group controlId="title">
-                        <Form.Label>Title</Form.Label>
-                        <Form.Control type="text" />
-                    </Form.Group>
-                    <Form.Group controlId="description">
-                        <Form.Label>Description</Form.Label>
-                        <Form.Control type="text" as="textarea" rows="3" />
-                    </Form.Group>
-                    <Form.Group controlId="start_date">
-                    <Form.Label>Start date</Form.Label>
-                    <Form.Control type="date"/>
-                    </Form.Group>
-                    <Form.Group controlId="end_date">
-                    <Form.Label>End date</Form.Label>
-                    <Form.Control type="date"/>
-                    </Form.Group>
-                    <Form.Group controlId="image">
-                        <Form.Label>Image</Form.Label>
-                    </Form.Group>
+        this.setState({component: <Form>
+            <Form.Group controlId="title">
+                <Form.Label>Title</Form.Label>
+                <Form.Control type="text" />
+            </Form.Group>
+            <Form.Group controlId="description">
+                <Form.Label>Description</Form.Label>
+                <Form.Control type="text" as="textarea" rows="3" />
+            </Form.Group>
+            <Form.Group controlId="start_date">
+                <Form.Label>Start date</Form.Label>
+                <Form.Control type="date"/>
+            </Form.Group>
+            <Form.Group controlId="end_date">
+                <Form.Label>End date</Form.Label>
+                <Form.Control type="date"/>
+            </Form.Group>
+            <Form.Group controlId="image">
+                <Form.Label>Image</Form.Label>
+            </Form.Group>
 
-                </Form>, submitFunction: this.handleSubmitAdd,show: true, add: true})
+        </Form>, submitFunction: this.handleSubmitAdd,show: true, add: true});
     }
 
     async selectProject(project) {
         await this.setState({selectedProject: project});
         await this.setState({form: <Form>
-                <Form.Group controlId="title">
-                    <Form.Label>Title</Form.Label>
-                    <Form.Control type="text" defaultValue={project.title}/>
-                </Form.Group>
-                <Form.Group controlId="description">
-                    <Form.Label>Description</Form.Label>
-                    <Form.Control type="text" as="textarea" rows="3" defaultValue={project.description}/>
-                </Form.Group>
-                <Form.Group controlId="start_date">
-                    <Form.Label>Start date</Form.Label>
-                    <Form.Control type="date" defaultValue={project.start_date}/>
-                </Form.Group>
-                <Form.Group controlId="end_date">
-                    <Form.Label>End date</Form.Label>
-                    <Form.Control type="date" defaultValue={project.end_date}/>
-                </Form.Group>
-                <Form.Group controlId="image">
-                    <Form.Label>Image</Form.Label>
-                </Form.Group>
+            <Form.Group controlId="title">
+                <Form.Label>Title</Form.Label>
+                <Form.Control type="text" defaultValue={project.title}/>
+            </Form.Group>
+            <Form.Group controlId="description">
+                <Form.Label>Description</Form.Label>
+                <Form.Control type="text" as="textarea" rows="3" defaultValue={project.description}/>
+            </Form.Group>
+            <Form.Group controlId="start_date">
+                <Form.Label>Start date</Form.Label>
+                <Form.Control type="date" defaultValue={project.start_date}/>
+            </Form.Group>
+            <Form.Group controlId="end_date">
+                <Form.Label>End date</Form.Label>
+                <Form.Control type="date" defaultValue={project.end_date}/>
+            </Form.Group>
+            <Form.Group controlId="image">
+                <Form.Label>Image</Form.Label>
+            </Form.Group>
 
-            </Form> });
+        </Form> });
     }
 
     handleShow() {
-            this.setState({component:
+        this.setState({component:
                 <React.Fragment>
                     <DropdownButton id="dropdown-item-button" title="Select project">
                         {this.props.projects.map(project => (
@@ -120,7 +120,7 @@ export default class EditProject extends React.Component {
                         ))}
                     </DropdownButton>
                     {this.state.form}
-                </React.Fragment>, submitFunction: this.handleSubmit,show: true, add: false})
+                </React.Fragment>, submitFunction: this.handleSubmit,show: true, add: false});
 
 
     }
@@ -139,13 +139,13 @@ export default class EditProject extends React.Component {
         axios.post('http://127.0.0.1:3000/api/user/'+this.props.id+'/project/'+this.state.selectedProject.id+'/edit',formData,config)
             .then((response) => {
                 if(response.status === 200) {
-                    alert("Project added");
+                    alert('Project added');
                 } else {
-                    alert("Something went wrong, " + response.status + ": " + response.statusText);
+                    alert('Something went wrong, ' + response.status + ': ' + response.statusText);
                 }
             }).catch((error) => {
-            alert("Something went wrong, " + error);
-        });
+                alert('Something went wrong, ' + error);
+            });
         this.setState({ show: false });
     }
 
@@ -163,24 +163,24 @@ export default class EditProject extends React.Component {
         axios.post('http://127.0.0.1:3000/api/user/'+this.props.id+'/project/new',formData,config)
             .then((response) => {
                 if(response.status === 200) {
-                    alert("Project added");
+                    alert('Project added');
                 } else {
-                    alert("Something went wrong, " + response.status + ": " + response.statusText);
+                    alert('Something went wrong, ' + response.status + ': ' + response.statusText);
                 }
             }).catch((error) => {
-            alert("Something went wrong, " + error);
-        });
+                alert('Something went wrong, ' + error);
+            });
         this.setState({ show: false });
     }
 
     render() {
         let edit = <Button variant="primary" onClick={this.handleShow} disabled>
             Edit
-        </Button>
+        </Button>;
         if (this.props.projects!==null) {
             edit = <Button variant="primary" onClick={this.handleShow}>
                 Edit
-            </Button>
+            </Button>;
         }
         return (
             <>

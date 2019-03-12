@@ -21,34 +21,34 @@ router.get('/', (req, res) => {
 
 
 router.get('/users', async (req, res) => {
-    const users = await User.query()
-    res.json(users)
+    const users = await User.query();
+    res.json(users);
 });
 
 router.get('/user/:id', async (req, res) => {
-    const user = await User.query().findById(req.params.id).first()
-    res.json(user)
+    const user = await User.query().findById(req.params.id).first();
+    res.json(user);
 });
 
 // Get all experiences, abouts, projects of a user by id
 router.get('/user/:id/experiences', async (req, res) => {
-    const experiences = await Experience.query().where('user_id', '=', req.params.id)
-    res.json(experiences)
+    const experiences = await Experience.query().where('user_id', '=', req.params.id);
+    res.json(experiences);
 });
 
 router.get('/user/:id/abouts', async (req, res) => {
-    const abouts = await About.query().where('user_id', '=', req.params.id)
-    res.json(abouts)
+    const abouts = await About.query().where('user_id', '=', req.params.id);
+    res.json(abouts);
 });
 
 router.get('/user/:id/projects', async (req, res) => {
-    const projects = await Project.query().where('user_id', '=', req.params.id)
-    res.json(projects)
+    const projects = await Project.query().where('user_id', '=', req.params.id);
+    res.json(projects);
 });
 
 // Add a new experience, about or project of a user by id
 router.post('/user/:id/experience/new', withAuth, upload.none(), async (req, res) => {
-    const newExperience = req.body
+    const newExperience = req.body;
 
     if(req.id != req.params.id) {
         res.status(401).contentType('text/plain').end('Unauthorized');
@@ -59,12 +59,12 @@ router.post('/user/:id/experience/new', withAuth, upload.none(), async (req, res
         }).catch(err => {
             console.log(err);
             res.status(500).contentType('text/plain').end('Error inserting');
-        })
+        });
     }
 });
 
 router.post('/user/:id/about/new', withAuth, upload.none(), async (req, res) => {
-    const newAbout = req.body
+    const newAbout = req.body;
 
     if(req.id != req.params.id) {
         res.status(401).contentType('text/plain').end('Unauthorized');
@@ -75,30 +75,30 @@ router.post('/user/:id/about/new', withAuth, upload.none(), async (req, res) => 
         }).catch(err => {
             console.log(err);
             res.status(500).contentType('text/plain').end('Error inserting');
-        })
+        });
     }
 });
 
 router.post('/user/:id/project/new', upload.none(), async (req, res) => {
-    const newProject = req.body
+    const newProject = req.body;
 
     if(false) {
         res.status(401).contentType('text/plain').end('Unauthorized');
     } else {
         newProject.user_id = req.params.id; // Force the insert to use the authorized user_id!
-        console.log(newProject)
+        console.log(newProject);
         Project.query().insert(newProject).then(project => {
             res.status(200).contentType('text/plain').end('New project added');
         }).catch(err => {
             console.log(err);
             res.status(500).contentType('text/plain').end('Error inserting');
-        })
+        });
     }
 });
 
 // Updates an experience, about or project with new data
 router.post('/user/:id/about/:item/edit', withAuth, upload.none(), async (req, res) => {
-    const updateAbout = req.body
+    const updateAbout = req.body;
 
     if(req.id != req.params.id) {
         res.status(401).contentType('text/plain').end('Unauthorized');
@@ -110,12 +110,12 @@ router.post('/user/:id/about/:item/edit', withAuth, upload.none(), async (req, r
         }).catch(err => {
             console.log(err);
             res.status(500).contentType('text/plain').end('Error updating');
-        })
+        });
     }
 });
 
 router.post('/user/:id/experience/:item/edit', withAuth, upload.none(), async (req, res) => {
-    const updateExperience = req.body
+    const updateExperience = req.body;
 
     if(req.id != req.params.id) {
         res.status(401).contentType('text/plain').end('Unauthorized');
@@ -127,12 +127,12 @@ router.post('/user/:id/experience/:item/edit', withAuth, upload.none(), async (r
         }).catch(err => {
             console.log(err);
             res.status(500).contentType('text/plain').end('Error updating');
-        })
+        });
     }
 });
 
 router.post('/user/:id/project/:item/edit', upload.none(), async (req, res) => {
-    const updateProject = req.body
+    const updateProject = req.body;
 
     if(false) {
         res.status(401).contentType('text/plain').end('Unauthorized');
@@ -144,7 +144,7 @@ router.post('/user/:id/project/:item/edit', upload.none(), async (req, res) => {
         }).catch(err => {
             console.log(err);
             res.status(500).contentType('text/plain').end('Error updating');
-        })
+        });
     }
 });
 
@@ -180,7 +180,7 @@ router.get('/display/:id', async (req, res) => {
 router.post('/register', upload.none(), async (req, res) => {
     const { email, password } = req.body;
     const userexists = await User.query().where('email', '=', email).first();
-    console.log(userexists)
+    console.log(userexists);
     if(userexists != null) {
         res.status(401).contentType('text/plain').end('User already exists').send();
     } else {

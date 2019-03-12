@@ -15,13 +15,13 @@ export default class UserContact extends React.Component {
                     <Card.Body>
                         <Card.Title>Contact information</Card.Title>
                         <Card.Text>
-                            Phone nr: Loading... {"\n"}
-                            Email: Loading... {"\n"}
-                            etc: {"\n"}
+                            Phone nr: Loading... {'\n'}
+                            Email: Loading... {'\n'}
+                            etc: {'\n'}
                         </Card.Text>
                     </Card.Body>
                 </Card>
-            )
+            );
         } else {
             return (
                 <Card>

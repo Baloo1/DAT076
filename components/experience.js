@@ -15,18 +15,18 @@ export default class Experience extends React.Component {
         this.state = {
             start_date: this.props.experience.start_date.substring(0, 10),
             end_date: end_date,
-        }
+        };
 
     }
-  render() {
-    return (
-      <Card>
-        <Card.Body>
-          <Card.Title>{this.props.experience.title}</Card.Title>
-          <Card.Text> {this.state.start_date} – {this.state.end_date} </Card.Text>
-          <Card.Text>{this.props.experience.description}</Card.Text>
-        </Card.Body>
-      </Card>
-    );
-  }
+    render() {
+        return (
+            <Card>
+                <Card.Body>
+                    <Card.Title>{this.props.experience.title}</Card.Title>
+                    <Card.Text> {this.state.start_date} – {this.state.end_date} </Card.Text>
+                    <Card.Text>{this.props.experience.description}</Card.Text>
+                </Card.Body>
+            </Card>
+        );
+    }
 }

@@ -6,5 +6,5 @@ exports.seed = async function(knex, Promise) {
     await knex('projects').del();
     await knex('companies').del();
     await knex('users').del();
-    await knex('images').del()
-}
+    await knex('images').del();
+};

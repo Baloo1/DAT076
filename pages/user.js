@@ -6,9 +6,9 @@ import ExperienceTable from '../components/experienceTable';
 import UserInformation from '../components/userInformation';
 import Head from 'next/head';
 import Projects from '../components/projects';
-import Upload from '../components/upload'
-import Router from "next/dist/client/router";
-import MainNavBar from "../components/mainNavbar";
+import Upload from '../components/upload';
+import Router from 'next/dist/client/router';
+import MainNavBar from '../components/mainNavbar';
 const axios =require('axios');
 
 
@@ -29,28 +29,28 @@ export default class User extends React.Component {
     }
 
 
-  constructor(props) {
-      super(props);
+    constructor(props) {
+        super(props);
 
-      this.getUser = this.getUser.bind(this);
+        this.getUser = this.getUser.bind(this);
 
-      this.state = {
-          user_id: null,
-          user: null,
-          experiences: null,
-          projects: null,
-          about: null
-      };
-      this.getUser();
-  }
+        this.state = {
+            user_id: null,
+            user: null,
+            experiences: null,
+            projects: null,
+            about: null
+        };
+        this.getUser();
+    }
 
-  async componentDidMount() {
-    const resU = await axios.get('http://localhost:3000/api/user/' + sessionStorage.user);
-    const resE = await axios.get('http://localhost:3000/api/user/' + sessionStorage.user + '/experiences');
-    const resP = await axios.get('http://localhost:3000/api/user/' + sessionStorage.user + '/projects');
-    const resA = await axios.get('http://localhost:3000/api/user/' + sessionStorage.user + '/abouts');
-    await this.setState({user_id: sessionStorage.user, user: resU.data, experiences: resE.data, projects: resP.data, about: resA.data[0]});
-  }
+    async componentDidMount() {
+        const resU = await axios.get('http://localhost:3000/api/user/' + sessionStorage.user);
+        const resE = await axios.get('http://localhost:3000/api/user/' + sessionStorage.user + '/experiences');
+        const resP = await axios.get('http://localhost:3000/api/user/' + sessionStorage.user + '/projects');
+        const resA = await axios.get('http://localhost:3000/api/user/' + sessionStorage.user + '/abouts');
+        await this.setState({user_id: sessionStorage.user, user: resU.data, experiences: resE.data, projects: resP.data, about: resA.data[0]});
+    }
 
     getUser() {
         // We're using axios instead of Fetch
@@ -63,51 +63,51 @@ export default class User extends React.Component {
                     name: `${user.name}`,
                 }))
             )
-                    .then(user => {
-                        console.log(user);
-                        this.setState({
-                            user,
-                        });
-                    })
+            .then(user => {
+                console.log(user);
+                this.setState({
+                    user,
+                });
+            })
             // Let's make sure to change the loading state to display the data
             // We can still use the `.catch()` method since axios is promise-based
             .catch(error => this.setState({ error}));
     }
 
 
-  render() {
-    return (
-      <div>
-        <Head>
-          <title>User</title>
-          <link
-            rel="stylesheet"
-            href="https://maxcdn.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css"
-            integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS"
-            crossOrigin="anonymous"
-          />
-        </Head>
-        <MainNavBar/>
-        <Container>
-          <Row>
-            <Col>
-              <UserContact user={this.state.user}/>
-              <Upload/>
-            </Col>
-            <Col>
-              <Col>
-                <UserInformation user={this.state.user} about={this.state.about}/>
-              </Col>
-              <Col>
-                <ExperienceTable experiences={this.state.experiences}/>
-              </Col>
-            </Col>
-          </Row>
-          <Row>
-            <Projects projects={this.state.projects}/>
-          </Row>
-        </Container>
-      </div>
-    );
-  }
+    render() {
+        return (
+            <div>
+                <Head>
+                    <title>User</title>
+                    <link
+                        rel="stylesheet"
+                        href="https://maxcdn.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css"
+                        integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS"
+                        crossOrigin="anonymous"
+                    />
+                </Head>
+                <MainNavBar/>
+                <Container>
+                    <Row>
+                        <Col>
+                            <UserContact user={this.state.user}/>
+                            <Upload/>
+                        </Col>
+                        <Col>
+                            <Col>
+                                <UserInformation user={this.state.user} about={this.state.about}/>
+                            </Col>
+                            <Col>
+                                <ExperienceTable experiences={this.state.experiences}/>
+                            </Col>
+                        </Col>
+                    </Row>
+                    <Row>
+                        <Projects projects={this.state.projects}/>
+                    </Row>
+                </Container>
+            </div>
+        );
+    }
 }

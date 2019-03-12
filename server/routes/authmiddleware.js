@@ -2,7 +2,7 @@ const jwt = require('jsonwebtoken');
 
 const withAuth = function(req, res, next) {
     // Support tokens from many places
-    const token = req.body.token || req.query.token || req.headers['x-access-token']
+    const token = req.body.token || req.query.token || req.headers['x-access-token'];
 
     if (!token) {
         res.status(401).send('Not authorized: No token provided');
@@ -14,8 +14,8 @@ const withAuth = function(req, res, next) {
                 req.id = decoded.id;
                 next();
             }
-        })
+        });
     }
-}
+};
 
 module.exports = withAuth;

@@ -7,9 +7,9 @@ import ExperienceTable from '../components/experienceTable';
 import UserInformation from '../components/userInformation';
 import Head from 'next/head';
 import Projects from '../components/projects';
-import Upload from '../components/upload'
-import Router from "next/dist/client/router";
-import EditProject from "../components/editProject";
+import Upload from '../components/upload';
+import Router from 'next/dist/client/router';
+import EditProject from '../components/editProject';
 const axios =require('axios');
 
 
@@ -29,18 +29,18 @@ export default class User extends React.Component {
     }
 
 
-  constructor(props) {
-      super(props);
+    constructor(props) {
+        super(props);
 
-      this.getUser = this.getUser.bind(this);
+        this.getUser = this.getUser.bind(this);
 
-      this.state = {
-          user: null
+        this.state = {
+            user: null
 
-      };
-      this.getUser();
+        };
+        this.getUser();
 
-  }
+    }
 
 
 
@@ -57,53 +57,53 @@ export default class User extends React.Component {
                     name: `${user.name}`,
                 }))
             )
-                    .then(user => {
-                        console.log(user);
-                        this.setState({
-                            user,
-                        });
-                    })
+            .then(user => {
+                console.log(user);
+                this.setState({
+                    user,
+                });
+            })
             // Let's make sure to change the loading state to display the data
             // We can still use the `.catch()` method since axios is promise-based
             .catch(error => this.setState({ error}));
     }
 
 
-  render() {
-    return (
-      <div>
-        <Head>
-          <title>User</title>
-          <link
-            rel="stylesheet"
-            href="https://maxcdn.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css"
-            integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS"
-            crossOrigin="anonymous"
-          />
-        </Head>
-        <MainNavBar/>
-        <Container>
-          <Row>
-            <Col>
-              <UserContact user={this.props.user}/>
-            </Col>
-            <Col>
-              <Col>
-                <UserInformation user={this.props.user} about={this.props.about}/>
-              </Col>
-              <Col>
-                <ExperienceTable experiences={this.props.experiences}/>
-              </Col>
-            </Col>
-          </Row>
-          <Row>
-            <Projects projects={this.props.projects}/>
-          </Row>
-            <Row>
-                <EditProject id={this.props.user.id} projects={this.props.projects}/>
-            </Row>
-        </Container>
-      </div>
-    );
-  }
+    render() {
+        return (
+            <div>
+                <Head>
+                    <title>User</title>
+                    <link
+                        rel="stylesheet"
+                        href="https://maxcdn.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css"
+                        integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS"
+                        crossOrigin="anonymous"
+                    />
+                </Head>
+                <MainNavBar/>
+                <Container>
+                    <Row>
+                        <Col>
+                            <UserContact user={this.props.user}/>
+                        </Col>
+                        <Col>
+                            <Col>
+                                <UserInformation user={this.props.user} about={this.props.about}/>
+                            </Col>
+                            <Col>
+                                <ExperienceTable experiences={this.props.experiences}/>
+                            </Col>
+                        </Col>
+                    </Row>
+                    <Row>
+                        <Projects projects={this.props.projects}/>
+                    </Row>
+                    <Row>
+                        <EditProject id={this.props.user.id} projects={this.props.projects}/>
+                    </Row>
+                </Container>
+            </div>
+        );
+    }
 }
