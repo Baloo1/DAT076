@@ -7,7 +7,7 @@ exports.up = function(knex, Promise) {
             table.string('password').notNullable();
             table.enum('role', ['user', 'admin']).defaultTo('user');
             table.string('name');
-            table.integer('image_id').references('images.id');
+            table.integer('image_id').references('images.id').defaultTo(0);
             table.string('phone');
             table.string('website');
             table.string('twitter');
