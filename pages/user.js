@@ -1,13 +1,11 @@
 import React from 'react';
 import {Col, Container, Row} from 'react-bootstrap';
-import UserHeader from '../components/userHeader';
 import UserContact from '../components/userContact';
 import ExperienceTable from '../components/experienceTable';
 import UserInformation from '../components/userInformation';
 import Head from 'next/head';
 import Projects from '../components/projects';
 import Upload from '../components/upload';
-import Router from 'next/dist/client/router';
 import MainNavBar from '../components/mainNavbar';
 const axios =require('axios');
 
