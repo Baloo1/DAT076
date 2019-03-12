@@ -1,6 +1,6 @@
 import React from 'react';
 import { Card } from 'react-bootstrap';
-
+import PropTypes from 'prop-types';
 
 export default class Experience extends React.Component {
     constructor(props) {
@@ -30,3 +30,7 @@ export default class Experience extends React.Component {
         );
     }
 }
+
+Experience.propTypes = {
+    experience: PropTypes.object
+};

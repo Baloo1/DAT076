@@ -9,6 +9,7 @@ import UserInformation from '../components/userInformation';
 import Projects from '../components/projects';
 import EditProject from '../components/editProject';
 import axios from 'axios';
+import PropTypes from 'prop-types';
 
 
 export default class User extends React.Component {
@@ -99,3 +100,10 @@ export default class User extends React.Component {
         );
     }
 }
+
+User.propTypes = {
+    user: PropTypes.object,
+    projects: PropTypes.array,
+    experiences: PropTypes.object,
+    about: PropTypes.object
+};

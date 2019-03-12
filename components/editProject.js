@@ -5,6 +5,7 @@ import Form from 'react-bootstrap/Form';
 import DropdownButton from 'react-bootstrap/DropdownButton';
 import Dropdown from 'react-bootstrap/Dropdown';
 import axios from 'axios';
+import PropTypes from 'prop-types';
 
 
 export default class EditProject extends React.Component {
@@ -204,3 +205,7 @@ export default class EditProject extends React.Component {
         );
     }
 }
+
+EditProject.propTypes = {
+    projects: PropTypes.array
+};

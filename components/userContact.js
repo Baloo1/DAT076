@@ -1,5 +1,6 @@
 import React from 'react';
 import { Card } from 'react-bootstrap';
+import PropTypes from 'prop-types';
 
 
 export default class UserContact extends React.Component {
@@ -39,3 +40,7 @@ export default class UserContact extends React.Component {
         }
     }
 }
+
+UserContact.propTypes = {
+    user: PropTypes.object
+};
