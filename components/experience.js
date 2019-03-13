@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 
 export default class Experience extends React.Component {
     render() {
+        // Destructuring of props for cleaner syntax
         const {
             experience,
             start_date,
