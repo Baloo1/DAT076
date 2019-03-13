@@ -3,28 +3,19 @@ import { Card } from 'react-bootstrap';
 import PropTypes from 'prop-types';
 
 export default class Experience extends React.Component {
-    constructor(props) {
-        super(props);
-        let end_date;
-        if (!(this.props.experience.end_date===null)) {
-            end_date = this.props.experience.end_date.substring(0, 10);
-        } else {
-            end_date = 'present';
-        }
-
-        this.state = {
-            start_date: this.props.experience.start_date.substring(0, 10),
-            end_date: end_date,
-        };
-
-    }
     render() {
-        return (
+        const {
+            experience,
+            start_date,
+            end_date
+        } = this.props;
+
+        return(
             <Card>
                 <Card.Body>
-                    <Card.Title>{this.props.experience.title}</Card.Title>
-                    <Card.Text> {this.state.start_date} – {this.state.end_date} </Card.Text>
-                    <Card.Text>{this.props.experience.description}</Card.Text>
+                    <Card.Title>{experience.title}</Card.Title>
+                    <Card.Text> {start_date} – {end_date} </Card.Text>
+                    <Card.Text>{experience.description}</Card.Text>
                 </Card.Body>
             </Card>
         );
@@ -32,5 +23,9 @@ export default class Experience extends React.Component {
 }
 
 Experience.propTypes = {
-    experience: PropTypes.object
+    experience: PropTypes.object,
+    start_date: PropTypes.string,
+    end_date: PropTypes.string
 };
+
+

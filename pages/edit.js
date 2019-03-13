@@ -2,15 +2,15 @@ import React from 'react';
 import {Col, Container, Row} from 'react-bootstrap';
 import Head from 'next/head';
 import axios from 'axios';
+import PropTypes from 'prop-types';
 
 import MainNavBar from '../components/mainNavbar';
 import UserContact from '../components/userContact';
 import ExperienceTable from '../components/experienceTable';
 import UserInformation from '../components/userInformation';
 import Projects from '../components/projects';
-import EditProject from '../components/editProject';
-import PropTypes from 'prop-types';
-import EditContact from '../components/editContact';
+import EditProjectContainer from '../container/editProjectContainer';
+import EditContactContainer from '../container/editContactContainer';
 
 
 export default class User extends React.Component {
@@ -95,7 +95,7 @@ export default class User extends React.Component {
                             </Row>
                             <Row>
                                 <Col>
-                                    <EditContact user={this.state.user}/>
+                                    <EditContactContainer user={this.state.user}/>
                                 </Col>
                             </Row>
                         </Col>
@@ -112,7 +112,7 @@ export default class User extends React.Component {
                         <Projects projects={this.state.projects}/>
                     </Row>
                     <Row>
-                        <EditProject id={this.state.user} projects={this.state.projects}/>
+                        <EditProjectContainer id={this.state.user} projects={this.state.projects}/>
                     </Row>
                 </Container>
             </div>

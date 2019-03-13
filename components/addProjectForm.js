@@ -5,7 +5,6 @@ import Form from 'react-bootstrap/Form';
 export default class AddProjectForm extends React.Component {
     render() {
         return(
-
             <Form>
                 <Form.Group controlId="title">
                     <Form.Label>Title</Form.Label>

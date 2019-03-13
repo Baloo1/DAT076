@@ -6,10 +6,6 @@ import Form from 'react-bootstrap/Form';
 
 
 export default class EditProjectForm extends React.Component {
-    constructor(props) {
-        super(props);
-    }
-
     render() {
         return (
             <React.Fragment>

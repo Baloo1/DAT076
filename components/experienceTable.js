@@ -3,7 +3,7 @@ import {ListGroup} from 'react-bootstrap';
 import Card from 'react-bootstrap/Card';
 import PropTypes from 'prop-types';
 
-import Experience from './experience';
+import ExperienceContainer from '../container/experienceContainer';
 
 
 export default class ExperienceTable extends React.Component {
@@ -18,7 +18,7 @@ export default class ExperienceTable extends React.Component {
             const experiences = [];
             for (let i = 0; i < this.props.experiences.length; i += 1) {
                 experiences.push(
-                    <Experience key={i} experience={this.props.experiences[i]}/>
+                    <ExperienceContainer key={i} experience={this.props.experiences[i]}/>
                 );
             }
             return (
