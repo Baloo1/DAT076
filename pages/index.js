@@ -2,7 +2,7 @@ import React from 'react';
 import Head from 'next/head';
 import {Container, Row, Col, Jumbotron} from 'react-bootstrap';
 
-import MainNavBar from '../components/mainNavbar';
+import MainNavbarContainer from '../container/mainNavbarContainer';
 
 
 export default class Home extends React.Component {
@@ -18,7 +18,7 @@ export default class Home extends React.Component {
                         crossOrigin="anonymous"
                     />
                 </Head>
-                <MainNavBar/>
+                <MainNavbarContainer/>
                 <Container>
                     <Row>
                         <Col>

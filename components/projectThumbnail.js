@@ -36,5 +36,5 @@ ProjectThumbnail.propTypes = {
     start_date: PropTypes.string,
     end_date: PropTypes.string,
     project: PropTypes.object,
-    img: PropTypes.object,
+    img: PropTypes.string,
 };

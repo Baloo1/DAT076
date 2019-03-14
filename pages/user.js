@@ -8,7 +8,7 @@ import ExperienceTable from '../components/experienceTable';
 import UserInformation from '../components/userInformation';
 import Projects from '../components/projects';
 import Upload from '../components/upload';
-import MainNavBar from '../components/mainNavbar';
+import MainNavbarContainer from '../container/mainNavbarContainer';
 
 
 export default class User extends React.Component {
@@ -86,7 +86,7 @@ export default class User extends React.Component {
                         crossOrigin="anonymous"
                     />
                 </Head>
-                <MainNavBar/>
+                <MainNavbarContainer/>
                 <Container>
                     <Row>
                         <Col>

@@ -4,11 +4,12 @@ import Head from 'next/head';
 import axios from 'axios';
 import PropTypes from 'prop-types';
 
-import MainNavBar from '../components/mainNavbar';
 import UserContact from '../components/userContact';
 import ExperienceTable from '../components/experienceTable';
 import UserInformation from '../components/userInformation';
 import Projects from '../components/projects';
+
+import MainNavBarContainer from '../container/mainNavbarContainer';
 import EditProjectContainer from '../container/editProjectContainer';
 import EditContactContainer from '../container/editContactContainer';
 
@@ -84,7 +85,7 @@ export default class User extends React.Component {
                         crossOrigin="anonymous"
                     />
                 </Head>
-                <MainNavBar/>
+                <MainNavBarContainer/>
                 <Container>
                     <Row>
                         <Col>
