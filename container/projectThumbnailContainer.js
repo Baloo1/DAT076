@@ -39,12 +39,12 @@ export default class ProjectThumbnailContainer extends React.Component {
 
     }
 
-    async mouseOut() {
-        await this.setState({style: {display: 'none'}});
+    mouseOut() {
+        this.setState({style: {display: 'none'}});
     }
 
-    async mouseOver() {
-        await this.setState({style: {}});
+    mouseOver() {
+        this.setState({style: {}});
     }
 
     render() {
