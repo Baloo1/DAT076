@@ -13,6 +13,7 @@ import MainNavBarContainer from '../container/mainNavbarContainer';
 import EditProjectContainer from '../container/editProjectContainer';
 import EditContactContainer from '../container/editContactContainer';
 import EditExperienceContainer from "../container/editExperienceContainer";
+import EditAboutContainer from "../container/editAboutContainer";
 
 
 export default class User extends React.Component {
@@ -104,6 +105,10 @@ export default class User extends React.Component {
                         <Col>
                             <Col>
                                 <UserInformation user={this.state.user} abouts={this.state.abouts}/>
+                            </Col>
+                            <Col>
+                                {this.state.user ? <EditAboutContainer id={this.state.user.id} abouts={this.state.abouts}/> : <React.Fragment/>}
+
                             </Col>
                             <Col>
                                 <ExperienceTable experiences={this.state.experiences}/>

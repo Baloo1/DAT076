@@ -1,10 +1,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import axios from 'axios';
-import EditProject from '../components/editProject';
+import EditAbout from '../components/editAbout';
 
 
-export default class EditProjectContainer extends React.Component {
+export default class EditAboutContainer extends React.Component {
     constructor(props, context) {
         super(props, context);
 
@@ -13,25 +13,24 @@ export default class EditProjectContainer extends React.Component {
         this.handleClose = this.handleClose.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
         this.handleSubmitAdd = this.handleSubmitAdd.bind(this);
-        this.selectProject = this.selectProject.bind(this);
-        this.handleProjectChange = this.handleProjectChange.bind(this);
-        this.modifyDate = this.modifyDate.bind(this);
+        this.selectAbout = this.selectAbout.bind(this);
+        this.handleAboutChange = this.handleAboutChange.bind(this);
 
-        let project = null;
-        if (this.props.projects!==null) {
-            project = this.props.projects[0];
+        let about = null;
+        if (this.props.abouts!==null) {
+            about = this.props.abouts[0];
         }
         this.state = {
             show: false,
             add: false,
             submitFunction: this.handleSubmit,
-            selectedProject: project,
+            selectedAbout: about,
         };
     }
 
     componentDidUpdate(prevProps) {
-        if(this.props.projects!==prevProps.projects) {
-            this.setState({selectedProject: this.props.projects[0]});
+        if(this.props.abouts!==prevProps.abouts) {
+            this.setState({selectedAbout: this.props.abouts[0]});
         }
     }
 
@@ -39,8 +38,8 @@ export default class EditProjectContainer extends React.Component {
         this.setState({ show: false });
     }
 
-    selectProject(project) {
-        this.setState({selectedProject: project});
+    selectAbout(about) {
+        this.setState({selectedAbout: about});
     }
 
     handleShow() {
@@ -61,10 +60,9 @@ export default class EditProjectContainer extends React.Component {
 
     handleSubmit() {
         const formData = new FormData();
-        formData.append('title', this.state.selectedProject.title);
-        formData.append('description', this.state.selectedProject.description);
-        formData.append('start_date', this.state.selectedProject.start_date);
-        formData.append('end_date', this.state.selectedProject.end_date);
+        formData.append('title', this.state.selectedAbout.title);
+        formData.append('description', this.state.selectedAbout.description);
+
 
         const config = {
             headers: {
@@ -73,77 +71,71 @@ export default class EditProjectContainer extends React.Component {
             }
         };
 
-        axios.post('http://127.0.0.1:3000/api/user/'+this.props.id+'/project/'+this.state.selectedProject.id+'/edit',formData,config)
+        axios.post('http://127.0.0.1:3000/api/user/'+this.props.id+'/about/'+this.state.selectedAbout.id+'/edit',formData,config)
             .then((response) => {
                 if(response.status === 200) {
-                    alert('Project added');
+                    alert('About added');
                 } else {
                     alert('Something went wrong, ' + response.status + ': ' + response.statusText);
                 }
             }).catch((error) => {
-                alert('Something went wrong, ' + error);
-            });
+            alert('Something went wrong, ' + error);
+        });
         this.setState({ show: false });
     }
 
-    handleProjectChange(e) {
-        let newSelectedProject = this.state.selectedProject;
-        newSelectedProject[e.target.name] = e.target.value;
-        this.setState({ selectedProject: newSelectedProject });
+    handleAboutChange(e) {
+        let newSelectedAbout = this.state.selectedAbout;
+        newSelectedAbout[e.target.name] = e.target.value;
+        this.setState({ selectedAbout: newSelectedAbout });
     }
 
     handleSubmitAdd() {
         const formData = new FormData();
         formData.append('title', title.value);
         formData.append('description', description.value);
-        formData.append('start_date', start_date.value);
-        formData.append('end_date', end_date.value);
+
         const config = {
             headers: {
                 'content-type': 'multi-part/form-data',
                 'x-access-token': sessionStorage.getItem('jwtToken')
             }
         };
-        axios.post('http://127.0.0.1:3000/api/user/'+this.props.id+'/project/new',formData,config)
+        axios.post('http://127.0.0.1:3000/api/user/'+this.props.id+'/about/new',formData,config)
             .then((response) => {
                 if(response.status === 200) {
-                    alert('Project added');
+                    alert('About added');
                 } else {
                     alert('Something went wrong, ' + response.status + ': ' + response.statusText);
                 }
             }).catch((error) => {
-                alert('Something went wrong, ' + error);
-            });
+            alert('Something went wrong, ' + error);
+        });
         this.setState({ show: false });
     }
 
-    modifyDate(date) {
-        let modified = date.substring(0,10);
-        return modified;
-    }
 
     render() {
         return (
-            <EditProject
+            <EditAbout
                 handleClose={this.handleClose}
                 handleShow={this.handleShow}
                 handleShowAdd={this.handleShowAdd}
                 isAdding={this.state.add}
-                isDisabled={this.props.projects===null}
+                isDisabled={this.props.abouts===null}
                 isShowing={this.state.show}
-                projects={this.props.projects}
-                selectedProject={this.state.selectedProject}
-                selectProject={this.selectProject}
+                abouts={this.props.abouts}
+                selectedAbout={this.state.selectedAbout}
+                selectAbout={this.selectAbout}
                 submitFunction={this.state.submitFunction}
-                handleProjectChange={this.handleProjectChange}
-                modifyDate={this.modifyDate}
+                handleAboutChange={this.handleAboutChange}
             />
         );
     }
 }
 
-EditProjectContainer.propTypes = {
-    projects: PropTypes.array,
+EditAboutContainer.propTypes = {
+    abouts: PropTypes.array,
     id: PropTypes.number
 };
 
