@@ -20,7 +20,8 @@ export default class EditProject extends React.Component {
             selectedProject,
             selectProject,
             isShowing,
-            submitFunction
+            submitFunction,
+            handleProjectChange
         } = this.props;
 
         return (
@@ -42,6 +43,7 @@ export default class EditProject extends React.Component {
                                 projects={projects}
                                 selectedProject={selectedProject}
                                 selectProject={selectProject}
+                                handleProjectChange={handleProjectChange}
                             />
                         }
                     </Modal.Body>
@@ -69,5 +71,6 @@ EditProject.propTypes = {
     projects: PropTypes.array,
     selectedProject: PropTypes.object,
     selectProject: PropTypes.func,
-    submitFunction: PropTypes.func
+    submitFunction: PropTypes.func,
+    handleProjectChange: PropTypes.func
 };

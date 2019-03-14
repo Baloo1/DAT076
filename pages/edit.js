@@ -113,7 +113,7 @@ export default class User extends React.Component {
                         <Projects projects={this.state.projects}/>
                     </Row>
                     <Row>
-                        <EditProjectContainer id={this.state.user} projects={this.state.projects}/>
+                        {this.state.user ? <EditProjectContainer id={this.state.user.id} projects={this.state.projects}/> : <React.Fragment/>}
                     </Row>
                 </Container>
             </div>

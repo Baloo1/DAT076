@@ -7,29 +7,57 @@ import Form from 'react-bootstrap/Form';
 
 export default class EditProjectForm extends React.Component {
     render() {
+        const {
+            projects,
+            selectProject,
+            selectedProject,
+            handleProjectChange
+        } = this.props;
         return (
             <React.Fragment>
                 <DropdownButton id="dropdown-item-button" title="Select project">
-                    {this.props.projects.map((project,index) => (
-                        <Dropdown.Item key={index} as="button" onClick={() => this.props.selectProject(project)}>{project.title}</Dropdown.Item>
+                    {projects.map((project,index) => (
+                        <Dropdown.Item key={index} as="button" onClick={() => selectProject(project)}>{project.title}</Dropdown.Item>
                     ))}
                 </DropdownButton>
                 <Form>
                     <Form.Group controlId="title">
                         <Form.Label>Title</Form.Label>
-                        <Form.Control type="text" value={this.props.selectedProject.title}/>
+                        <Form.Control
+                            name={'title'}
+                            type="text"
+                            value={selectedProject.title}
+                            onChange={handleProjectChange}
+                        />
                     </Form.Group>
                     <Form.Group controlId="description">
                         <Form.Label>Description</Form.Label>
-                        <Form.Control type="text" as="textarea" rows="3" value={this.props.selectedProject.description}/>
+                        <Form.Control
+                            name={'description'}
+                            type="text"
+                            as="textarea"
+                            rows="3"
+                            value={selectedProject.description}
+                            onChange={handleProjectChange}
+                        />
                     </Form.Group>
                     <Form.Group controlId="start_date">
                         <Form.Label>Start date</Form.Label>
-                        <Form.Control type="date" value={this.props.selectedProject.start_date}/>
+                        <Form.Control
+                            name={'start_date'}
+                            type="date"
+                            value={selectedProject.start_date}
+                            onChange={handleProjectChange}
+                        />
                     </Form.Group>
                     <Form.Group controlId="end_date">
                         <Form.Label>End date</Form.Label>
-                        <Form.Control type="date" value={this.props.selectedProject.end_date}/>
+                        <Form.Control
+                            type="date"
+                            name={'end_date'}
+                            value={selectedProject.end_date}
+                            onChange={handleProjectChange}
+                        />
                     </Form.Group>
                     <Form.Group controlId="image">
                         <Form.Label>Image</Form.Label>
@@ -43,6 +71,7 @@ export default class EditProjectForm extends React.Component {
 EditProjectForm.propTypes = {
     projects: PropTypes.array,
     selectedProject: PropTypes.object,
-    selectProject: PropTypes.func
+    selectProject: PropTypes.func,
+    handleProjectChange: PropTypes.func
 };
 
