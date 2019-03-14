@@ -15,6 +15,7 @@ export default class EditProjectContainer extends React.Component {
         this.handleSubmitAdd = this.handleSubmitAdd.bind(this);
         this.selectProject = this.selectProject.bind(this);
         this.handleProjectChange = this.handleProjectChange.bind(this);
+        this.modifyDate = this.modifyDate.bind(this);
 
         let project = null;
         if (this.props.projects!==null) {
@@ -101,7 +102,7 @@ export default class EditProjectContainer extends React.Component {
                 'content-type': 'multi-part/form-data'
             }
         };
-        axios.post('http://127.0.0.1:3000/api/user/'+this.props.id+'/edit',formData,config)
+        axios.post('http://127.0.0.1:3000/api/user/'+this.props.id+'/project/new',formData,config)
             .then((response) => {
                 if(response.status === 200) {
                     alert('Project added');
@@ -112,6 +113,11 @@ export default class EditProjectContainer extends React.Component {
                 alert('Something went wrong, ' + error);
             });
         this.setState({ show: false });
+    }
+
+    modifyDate(date) {
+        let modified = date.substring(0,10);
+        return modified;
     }
 
     render() {
@@ -128,6 +134,7 @@ export default class EditProjectContainer extends React.Component {
                 selectProject={this.selectProject}
                 submitFunction={this.state.submitFunction}
                 handleProjectChange={this.handleProjectChange}
+                modifyDate={this.modifyDate}
             />
         );
     }

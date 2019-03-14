@@ -11,8 +11,10 @@ export default class EditProjectForm extends React.Component {
             projects,
             selectProject,
             selectedProject,
-            handleProjectChange
+            handleProjectChange,
+            modifyDate
         } = this.props;
+
         return (
             <React.Fragment>
                 <DropdownButton id="dropdown-item-button" title="Select project">
@@ -46,7 +48,7 @@ export default class EditProjectForm extends React.Component {
                         <Form.Control
                             name={'start_date'}
                             type="date"
-                            value={selectedProject.start_date}
+                            value={modifyDate(selectedProject.start_date)}
                             onChange={handleProjectChange}
                         />
                     </Form.Group>
@@ -55,7 +57,7 @@ export default class EditProjectForm extends React.Component {
                         <Form.Control
                             type="date"
                             name={'end_date'}
-                            value={selectedProject.end_date}
+                            value={modifyDate(selectedProject.end_date)}
                             onChange={handleProjectChange}
                         />
                     </Form.Group>
@@ -72,6 +74,7 @@ EditProjectForm.propTypes = {
     projects: PropTypes.array,
     selectedProject: PropTypes.object,
     selectProject: PropTypes.func,
-    handleProjectChange: PropTypes.func
+    handleProjectChange: PropTypes.func,
+    modifyDate: PropTypes.func
 };
 

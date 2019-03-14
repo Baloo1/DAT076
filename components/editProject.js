@@ -21,7 +21,8 @@ export default class EditProject extends React.Component {
             selectProject,
             isShowing,
             submitFunction,
-            handleProjectChange
+            handleProjectChange,
+            modifyDate
         } = this.props;
 
         return (
@@ -34,7 +35,7 @@ export default class EditProject extends React.Component {
                 </Button>
                 <Modal show={isShowing} onHide={handleClose}>
                     <Modal.Header closeButton>
-                        <Modal.Title>Modal heading</Modal.Title>
+                        <Modal.Title>Project</Modal.Title>
                     </Modal.Header>
                     <Modal.Body>
                         {isAdding ?
@@ -44,6 +45,7 @@ export default class EditProject extends React.Component {
                                 selectedProject={selectedProject}
                                 selectProject={selectProject}
                                 handleProjectChange={handleProjectChange}
+                                modifyDate={modifyDate}
                             />
                         }
                     </Modal.Body>
@@ -72,5 +74,6 @@ EditProject.propTypes = {
     selectedProject: PropTypes.object,
     selectProject: PropTypes.func,
     submitFunction: PropTypes.func,
-    handleProjectChange: PropTypes.func
+    handleProjectChange: PropTypes.func,
+    modifyDate: PropTypes.func
 };
