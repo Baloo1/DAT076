@@ -16,7 +16,7 @@ export default class MainNavBar extends React.Component {
         } = this.props;
         return (
             <Navbar bg="light" expand="lg">
-                <Navbar.Brand>LinkedIn</Navbar.Brand>
+                <Navbar.Brand href="/">LinkedIn</Navbar.Brand>
                 <Navbar.Toggle aria-controls="basic-navbar-nav"/>
                 <Navbar.Collapse id="basic-navbar-nav">
                     { isLoggedIn ? (
