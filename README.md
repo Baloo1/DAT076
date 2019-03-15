@@ -12,3 +12,8 @@ Create a postgresql db name `api` with user `api` and password as `password`. Th
 * [Next.js](https://nextjs.org/docs/)
 * [React.js](https://reactjs.org/docs/getting-started.html)
 * [React-Bootstrap](https://react-bootstrap.github.io)
+
+## Use cases
+* Register account
+* Login to account
+* 

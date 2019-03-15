@@ -14,8 +14,6 @@ export default class ProjectThumbnail extends React.Component {
             style
         } = this.props;
 
-
-
         return (
             <Card onMouseOut={onMouseOut} onMouseOver={onMouseOver}>
                 <Card.Img variant="top" src={img} alt="Picture"/>

@@ -37,7 +37,7 @@ export default class UserContact extends React.Component {
             return (
                 <Card>
                     <Card.Img variant="top" src={'/api/display/' + this.props.user.image_id} alt="Profile picture"/>
-                    <Card.Header>{this.props.user.name}</Card.Header>
+                    <Card.Header>{this.props.user.name ? this.props.user.name : "Your name here"}</Card.Header>
                     <Card.Body>
                         <Card.Title>Contact information</Card.Title>
                         <Card.Text>
@@ -45,7 +45,7 @@ export default class UserContact extends React.Component {
                             Email: {this.props.user.email}<br/>
                             Website: <Link href={'https://' + this.props.user.website}><a>{this.props.user.website}</a></Link>
                             <br/>
-                            Twitter: <Link href={'https://twitter.com/' + this.props.user.twitter.substring(1)}><a>{this.props.user.twitter}</a></Link>
+                            Twitter: {this.props.user ? "" :<Link href={'https://twitter.com/' + this.props.user.twitter.substring(1)}><a>{this.props.user.twitter}</a></Link>}
                             <br/>
                         </Card.Text>
                     </Card.Body>

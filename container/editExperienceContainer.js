@@ -132,7 +132,7 @@ export default class EditExperienceContainer extends React.Component {
                 handleShow={this.handleShow}
                 handleShowAdd={this.handleShowAdd}
                 isAdding={this.state.add}
-                isDisabled={this.props.experiences===null}
+                isDisabled={this.props.experiences.length===0}
                 isShowing={this.state.show}
                 experiences={this.props.experiences}
                 selectedExperience={this.state.selectedExperience}

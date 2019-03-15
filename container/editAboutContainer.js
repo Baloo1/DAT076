@@ -122,7 +122,7 @@ export default class EditAboutContainer extends React.Component {
                 handleShow={this.handleShow}
                 handleShowAdd={this.handleShowAdd}
                 isAdding={this.state.add}
-                isDisabled={this.props.abouts===null}
+                isDisabled={this.props.abouts.length===0}
                 isShowing={this.state.show}
                 abouts={this.props.abouts}
                 selectedAbout={this.state.selectedAbout}
