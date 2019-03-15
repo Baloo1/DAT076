@@ -16,4 +16,18 @@ Create a postgresql db name `api` with user `api` and password as `password`. Th
 ## Use cases
 * Register account
 * Login to account
-* 
+* Logout
+* User-page
+* Add profile picture
+* Add contact information
+* Add skills
+* Add work experiences
+* Add projects
+* Add images to projects
+* Edit profile picture
+* Edit contact information
+* Edit skills
+* Edit work experiences
+* Edit projects
+* Edit project images
+* Generate link to page
