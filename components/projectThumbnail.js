@@ -10,14 +10,17 @@ export default class ProjectThumbnail extends React.Component {
             end_date,
             img,
             onMouseOut,
-            onMouseOver
+            onMouseOver,
+            style
         } = this.props;
+
+
 
         return (
             <Card onMouseOut={onMouseOut} onMouseOver={onMouseOver}>
                 <Card.Img variant="top" src={img} alt="Picture"/>
                 <Card.Body>
-                    <Card.ImgOverlay>
+                    <Card.ImgOverlay style={style}>
                         <Card.Title>{project.title}</Card.Title>
                         <Card.Text>
                             {project.description}
@@ -37,4 +40,5 @@ ProjectThumbnail.propTypes = {
     end_date: PropTypes.string,
     project: PropTypes.object,
     img: PropTypes.string,
+    style: PropTypes.any
 };

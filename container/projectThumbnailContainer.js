@@ -54,8 +54,9 @@ export default class ProjectThumbnailContainer extends React.Component {
                 start_date={this.state.start_date}
                 end_date={this.state.end_date}
                 img={this.state.img}
-                onMouseOut={() => this.mouseOut()}
-                onMouseOver={() => this.mouseOver()}
+                onMouseOut={this.mouseOut}
+                onMouseOver={this.mouseOver}
+                style={this.state.style}
             />
         );
     }
