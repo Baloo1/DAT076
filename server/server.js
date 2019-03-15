@@ -55,4 +55,10 @@ nextApp.prepare().then(() => {
         if (err) throw err;
         console.log(`ready at http://localhost:${PORT}`);
     });
+
+    app.get('/user/:UserName/:id', (req, res) => {
+        const actualPage = '/user';
+        const queryParams = { id: req.params.id };
+        app.render(req, res, actualPage, queryParams);
+    });
 });

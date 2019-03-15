@@ -5,10 +5,12 @@ import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 
 
+
 export default class EditContact extends React.Component {
     render() {
         // Destructuring of props for cleaner syntax
         const {
+            name,
             phone,
             email,
             website,
@@ -33,6 +35,10 @@ export default class EditContact extends React.Component {
                     </Modal.Header>
                     <Modal.Body>
                         <Form>
+                            <Form.Group controlId="name">
+                                <Form.Label>Name</Form.Label>
+                                <Form.Control type="text" defaultValue={name}/>
+                            </Form.Group>
                             <Form.Group controlId="phone">
                                 <Form.Label>Phone</Form.Label>
                                 <Form.Control type="text" defaultValue={phone}/>

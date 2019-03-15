@@ -63,6 +63,7 @@ export default class EditContactContainer extends React.Component {
             }
         };
         const formData = new FormData();
+        formData.append('name', name.value);
         formData.append('phone', phone.value);
         formData.append('email', email.value);
         formData.append('website', website.value);
