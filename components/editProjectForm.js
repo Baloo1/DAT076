@@ -12,7 +12,8 @@ export default class EditProjectForm extends React.Component {
             selectProject,
             selectedProject,
             handleProjectChange,
-            modifyDate
+            modifyDate,
+            fileChange
         } = this.props;
 
         return (
@@ -63,6 +64,7 @@ export default class EditProjectForm extends React.Component {
                     </Form.Group>
                     <Form.Group controlId="image">
                         <Form.Label>Image</Form.Label>
+                        <Form.Control type="file" onChange={fileChange}/>
                     </Form.Group>
                 </Form>
             </React.Fragment>
@@ -75,6 +77,7 @@ EditProjectForm.propTypes = {
     selectedProject: PropTypes.object,
     selectProject: PropTypes.func,
     handleProjectChange: PropTypes.func,
-    modifyDate: PropTypes.func
+    modifyDate: PropTypes.func,
+    fileChange: PropTypes.func
 };
 

@@ -24,6 +24,7 @@ export default class AddProjectForm extends React.Component {
                 </Form.Group>
                 <Form.Group controlId="image">
                     <Form.Label>Image</Form.Label>
+                    <Form.Control type="file"/>
                 </Form.Group>
             </Form>
         );

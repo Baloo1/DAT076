@@ -16,6 +16,7 @@ export default class EditProjectContainer extends React.Component {
         this.selectProject = this.selectProject.bind(this);
         this.handleProjectChange = this.handleProjectChange.bind(this);
         this.modifyDate = this.modifyDate.bind(this);
+        this.fileChange = this.fileChange.bind(this);
 
         let project = null;
         if (this.props.projects!==null) {
@@ -26,6 +27,7 @@ export default class EditProjectContainer extends React.Component {
             add: false,
             submitFunction: this.handleSubmit,
             selectedProject: project,
+            image: null
         };
     }
 
@@ -60,12 +62,6 @@ export default class EditProjectContainer extends React.Component {
     }
 
     handleSubmit() {
-        const formData = new FormData();
-        formData.append('title', this.state.selectedProject.title);
-        formData.append('description', this.state.selectedProject.description);
-        formData.append('start_date', this.state.selectedProject.start_date);
-        formData.append('end_date', this.state.selectedProject.end_date);
-
         const config = {
             headers: {
                 'content-type': 'multi-part/form-data',
@@ -73,6 +69,42 @@ export default class EditProjectContainer extends React.Component {
             }
         };
 
+        let image_id = this.state.selectedProject.image_id;
+
+        if (this.state.image != null) {
+            const formDataImg = new FormData();
+            formDataImg.append('image', this.state.image);
+            axios.post('/api/uploadimg', formDataImg, config)
+                .then((response) => {
+                    if (response.status == 200) {
+                        image_id = response.data.id;
+                        this.updateProject(image_id);
+                    } else {
+                        alert('Something went wrong with the image, ' + response.status + ': ' + response.statusText);
+                    }
+                }).catch((error) => {
+                alert('Something went wrong with the image, ' + error);
+            });
+        } else {
+            this.updateProject(image_id);
+        }
+
+
+    }
+    updateProject(image_id) {
+        const formData = new FormData();
+        formData.append('title', this.state.selectedProject.title);
+        formData.append('description', this.state.selectedProject.description);
+        formData.append('start_date', this.state.selectedProject.start_date);
+        formData.append('end_date', this.state.selectedProject.end_date);
+        formData.append('image_id',image_id);
+
+        const config = {
+            headers: {
+                'content-type': 'multi-part/form-data',
+                'x-access-token': sessionStorage.getItem('jwtToken')
+            }
+        };
         axios.post('http://127.0.0.1:3000/api/user/'+this.props.id+'/project/'+this.state.selectedProject.id+'/edit',formData,config)
             .then((response) => {
                 if(response.status === 200) {
@@ -93,11 +125,41 @@ export default class EditProjectContainer extends React.Component {
     }
 
     handleSubmitAdd() {
+        const config = {
+            headers: {
+                'content-type': 'multi-part/form-data',
+                'x-access-token': sessionStorage.getItem('jwtToken')
+            }
+        };
+
+        let image_id = this.state.selectedProject.image_id;
+
+        if (this.state.image != null) {
+            const formDataImg = new FormData();
+            formDataImg.append('image', this.state.image);
+            axios.post('/api/uploadimg', formDataImg, config)
+                .then((response) => {
+                    if (response.status == 200) {
+                        image_id = response.data.id;
+                        this.addProject(image_id);
+                    } else {
+                        alert('Something went wrong with the image, ' + response.status + ': ' + response.statusText);
+                    }
+                }).catch((error) => {
+                alert('Something went wrong with the image, ' + error);
+            });
+        } else {
+            this.addProject(image_id);
+        }
+    }
+
+    addProject(image_id) {
         const formData = new FormData();
         formData.append('title', title.value);
         formData.append('description', description.value);
         formData.append('start_date', start_date.value);
         formData.append('end_date', end_date.value);
+        formData.append('image_id',image_id)
         const config = {
             headers: {
                 'content-type': 'multi-part/form-data',
@@ -122,6 +184,10 @@ export default class EditProjectContainer extends React.Component {
         return modified;
     }
 
+    fileChange(e) {
+        this.setState({image: e.target.files[0]});
+    }
+
     render() {
         return (
             <EditProject
@@ -137,6 +203,7 @@ export default class EditProjectContainer extends React.Component {
                 submitFunction={this.state.submitFunction}
                 handleProjectChange={this.handleProjectChange}
                 modifyDate={this.modifyDate}
+                fileChange={this.fileChange}
             />
         );
     }

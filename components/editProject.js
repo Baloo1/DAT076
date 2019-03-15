@@ -22,7 +22,8 @@ export default class EditProject extends React.Component {
             isShowing,
             submitFunction,
             handleProjectChange,
-            modifyDate
+            modifyDate,
+            fileChange
         } = this.props;
 
         return (
@@ -46,6 +47,7 @@ export default class EditProject extends React.Component {
                                 selectProject={selectProject}
                                 handleProjectChange={handleProjectChange}
                                 modifyDate={modifyDate}
+                                fileChange={fileChange}
                             />
                         }
                     </Modal.Body>
@@ -75,5 +77,6 @@ EditProject.propTypes = {
     selectProject: PropTypes.func,
     submitFunction: PropTypes.func,
     handleProjectChange: PropTypes.func,
-    modifyDate: PropTypes.func
+    modifyDate: PropTypes.func,
+    fileChange: PropTypes.func
 };

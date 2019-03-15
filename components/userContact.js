@@ -50,14 +50,10 @@ export default class UserContact extends React.Component {
                         </Card.Text>
                     </Card.Body>
                     <Card.Footer>
-
-
                             <CopyToClipboard text={'https://www.example.com/user/'+this.props.user.name+'/'+this.props.user.id}
                             onCopy={()=>this.setState({copied: true})}>
                                 <Button>{this.state.copied ? "Copied" : "Get Link"}</Button>
                             </CopyToClipboard>
-
-
                     </Card.Footer>
                 </Card>
             );
