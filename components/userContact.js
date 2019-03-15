@@ -1,6 +1,7 @@
 import React from 'react';
 import { Card } from 'react-bootstrap';
 import PropTypes from 'prop-types';
+import Link from 'next/link';
 
 
 export default class UserContact extends React.Component {
@@ -13,6 +14,7 @@ export default class UserContact extends React.Component {
             return (
                 <Card>
                     <Card.Img variant="top" src="/api/display/0" alt="Profile picture"/>
+                    <Card.Header>Loading... </Card.Header>
                     <Card.Body>
                         <Card.Title>Contact information</Card.Title>
                         <Card.Text>
@@ -28,13 +30,16 @@ export default class UserContact extends React.Component {
             return (
                 <Card>
                     <Card.Img variant="top" src={'/api/display/' + this.props.user.image_id} alt="Profile picture"/>
+                    <Card.Header>{this.props.user.name}</Card.Header>
                     <Card.Body>
                         <Card.Title>Contact information</Card.Title>
                         <Card.Text>
                             Phone nr: {this.props.user.phone}<br/>
                             Email: {this.props.user.email}<br/>
-                            Website: {this.props.user.website}<br/>
-                            Twitter: {this.props.user.twitter}<br/>
+                            Website: <Link href={"https://" + this.props.user.website}><a>{this.props.user.website}</a></Link>
+                            <br/>
+                            Twitter: <Link href={"https://twitter.com/" + this.props.user.twitter.substring(1)}><a>{this.props.user.twitter}</a></Link>
+                             <br/>
                         </Card.Text>
                     </Card.Body>
                 </Card>

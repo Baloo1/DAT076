@@ -3,8 +3,8 @@ import PropTypes from 'prop-types';
 
 import Modal from 'react-bootstrap/Modal';
 import Button from 'react-bootstrap/Button';
-import AddAboutForm from "./addAboutForm";
-import EditAboutForm from "./editAboutForm";
+import AddAboutForm from './addAboutForm';
+import EditAboutForm from './editAboutForm';
 
 
 

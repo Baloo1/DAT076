@@ -12,8 +12,8 @@ import Projects from '../components/projects';
 import MainNavBarContainer from '../container/mainNavbarContainer';
 import EditProjectContainer from '../container/editProjectContainer';
 import EditContactContainer from '../container/editContactContainer';
-import EditExperienceContainer from "../container/editExperienceContainer";
-import EditAboutContainer from "../container/editAboutContainer";
+import EditExperienceContainer from '../container/editExperienceContainer';
+import EditAboutContainer from '../container/editAboutContainer';
 
 
 export default class User extends React.Component {

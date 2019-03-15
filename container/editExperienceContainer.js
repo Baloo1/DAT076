@@ -81,8 +81,8 @@ export default class EditExperienceContainer extends React.Component {
                     alert('Something went wrong, ' + response.status + ': ' + response.statusText);
                 }
             }).catch((error) => {
-            alert('Something went wrong, ' + error);
-        });
+                alert('Something went wrong, ' + error);
+            });
         this.setState({ show: false });
     }
 
@@ -112,8 +112,8 @@ export default class EditExperienceContainer extends React.Component {
                     alert('Something went wrong, ' + response.status + ': ' + response.statusText);
                 }
             }).catch((error) => {
-            alert('Something went wrong, ' + error);
-        });
+                alert('Something went wrong, ' + error);
+            });
         this.setState({ show: false });
     }
 
@@ -121,7 +121,7 @@ export default class EditExperienceContainer extends React.Component {
         if (date!==null) {
             return date.substring(0, 10);
         } else {
-            return "";
+            return '';
         }
     }
 
