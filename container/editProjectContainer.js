@@ -83,8 +83,8 @@ export default class EditProjectContainer extends React.Component {
                         alert('Something went wrong with the image, ' + response.status + ': ' + response.statusText);
                     }
                 }).catch((error) => {
-                alert('Something went wrong with the image, ' + error);
-            });
+                    alert('Something went wrong with the image, ' + error);
+                });
         } else {
             this.updateProject(image_id);
         }
@@ -146,8 +146,8 @@ export default class EditProjectContainer extends React.Component {
                         alert('Something went wrong with the image, ' + response.status + ': ' + response.statusText);
                     }
                 }).catch((error) => {
-                alert('Something went wrong with the image, ' + error);
-            });
+                    alert('Something went wrong with the image, ' + error);
+                });
         } else {
             this.addProject(image_id);
         }
@@ -159,7 +159,7 @@ export default class EditProjectContainer extends React.Component {
         formData.append('description', description.value);
         formData.append('start_date', start_date.value);
         formData.append('end_date', end_date.value);
-        formData.append('image_id',image_id)
+        formData.append('image_id',image_id);
         const config = {
             headers: {
                 'content-type': 'multi-part/form-data',

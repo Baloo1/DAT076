@@ -7,7 +7,6 @@ import UserContact from '../components/userContact';
 import ExperienceTable from '../components/experienceTable';
 import UserInformation from '../components/userInformation';
 import Projects from '../components/projects';
-import Upload from '../components/upload';
 import MainNavbarContainer from '../container/mainNavbarContainer';
 
 
