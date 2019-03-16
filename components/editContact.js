@@ -3,10 +3,19 @@ import PropTypes from 'prop-types';
 import Modal from 'react-bootstrap/Modal';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
+import {CopyToClipboard} from "react-copy-to-clipboard";
 
 
 
 export default class EditContact extends React.Component {
+    constructor(props) {
+        super(props)
+
+        this.state = {
+            copied: false,
+        };
+    }
+
     render() {
         // Destructuring of props for cleaner syntax
         const {
@@ -29,6 +38,10 @@ export default class EditContact extends React.Component {
                 <Button variant="primary" onClick={handleShow}>
                         Edit
                 </Button>
+                <CopyToClipboard text={'https://www.example.com/user/'+this.props.user.name+'/'+this.props.user.id}
+                                 onCopy={()=>this.setState({copied: true})}>
+                    <Button variant="secondary">{this.state.copied ? 'Copied' : 'Get Link'}</Button>
+                </CopyToClipboard>
                 <Modal show={show} onHide={handleClose}>
                     <Modal.Header closeButton>
                         <Modal.Title>Edit contact details</Modal.Title>

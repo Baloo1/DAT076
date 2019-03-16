@@ -25,7 +25,6 @@ export default class EditProject extends React.Component {
             modifyDate,
             fileChange
         } = this.props;
-
         return (
             <React.Fragment>
                 <Button variant="primary" onClick={handleShow} disabled={isDisabled}>
