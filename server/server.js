@@ -47,6 +47,12 @@ nextApp.prepare().then(() => {
     // API routes
     app.use('/api/', require('./routes/api'));
 
+    app.get('/user/:user/:id', (req, res) => {
+        const actualPage = '/user';
+        const queryParams = {id: parseInt(req.params.id)};
+        return nextApp.render(req, res, actualPage, queryParams);
+    });
+
     // React routes
     app.get('*', (req, res) => {
         return handle(req, res);
@@ -56,9 +62,5 @@ nextApp.prepare().then(() => {
         console.log(`ready at http://localhost:${PORT}`);
     });
 
-    app.get('/user/:UserName/:id', (req, res) => {
-        const actualPage = '/user';
-        const queryParams = {id: req.params.id};
-        app.render(req, res, actualPage, queryParams);
-    });
+
 });
