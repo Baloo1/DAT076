@@ -39,7 +39,10 @@ export default class EditProject extends React.Component {
                     </Modal.Header>
                     <Modal.Body>
                         {isAdding ?
-                            <AddProjectForm /> :
+                            <AddProjectForm
+                                selectedProject={{title: "", description: "", start_date: null, end_date: null, image_id: 0}}
+                                fileChange={fileChange}
+                            /> :
                             <EditProjectForm
                                 projects={projects}
                                 selectedProject={selectedProject}

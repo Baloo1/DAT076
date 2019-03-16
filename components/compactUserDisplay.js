@@ -1,8 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 import { Card, Button } from "react-bootstrap";
-import EditAbout from "./editAbout";
-import Link from "./userContact";
+import Link from 'next/link';
 
 export default class CompactUserDisplay extends React.Component {
     render() {
@@ -19,8 +18,9 @@ export default class CompactUserDisplay extends React.Component {
                         Id: {user.id} <br/>
                         Phone nr: {user.phone}<br/>
                         Email: {user.email}<br/>
-                        Website: {user.website} <br/>
-                        Twitter: {user.twitter}
+                        Website: <Link href={'https://' + user.website}><a>{user.website}</a></Link>
+                        <br/>
+                        Twitter: {user.twitter ? <Link href={'https://twitter.com/' + user.twitter.substring(1)}><a>{user.twitter}</a></Link> : ""}
                     </Card.Text>
                     <Button variant="primary" href={"/viewuser?id=" + user.id}>View user profile</Button>
                 </Card.Body>
