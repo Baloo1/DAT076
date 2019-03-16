@@ -69,7 +69,7 @@ export default class EditExperienceContainer extends React.Component {
         const config = {
             headers: {
                 'content-type': 'multi-part/form-data',
-                'x-access-token': sessionStorage.getItem('jwtToken')
+                'x-access-token': localStorage.getItem('jwtToken')
             }
         };
 
@@ -101,7 +101,7 @@ export default class EditExperienceContainer extends React.Component {
         const config = {
             headers: {
                 'content-type': 'multi-part/form-data',
-                'x-access-token': sessionStorage.getItem('jwtToken')
+                'x-access-token': localStorage.getItem('jwtToken')
             }
         };
         axios.post('http://127.0.0.1:3000/api/user/'+this.props.id+'/experience/new',formData,config)

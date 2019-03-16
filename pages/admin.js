@@ -24,7 +24,7 @@ class Admin extends React.Component {
         const config = {
             headers: {
                 'content-type': 'multi-part/form-data',
-                'x-access-token': sessionStorage.getItem('jwtToken')
+                'x-access-token': localStorage.getItem('jwtToken')
             }
         };
         const resUsers = await axios.get('http://localhost:3000/api/users', config).catch(() => {

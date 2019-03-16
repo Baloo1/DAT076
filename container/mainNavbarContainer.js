@@ -30,10 +30,10 @@ export default class MainNavBarContainer extends React.Component {
     }
 
     async componentDidMount() {
-        if(window.sessionStorage.getItem('user') != null) {
+        if(window.localStorage.getItem('user') != null) {
             await this.setState({isLoggedIn: true});
-            this.setState({user: window.sessionStorage.getItem('user')});
-            if(window.sessionStorage.getItem('role') === 'admin') {
+            this.setState({user: window.localStorage.getItem('user')});
+            if(window.localStorage.getItem('role') === 'admin') {
                 this.setState({isAdmin: true});
             }
         }
@@ -49,8 +49,8 @@ export default class MainNavBarContainer extends React.Component {
 
     handleLogout() {
         this.setState({isLoggedIn: false});
-        sessionStorage.removeItem('user');
-        sessionStorage.removeItem('token');
+        localStorage.removeItem('user');
+        localStorage.removeItem('token');
         window.location = '/';
     }
 
@@ -76,9 +76,9 @@ export default class MainNavBarContainer extends React.Component {
             axios.post('http://127.0.0.1:3000/api/register',formData,config)
                 .then((response) => {
                     if(response.status === 200) {
-                        sessionStorage.setItem('user', response.data.user);
-                        sessionStorage.setItem('role', response.data.role);
-                        sessionStorage.setItem('jwtToken', response.data.token);
+                        localStorage.setItem('user', response.data.user);
+                        localStorage.setItem('role', response.data.role);
+                        localStorage.setItem('jwtToken', response.data.token);
                         alert('Registration successful, welcome!');
                         this.setState({isLoggedIn: true, showRegister: false, user: response.data.user});
                     } else {
@@ -110,9 +110,9 @@ export default class MainNavBarContainer extends React.Component {
         axios.post('http://127.0.0.1:3000/api/login',formData,config)
             .then((response) => {
                 if(response.status === 200) {
-                    sessionStorage.setItem('user', response.data.user);
-                    sessionStorage.setItem('role', response.data.role);
-                    sessionStorage.setItem('jwtToken', response.data.token);
+                    localStorage.setItem('user', response.data.user);
+                    localStorage.setItem('role', response.data.role);
+                    localStorage.setItem('jwtToken', response.data.token);
                     this.setState({isLoggedIn: true, showLogin: false, user: response.data.user});
                 } else {
                     alert('Something went wrong, ' + response.status + ': ' + response.statusText);

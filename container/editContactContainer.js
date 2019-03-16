@@ -30,7 +30,7 @@ export default class EditContactContainer extends React.Component {
         const config = {
             headers: {
                 'content-type': 'multi-part/form-data',
-                'x-access-token': sessionStorage.getItem('jwtToken')
+                'x-access-token': localStorage.getItem('jwtToken')
             }
         };
 
@@ -59,7 +59,7 @@ export default class EditContactContainer extends React.Component {
         const config = {
             headers: {
                 'content-type': 'multi-part/form-data',
-                'x-access-token': sessionStorage.getItem('jwtToken')
+                'x-access-token': localStorage.getItem('jwtToken')
             }
         };
         const formData = new FormData();

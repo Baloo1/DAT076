@@ -29,7 +29,7 @@ class ViewUser extends React.Component {
         const resE = await axios.get('http://localhost:3000/api/user/' + id + '/experiences');
         const resP = await axios.get('http://localhost:3000/api/user/' + id + '/projects');
         const resA = await axios.get('http://localhost:3000/api/user/' + id + '/abouts');
-        await this.setState({user_id: sessionStorage.user, user: resU.data, experiences: resE.data, projects: resP.data, abouts: resA.data});
+        await this.setState({user_id: localStorage.user, user: resU.data, experiences: resE.data, projects: resP.data, abouts: resA.data});
     }
 
     render() {
