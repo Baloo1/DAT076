@@ -79,7 +79,7 @@ export default class User extends React.Component {
         return (
             <div>
                 <Head>
-                    <title>User</title>
+                    <title>My Page</title>
                     <link
                         rel="stylesheet"
                         href="https://maxcdn.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css"

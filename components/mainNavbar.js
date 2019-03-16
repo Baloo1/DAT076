@@ -12,6 +12,7 @@ export default class MainNavBar extends React.Component {
             handleShowRegister,
             handleShowLogin,
             handleLogout,
+            isAdmin,
             user
         } = this.props;
         return (
@@ -22,8 +23,13 @@ export default class MainNavBar extends React.Component {
                     { isLoggedIn ? (
                           <>
                               <Nav className="mr-auto">
-                                  <Nav.Link href={'user?id=' + user}>My Page</Nav.Link>
-                                  <Nav.Link href={'edit?id=' + user}>Edit My Page</Nav.Link>
+                                  <Nav.Link href={'user'}>My Page</Nav.Link>
+                                  <Nav.Link href={'edit'}>Edit My Page</Nav.Link>
+                                  { isAdmin ? (
+                                      <Nav.Link href={'admin'}>Admin Page</Nav.Link>
+                                  ) : (
+                                      <></>
+                                  )}
                               </Nav>
                               <Button onClick={handleLogout}>Logout</Button>
                           </>
@@ -36,8 +42,7 @@ export default class MainNavBar extends React.Component {
                               <Button onClick={handleShowRegister}>Register</Button>
                               <Button onClick={handleShowLogin}>Login</Button>
                           </>
-                    )
-                    }
+                    )}
                 </Navbar.Collapse>
             </Navbar>
 

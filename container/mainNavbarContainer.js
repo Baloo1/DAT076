@@ -11,6 +11,7 @@ export default class MainNavBarContainer extends React.Component {
 
         this.handleShowRegister = this.handleShowRegister.bind(this);
         this.handleCloseRegister = this.handleCloseRegister.bind(this);
+        this.validateEmail = this.validateEmail.bind(this);
         this.handleRegister = this.handleRegister.bind(this);
 
         this.handleShowLogin = this.handleShowLogin.bind(this);
@@ -23,6 +24,7 @@ export default class MainNavBarContainer extends React.Component {
             showLogin: false,
             showRegister: false,
             isLoggedIn: false,
+            isAdmin: false,
             user: null
         };
     }
@@ -31,6 +33,9 @@ export default class MainNavBarContainer extends React.Component {
         if(window.sessionStorage.getItem('user') != null) {
             await this.setState({isLoggedIn: true});
             this.setState({user: window.sessionStorage.getItem('user')});
+            if(window.sessionStorage.getItem('role') === 'admin') {
+                this.setState({isAdmin: true});
+            }
         }
     }
 
@@ -49,26 +54,40 @@ export default class MainNavBarContainer extends React.Component {
         window.location = '/';
     }
 
+    validateEmail(email) {
+        const re = /^(([^<>()\[\].,;:\s@"]+(\.[^<>()\[\].,;:\s@"]+)*)|(".+"))@(([^<>()[\].,;:\s@"]+\.)+[^<>()[\].,;:\s@"]{2,})$/i;
+        return re.test(String(email).toLowerCase());
+    }
+
     handleRegister() {
-        const formData = new FormData();
-        formData.append('email', registerEmail.value);
-        formData.append('password', registerPassword.value);
-        const config = {
-            headers: {
-                'content-type': 'multi-part/form-data'
-            }
-        };
-        axios.post('http://127.0.0.1:3000/api/register',formData,config)
-            .then((response) => {
-                if(response.status === 200) {
-                    alert('Registration successful, please login');
-                    this.setState({showRegister: false});
-                } else {
-                    alert('Something went wrong, ' + response.status + ': ' + response.statusText);
+        if(!this.validateEmail(registerEmail.value)) {
+            alert('Please enter a valid email address')
+        } else if(registerPassword.value !== registerPassword2.value) {
+            alert('Passwords must match!')
+        } else {
+            const formData = new FormData();
+            formData.append('email', registerEmail.value);
+            formData.append('password', registerPassword.value);
+            const config = {
+                headers: {
+                    'content-type': 'multi-part/form-data'
                 }
-            }).catch((error) => {
+            };
+            axios.post('http://127.0.0.1:3000/api/register',formData,config)
+                .then((response) => {
+                    if(response.status === 200) {
+                        sessionStorage.setItem('user', response.data.user);
+                        sessionStorage.setItem('role', response.data.role);
+                        sessionStorage.setItem('jwtToken', response.data.token);
+                        alert('Registration successful, welcome!');
+                        this.setState({isLoggedIn: true, showRegister: false, user: response.data.user});
+                    } else {
+                        alert('Something went wrong, ' + response.status + ': ' + response.statusText);
+                    }
+                }).catch((error) => {
                 alert('Something went wrong, ' + error.response.data);
             });
+        }
     }
 
     handleCloseLogin() {
@@ -92,6 +111,7 @@ export default class MainNavBarContainer extends React.Component {
             .then((response) => {
                 if(response.status === 200) {
                     sessionStorage.setItem('user', response.data.user);
+                    sessionStorage.setItem('role', response.data.role);
                     sessionStorage.setItem('jwtToken', response.data.token);
                     this.setState({isLoggedIn: true, showLogin: false, user: response.data.user});
                 } else {
@@ -110,6 +130,7 @@ export default class MainNavBarContainer extends React.Component {
                     handleShowRegister={this.handleShowRegister}
                     handleShowLogin={this.handleShowLogin}
                     handleLogout={this.handleLogout}
+                    isAdmin={this.state.isAdmin}
                     user={this.state.user}
                 />
 

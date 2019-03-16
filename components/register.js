@@ -29,6 +29,10 @@ export default class RegisterBox extends React.Component {
                             <Form.Label>Password</Form.Label>
                             <Form.Control type="password" placeholder="Password"/>
                         </Form.Group>
+                        <Form.Group controlId="registerPassword2">
+                            <Form.Label>Confirm password</Form.Label>
+                            <Form.Control type="password" placeholder="Re-enter password" />
+                        </Form.Group>
                     </Form>
                 </Modal.Body>
                 <Modal.Footer>

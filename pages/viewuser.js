@@ -7,9 +7,10 @@ import ExperienceTable from '../components/experienceTable';
 import UserInformation from '../components/userInformation';
 import Projects from '../components/projects';
 import MainNavbarContainer from '../container/mainNavbarContainer';
+import { withRouter } from 'next/router';
 
 
-export default class User extends React.Component {
+class ViewUser extends React.Component {
     constructor(props) {
         super(props);
 
@@ -23,10 +24,11 @@ export default class User extends React.Component {
     }
 
     async componentDidMount() {
-        const resU = await axios.get('http://localhost:3000/api/user/' + sessionStorage.user);
-        const resE = await axios.get('http://localhost:3000/api/user/' + sessionStorage.user + '/experiences');
-        const resP = await axios.get('http://localhost:3000/api/user/' + sessionStorage.user + '/projects');
-        const resA = await axios.get('http://localhost:3000/api/user/' + sessionStorage.user + '/abouts');
+        const id = this.props.router.query.id;
+        const resU = await axios.get('http://localhost:3000/api/user/' + id).catch(() => { return {user: {data: null}} });
+        const resE = await axios.get('http://localhost:3000/api/user/' + id + '/experiences');
+        const resP = await axios.get('http://localhost:3000/api/user/' + id + '/projects');
+        const resA = await axios.get('http://localhost:3000/api/user/' + id + '/abouts');
         await this.setState({user_id: sessionStorage.user, user: resU.data, experiences: resE.data, projects: resP.data, abouts: resA.data});
     }
 
@@ -34,7 +36,7 @@ export default class User extends React.Component {
         return (
             <div>
                 <Head>
-                    <title>My Page</title>
+                    <title>User</title>
                     <link
                         rel="stylesheet"
                         href="https://maxcdn.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css"
@@ -65,3 +67,5 @@ export default class User extends React.Component {
         );
     }
 }
+
+export default withRouter(ViewUser)

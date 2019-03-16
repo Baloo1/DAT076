@@ -38,7 +38,7 @@ export default class EditContact extends React.Component {
                 <Button variant="primary" onClick={handleShow}>
                         Edit
                 </Button>
-                <CopyToClipboard text={'https://www.example.com/user/'+this.props.user.name+'/'+this.props.user.id}
+                <CopyToClipboard text={'localhost:3000/viewuser?id='+this.props.user.id}
                                  onCopy={()=>this.setState({copied: true})}>
                     <Button variant="secondary">{this.state.copied ? 'Copied' : 'Get Link'}</Button>
                 </CopyToClipboard>

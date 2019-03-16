@@ -27,7 +27,8 @@ export default class Home extends React.Component {
                                 <p>
                                     On this site you can make your own, almost professional looking portfolio.
                                     It's not quite that cool though since it was made in haste for a school project
-                                    and we're not quite that smart yet. It was made with react-bootstrap
+                                    and we're not quite that smart yet. It was made with react-bootstrap, express, and
+                                    some other stuff.
                                 </p>
                             </Jumbotron>
                         </Col>

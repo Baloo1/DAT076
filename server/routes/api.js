@@ -19,15 +19,24 @@ router.get('/', (req, res) => {
     res.send('hello');
 });
 
-
-router.get('/users', async (req, res) => {
-    const users = await User.query();
-    res.json(users);
+router.get('/users', withAuth, upload.none(), async (req, res) => {
+    const requestingUser = await User.query().where('id', '=', req.id).pick(['role']);
+    const requestingRole = requestingUser[0].role;
+    if(requestingRole === 'admin') {
+        const users = await User.query().orderBy('id');
+        res.json(users);
+    } else {
+        res.status(401).contentType('text/plain').end('Insufficient privileges');
+    }
 });
 
 router.get('/user/:id', async (req, res) => {
     const user = await User.query().findById(req.params.id).omit(['password']).first();
-    res.json(user);
+    if(user == null) {
+        res.status(401).contentType('text/plain').end('No user found');
+    } else {
+        res.json(user);
+    }
 });
 
 // Get all experiences, abouts, projects of a user by id
@@ -54,6 +63,10 @@ router.post('/user/:id/experience/new', withAuth, upload.none(), async (req, res
         res.status(401).contentType('text/plain').end('Unauthorized');
     } else {
         newExperience.user_id = req.params.id; // Force the insert to use the authorized user_id!
+        // If end_date is empty, set it to null instead
+        if(newExperience.end_date == '') {
+            newExperience.end_date = null;
+        }
         Experience.query().insert(newExperience).then(experience => {
             res.status(200).contentType('text/plain').end('New experience added');
         }).catch(err => {
@@ -207,7 +220,11 @@ router.post('/register', upload.none(), async (req, res) => {
     } else {
         bcrypt.hash(password, 10, async function(err, hash) {
             const user = await User.query().insert({email: email, password: hash});
-            res.status(200).contentType('text/plain').end('User created!');
+            const payload = { id: user.id, role: user.role };
+            const token = jwt.sign(payload, process.env.SECRET, {
+                expiresIn: '12h'
+            });
+            res.json({user: user.id, role: user.role, token: token})
         });
     }
 });
@@ -238,7 +255,7 @@ router.post('/login', upload.none(), async (req, res) => {
                 const token = jwt.sign(payload, process.env.SECRET, {
                     expiresIn: '12h'
                 });
-                res.json({user: user.id, token: token});
+                res.json({user: user.id, role: user.role, token: token});
                 //res.cookie('token', token, { httpOnly: true }).sendStatus(200);
             }
         });
