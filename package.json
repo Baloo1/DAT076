@@ -25,7 +25,10 @@
   "homepage": "https://github.com/Baloo1/DAT076#readme",
   "jest": {
     "testEnvironment": "node",
-    "setupFilesAfterEnv": ["<rootDir>/__tests__/__mocks__/localStorageMock.js"],
+    "testURL": "http://localhost/",
+    "setupFilesAfterEnv": [
+      "<rootDir>/__tests__/__mocks__/localStorageMock.js"
+    ],
     "testMatch": [
       "<rootDir>/__tests__/**/*.js?(x)",
       "**/?(*.)+(spec|test).js?(x)"
@@ -55,9 +58,12 @@
     "cors": "^2.8.5",
     "dotenv": "^6.2.0",
     "enzyme": "^3.9.0",
+    "enzyme-async-helpers": "^0.9.1",
     "express": "^4.16.4",
     "file-loader": "^3.0.1",
     "fileuploader": "^1.2.7",
+    "jsdom": "^14.0.0",
+    "jsdom-global": "^3.0.2",
     "jsonwebtoken": "^8.5.0",
     "knex": "^0.16.3",
     "multer": "^1.4.1",
