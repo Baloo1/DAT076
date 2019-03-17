@@ -1,6 +1,6 @@
 import 'jsdom-global/register';
 import React from 'react';
-import Edit from '../pages/edit';
+import Admin from '../pages/admin';
 import Adapter from 'enzyme-adapter-react-16';
 import { shallow, configure } from 'enzyme';
 
@@ -45,13 +45,13 @@ const axios = require('axios');
 
 it('fetch user on #componentDidMount', async (done) => {
 
-    const edit = shallow(<Edit />);
-    edit
+    const admin = shallow(<Admin />);
+    admin
         .instance()
         .componentDidMount()
         .then(() => {
             expect(axios.get).toHaveBeenCalled();
-            expect(edit.state()).toHaveProperty('user',
+            expect(admin.state()).toHaveProperty('users',
                 {
                     email: 'user@example.com',
                     id: 0,
