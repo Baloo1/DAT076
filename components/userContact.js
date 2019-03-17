@@ -1,12 +1,21 @@
 import React from 'react';
-import { Card } from 'react-bootstrap';
+import { Card, Button } from 'react-bootstrap';
 import PropTypes from 'prop-types';
 import Link from 'next/link';
+import {CopyToClipboard} from "react-copy-to-clipboard";
 
 
 
 
 export default class UserContact extends React.Component {
+    constructor(props) {
+        super(props)
+
+        this.state = {
+            copied: false,
+        };
+    }
+
     render() {
         if (this.props.user == null) {
             return (
@@ -31,6 +40,10 @@ export default class UserContact extends React.Component {
                     <Card.Header>{this.props.user.name ? this.props.user.name : "Your name here"}</Card.Header>
                     <Card.Body>
                         <Card.Title>Contact information</Card.Title>
+                        <CopyToClipboard text={'localhost:3000/viewuser?id='+this.props.user.id}
+                                         onCopy={()=>this.setState({copied: true})}>
+                            <Button variant="secondary">{this.state.copied ? 'Copied' : 'Get Link'}</Button>
+                        </CopyToClipboard>
                         <Card.Text>
                             Phone nr: {this.props.user.phone}<br/>
                             Email: {this.props.user.email}<br/>
