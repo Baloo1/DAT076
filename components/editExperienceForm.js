@@ -61,9 +61,6 @@ export default class EditExperienceForm extends React.Component {
                             onChange={handleExperienceChange}
                         />
                     </Form.Group>
-                    <Form.Group controlId="image">
-                        <Form.Label>Image</Form.Label>
-                    </Form.Group>
                 </Form>
             </React.Fragment>
         );

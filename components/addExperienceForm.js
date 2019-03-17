@@ -22,9 +22,6 @@ export default class AddExperienceForm extends React.Component {
                     <Form.Label>End date</Form.Label>
                     <Form.Control type="date"/>
                 </Form.Group>
-                <Form.Group controlId="image">
-                    <Form.Label>Image</Form.Label>
-                </Form.Group>
             </Form>
         );
     }}
