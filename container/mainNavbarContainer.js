@@ -30,7 +30,7 @@ export default class MainNavBarContainer extends React.Component {
     }
 
     async componentDidMount() {
-        if(window.localStorage.getItem('user') != null) {
+        if(localStorage.getItem('user') != null) {
             await this.setState({isLoggedIn: true});
             this.setState({user: window.localStorage.getItem('user')});
             if(window.localStorage.getItem('role') === 'admin') {
