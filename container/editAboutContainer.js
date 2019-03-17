@@ -74,7 +74,7 @@ export default class EditAboutContainer extends React.Component {
         axios.post('http://127.0.0.1:3000/api/user/'+this.props.id+'/about/'+this.state.selectedAbout.id+'/edit',formData,config)
             .then((response) => {
                 if(response.status === 200) {
-                    alert('About added');
+                    alert('About edited');
                 } else {
                     alert('Something went wrong, ' + response.status + ': ' + response.statusText);
                 }

@@ -36,7 +36,7 @@ export default class UserContact extends React.Component {
                             Email: {this.props.user.email}<br/>
                             Website: <Link href={'https://' + this.props.user.website}><a>{this.props.user.website}</a></Link>
                             <br/>
-                            Twitter: {this.props.user ? <Link href={'https://twitter.com/' + this.props.user.twitter.substring(1)}><a>{this.props.user.twitter}</a></Link> : ""}
+                            Twitter: {this.props.user.twitter ? <Link href={'https://twitter.com/' + this.props.user.twitter.substring(1)}><a>{this.props.user.twitter}</a></Link> : ""}
                             <br/>
                         </Card.Text>
                     </Card.Body>

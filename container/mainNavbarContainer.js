@@ -50,7 +50,8 @@ export default class MainNavBarContainer extends React.Component {
     handleLogout() {
         this.setState({isLoggedIn: false});
         localStorage.removeItem('user');
-        localStorage.removeItem('token');
+        localStorage.removeItem('jwtToken');
+        localStorage.removeItem('role');
         window.location = '/';
     }
 

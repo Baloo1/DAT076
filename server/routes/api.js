@@ -115,7 +115,12 @@ router.post('/user/:id/edit', withAuth, upload.none(), async (req, res) => {
 
     if(req.id != req.params.id) {
         res.status(401).contentType('text/plain').end('Unauthorized');
+    } else if(!validateEmail(updateUser.email)) {
+        res.status(401).contentType('text/plain').end('Invalid email adress');
     } else {
+        if(updateUser.image_id == null) {
+            updateUser.image_id = 0
+        }
         updateUser.id = req.params.id; // Force the update to only update the correct user
         User.query().patch(updateUser).where('id', '=', req.params.id).then(user => {
             res.json(user);
@@ -210,6 +215,12 @@ router.get('/display/:id', async (req, res) => {
     }
 });
 
+function validateEmail(email) {
+    const re = /^(([^<>()\[\].,;:\s@"]+(\.[^<>()\[\].,;:\s@"]+)*)|(".+"))@(([^<>()[\].,;:\s@"]+\.)+[^<>()[\].,;:\s@"]{2,})$/i;
+    return re.test(String(email).toLowerCase());
+}
+
+
 // Handle login, registering and password changes
 router.post('/register', upload.none(), async (req, res) => {
     const { email, password } = req.body;
@@ -217,6 +228,8 @@ router.post('/register', upload.none(), async (req, res) => {
     console.log(userexists);
     if(userexists != null) {
         res.status(401).contentType('text/plain').end('User already exists').send();
+    } else if(!validateEmail(email)) {
+        res.status(401).contentType('text/plain').end('Invalid email adress').send();
     } else {
         bcrypt.hash(password, 10, async function(err, hash) {
             const user = await User.query().insert({email: email, password: hash});

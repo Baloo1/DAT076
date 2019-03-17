@@ -48,7 +48,7 @@ export default class EditContact extends React.Component {
                     </Modal.Header>
                     <Modal.Body>
                         <Form>
-                            <Form.Group controlId="name">
+                            <Form.Group controlId="usrname">
                                 <Form.Label>Name</Form.Label>
                                 <Form.Control type="text" defaultValue={name}/>
                             </Form.Group>

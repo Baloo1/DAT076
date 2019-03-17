@@ -11,6 +11,7 @@ export default class EditContactContainer extends React.Component {
         this.handleClose = this.handleClose.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
         this.fileChange = this.fileChange.bind(this);
+        this.validateEmail = this.validateEmail.bind(this);
         this.state = {
             show: false,
             image: null,
@@ -26,6 +27,11 @@ export default class EditContactContainer extends React.Component {
         this.setState({ show: true });
     }
 
+    validateEmail(email) {
+        const re = /^(([^<>()\[\].,;:\s@"]+(\.[^<>()\[\].,;:\s@"]+)*)|(".+"))@(([^<>()[\].,;:\s@"]+\.)+[^<>()[\].,;:\s@"]{2,})$/i;
+        return re.test(String(email).toLowerCase());
+    }
+
     handleSubmit() {
         const config = {
             headers: {
@@ -36,7 +42,13 @@ export default class EditContactContainer extends React.Component {
 
         let image_id = this.props.user.image_id;
 
-        if(this.state.image != null) {
+        if (image_id == null) {
+            image_id = 0
+        }
+
+    if(!this.validateEmail(email.value)) {
+        alert('Invalid email');
+    } else if(this.state.image != null) {
             const formDataImg = new FormData();
             formDataImg.append('image', this.state.image);
             axios.post('/api/uploadimg', formDataImg, config)
@@ -63,7 +75,7 @@ export default class EditContactContainer extends React.Component {
             }
         };
         const formData = new FormData();
-        formData.append('name', name.value);
+        formData.append('name', usrname.value);
         formData.append('phone', phone.value);
         formData.append('email', email.value);
         formData.append('website', website.value);
