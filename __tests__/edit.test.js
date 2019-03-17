@@ -1,6 +1,6 @@
 import 'jsdom-global/register';
 import React from 'react';
-import User from '../pages/user';
+import Edit from '../pages/edit';
 import Adapter from 'enzyme-adapter-react-16';
 import { shallow, configure } from 'enzyme';
 
@@ -45,7 +45,7 @@ const axios = require('axios');
 
 it('fetch user on #componentDidMount', async (done) => {
 
-    const user = shallow(<User />);
+    const user = shallow(<Edit />);
     user
         .instance()
         .componentDidMount()
