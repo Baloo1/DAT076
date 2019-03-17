@@ -132,7 +132,7 @@ export default class EditProjectContainer extends React.Component {
             }
         };
 
-        let image_id = this.state.selectedProject.image_id;
+        let image_id = 0
 
         if (this.state.image != null) {
             const formDataImg = new FormData();

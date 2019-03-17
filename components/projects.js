@@ -23,9 +23,12 @@ export default class Projects extends React.Component {
         }
 
         return (
-            <CardColumns>
-                {projectCards}
-            </CardColumns>
+            <div>
+                <h3>Projects</h3>
+                <CardColumns>
+                    {projectCards}
+                </CardColumns>
+            </div>
         );
     }
 }
